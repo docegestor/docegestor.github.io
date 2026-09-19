@@ -346,11 +346,11 @@ def sync_react_blog_bundle(article: dict[str, Any], topic: dict[str, Any], slug:
     headings = json.dumps([s.get("heading", "") for s in article.get("sections", [])], ensure_ascii=False, separators=(",", ":"))
     paragraphs = json.dumps([((s.get("subsections") or [{}])[0].get("paragraphs") or [""])[0] for s in article.get("sections", [])], ensure_ascii=False, separators=(",", ":"))
     call = f'{marker_start}eo.push(oa({json.dumps(slug)},{json.dumps(article["title"], ensure_ascii=False)},{json.dumps(article["meta_description"], ensure_ascii=False)},{json.dumps(topic.get("categoria", "Gestão"), ensure_ascii=False)},{keywords},{json.dumps(published)},{json.dumps(image_url)},{headings},{paragraphs}));{marker_end}'
-    anchor = ",ZD="
+    anchor = ",ZD=" if ",ZD=" in text else ";const ZD="
     if anchor not in text:
         print("Bundle React mudou; os cards serão inseridos pelo sincronizador do blog.", file=sys.stderr)
         return
-    path.write_text(text.replace(anchor, call + ";ZD=", 1), encoding="utf-8")
+    path.write_text(text.replace(anchor, call + ";const ZD=", 1), encoding="utf-8")
 
 
 def main() -> int:
