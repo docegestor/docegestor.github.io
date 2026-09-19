@@ -300,27 +300,78 @@ def render_html(article: dict[str, Any], topic: dict[str, Any], slug: str, relat
     schema = {"@context": "https://schema.org", "@type": "BlogPosting", "headline": title, "description": description, "image": [image_url], "datePublished": published, "dateModified": published, "author": {"@type": "Organization", "name": "Equipe DoceGestor"}, "publisher": {"@type": "Organization", "name": "DoceGestor"}, "articleSection": topic.get("categoria", "Gestão de confeitaria"), "keywords": keywords, "mainEntityOfPage": {"@type": "WebPage", "@id": canonical}}
     if faq_schema:
         schema["subjectOf"] = {"@type": "FAQPage", "mainEntity": faq_schema}
+    # Este template usa um <style> próprio, autocontido, em vez de classes do Tailwind
+    # (font-serif, max-w-3xl, rounded-2xl...). O CSS compilado do site (/assets/index-*.css)
+    # só contém as classes que o Tailwind encontrou no código-fonte React em tempo de build;
+    # como este script gera HTML fora desse build, classes pedidas aqui que não existem lá
+    # saem sem estilo nenhum — foi por isso que os artigos automáticos ficavam com aparência
+    # diferente do padrão do blog. Escrever o CSS aqui garante a mesma cara sempre.
+    mercado_livre = "https://www.mercadolivre.com.br/docegestor-sistema-para-confeitaria--precificacao-e-vendas/up/MLBU4686356819?pdp_filters=item_id:MLB7401439782"
+    indice_html = ''.join(f'<li><a href="#sec-{i}">{esc(s.get("heading"))}</a></li>' for i, s in enumerate(article["sections"]))
+    secoes_html = ''.join(
+        render_section(s).replace('<section class="article-section">', f'<section id="sec-{i}" class="article-section">', 1)
+        for i, s in enumerate(article["sections"])
+    )
+    style = '''
+    :root{--brand:#f4775b;--accent:#e65f47;--ink:#3b1f1b;--bg:#fffaf8;--card:#fff1ed;--border:#f3c5b8}
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--ink);font-family:'DM Sans',Arial,sans-serif;font-size:17px;line-height:1.7}
+    a{color:var(--accent)}
+    .topbar{background:#fff7f3;border-bottom:1px solid #f6ddd5}
+    .topbar-inner{max-width:1152px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:10px 24px;font-size:14px}
+    .topbar strong{color:var(--ink)}
+    header.site-header{max-width:1152px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:20px 24px;flex-wrap:wrap;gap:10px}
+    header.site-header .logo{font-weight:700;font-size:18px;color:var(--ink);text-decoration:none}
+    header.site-header nav{display:flex;gap:18px;font-size:14px;flex-wrap:wrap}
+    header.site-header nav a{text-decoration:none;color:var(--ink)}
+    main{max-width:760px;margin:0 auto;padding:8px 24px 64px}
+    .back-link{font-size:14px;opacity:.7;margin-bottom:24px;display:block}
+    .eyebrow{display:block;margin-bottom:10px;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--brand)}
+    h1{font-family:'Playfair Display',Georgia,serif;font-weight:800;font-size:34px;line-height:1.2;margin:0 0 18px}
+    .lede{font-size:19px;line-height:1.6;opacity:.85;margin:0 0 10px}
+    .byline{font-size:14px;opacity:.7;margin:0 0 28px}
+    figure{margin:0 0 30px}
+    figure img{display:block;width:100%;height:auto;border-radius:20px;box-shadow:0 16px 40px rgba(59,31,27,.12)}
+    figcaption{margin-top:8px;font-size:13px;opacity:.65}
+    .toc{background:#fff7f3;border:1px solid var(--border);border-radius:16px;padding:18px 22px;margin:0 0 30px}
+    .toc ul{margin:10px 0 0;padding-left:20px}
+    article h2{font-family:'Playfair Display',Georgia,serif;font-size:25px;font-weight:700;margin:32px 0 14px}
+    article h3{font-size:18px;font-weight:700;margin:20px 0 10px}
+    article p{margin:0 0 16px}
+    article ul{margin:0 0 16px;padding-left:22px}
+    article li{margin-bottom:8px}
+    .cta-banner{margin:44px 0;padding:30px;border-radius:22px;background:linear-gradient(135deg,var(--brand),var(--accent));color:#fff;text-align:center}
+    .cta-banner h2{color:#fff;margin-top:0}
+    .cta-banner p{color:#fff;opacity:.95;max-width:480px;margin:0 auto 8px}
+    .cta-banner .btn{display:inline-block;margin-top:14px;background:#fff;color:var(--accent);font-weight:700;text-decoration:none;padding:14px 30px;border-radius:999px;font-size:16px}
+    .related{margin-top:40px}
+    .related h2{font-family:'Playfair Display',Georgia,serif;font-size:21px}
+    .related ul{padding-left:22px}
+    footer.site-footer{border-top:1px solid var(--border);padding:32px 24px;text-align:center;font-size:14px;opacity:.7}
+    footer.site-footer a{color:var(--ink);font-weight:700;text-decoration:none}
+    @media(min-width:640px){h1{font-size:42px}}
+    '''
     return f'''<!doctype html>
 <html lang="pt-BR"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#f4775b"><meta name="robots" content="index, follow"><meta name="author" content="DoceGestor">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
 <title>{esc(title)} | DoceGestor</title><meta name="description" content="{esc(description)}"><meta name="keywords" content="{esc(', '.join(keywords))}"><link rel="canonical" href="{canonical}">
 <meta property="og:type" content="article"><meta property="og:title" content="{esc(title)} | DoceGestor"><meta property="og:description" content="{esc(description)}"><meta property="og:url" content="{canonical}"><meta property="og:image" content="{image_url}"><meta property="og:locale" content="pt_BR">
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="{esc(title)} | DoceGestor"><meta name="twitter:description" content="{esc(description)}"><meta name="twitter:image" content="{image_url}">
 <script type="application/ld+json">{json.dumps(schema, ensure_ascii=False)}</script>
-<link rel="stylesheet" href="/assets/index-D6y4RxRJ.css"></head><body style="background:#fffaf8;color:#3b1f1b">
-<div style="background:#fff7f3;border-bottom:1px solid #f6ddd5"><div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 text-sm"><strong style="color:#3b1f1b">Doce &amp; Lucro</strong><a href="https://t.me/docelucro" style="color:#e65f47">Entrar na comunidade →</a></div></div>
-<header class="mx-auto flex max-w-6xl items-center justify-between px-4 py-5"><a href="/" class="font-bold">DG Doce Gestor</a><nav class="flex gap-4 text-sm"><a href="/">O app</a><a href="/#recursos">Recursos</a><a href="/#como-funciona">Como funciona</a><a href="/blog/">Blog</a><a href="https://www.mercadolivre.com.br/docegestor-sistema-para-confeitaria--precificacao-e-vendas/up/MLBU4686356819?pdp_filters=item_id:MLB7401439782">Comprar agora</a></nav></header>
-<main class="mx-auto max-w-3xl px-4 pb-16 pt-8"><div class="mb-6 text-sm opacity-70"><a href="/blog/">Voltar para o blog</a></div>
-<article><p class="mb-3 text-sm font-semibold uppercase tracking-wider" style="color:#f4775b">{esc(topic.get("categoria", "Gestão de confeitaria"))}</p><h1 class="mb-6 font-serif text-4xl font-bold leading-tight md:text-5xl">{esc(title)}</h1><p class="mb-4 text-xl opacity-80">{rich_text(article["intro"])}</p><p style="font-size:14px;opacity:.7;margin-bottom:30px">{format_date_pt(published)} · 7 min de leitura · Por Equipe DoceGestor</p>
-<figure style="margin:0 0 32px"><img src="{image_url}" alt="Ilustração relacionada a {esc(title)}" width="1600" height="900" loading="eager" fetchpriority="high" style="display:block;width:100%;height:auto;border-radius:24px;box-shadow:0 16px 40px rgba(59,31,27,.12)"><figcaption style="margin-top:8px;font-size:13px;opacity:.65">Conteúdo educativo para gestão de confeitaria.</figcaption></figure>
-<div style="background:#fff7f3;border:1px solid #f3c5b8;border-radius:16px;padding:18px 22px;margin:0 0 30px"><strong>Índice deste artigo</strong><ul style="margin:10px 0 0">{''.join(f'<li><a href="#sec-{i}">{esc(s.get("heading"))}</a></li>' for i, s in enumerate(article["sections"]))}</ul></div>
-<div class="space-y-6 text-base leading-8">{''.join(s.replace('<section class="article-section">', f'<section id="sec-{i}" class="article-section">', 1) for i, s in enumerate([render_section(s) for s in article["sections"]]))}{faq_html}<section class="article-section"><h2>Conclusão</h2><p>{rich_text(article["conclusion"])}</p></section>
-<section class="rounded-2xl p-6" style="background:#fff1ed"><h2>Do papel para o celular</h2><p><strong>Precifique com mais segurança no DoceGestor.</strong></p><p>Pagamento único, acesso vitalício e uso online ou offline para calcular custos, registrar vendas e acompanhar o lucro.</p><p><a class="font-bold" style="color:#e65f47" href="https://www.mercadolivre.com.br/docegestor-sistema-para-confeitaria--precificacao-e-vendas/up/MLBU4686356819?pdp_filters=item_id:MLB7401439782">Conhecer o app →</a></p></section>
-<section><h2>Leia também</h2><ul>{related_html}</ul></section></div></article></main>
-<footer class="border-t px-4 py-8 text-center text-sm opacity-70"><a href="/">DoceGestor</a> · Gestão para confeitarias</footer></body></html>'''
+<style>{style}</style></head><body>
+<div class="topbar"><div class="topbar-inner"><strong>Doce &amp; Lucro</strong><a href="https://t.me/docelucro">Entrar na comunidade →</a></div></div>
+<header class="site-header"><a href="/" class="logo">DG Doce Gestor</a><nav><a href="/">O app</a><a href="/#recursos">Recursos</a><a href="/#como-funciona">Como funciona</a><a href="/blog/">Blog</a><a href="{mercado_livre}">Comprar agora</a></nav></header>
+<main><a class="back-link" href="/blog/">← Voltar para o blog</a>
+<article><span class="eyebrow">{esc(topic.get("categoria", "Gestão de confeitaria"))}</span><h1>{esc(title)}</h1><p class="lede">{rich_text(article["intro"])}</p><p class="byline">{format_date_pt(published)} · 7 min de leitura · Por Equipe DoceGestor</p>
+<figure><img src="{image_url}" alt="Ilustração relacionada a {esc(title)}" width="1600" height="900" loading="eager" fetchpriority="high"><figcaption>Conteúdo educativo para gestão de confeitaria.</figcaption></figure>
+<div class="toc"><strong>Índice deste artigo</strong><ul>{indice_html}</ul></div>
+{secoes_html}{faq_html}<section class="article-section"><h2>Conclusão</h2><p>{rich_text(article["conclusion"])}</p></section>
+<section class="cta-banner"><h2>Do papel para o celular</h2><p><strong>Precifique com mais segurança no DoceGestor.</strong> Pagamento único, acesso vitalício e uso online ou offline para calcular custos, registrar vendas e acompanhar o lucro.</p><a class="btn" href="{mercado_livre}">Conhecer o app →</a></section>
+<section class="related"><h2>Leia também</h2><ul>{related_html}</ul></section></article></main>
+<footer class="site-footer"><a href="/">DoceGestor</a> · Gestão para confeitarias</footer></body></html>'''
 
 
 def update_sitemap(slug: str, published: str) -> None:
