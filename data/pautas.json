@@ -41,7 +41,9 @@
     "titulo": "Controle de validade dos ingredientes: método simples",
     "keyword": "validade dos ingredientes confeitaria",
     "categoria": "Estoque",
-    "status": "pendente"
+    "status": "publicada",
+    "slug_publicado": "controle-de-validade-dos-ingredientes-metodo-simples",
+    "publicada_em": "2026-09-19"
   },
   {
     "titulo": "Como calcular o custo de uma receita de bolo recheado",

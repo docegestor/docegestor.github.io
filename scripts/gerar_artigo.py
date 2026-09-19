@@ -244,8 +244,12 @@ def esc(value: str) -> str:
 
 
 def rich_text(value: str) -> str:
-    """Renderiza texto da IA com links Markdown seguros, sem deixar Markdown cru."""
-    escaped = esc(value)
+    """Renderiza texto da IA com links seguros, aceitando Markdown e âncoras simples."""
+    # Alguns provedores retornam <a href="...">texto</a> apesar do prompt pedir
+    # texto/Markdown. Convertemos antes de escapar para não publicar HTML quebrado.
+    normalized = re.sub(r'<a\s+href=["\'](https?://[^"\']+)["\']\s*>(.*?)</a>', r'[\2](\1)', str(value or ""), flags=re.I | re.S)
+    normalized = re.sub(r'</?\w+[^>]*>', '', normalized)
+    escaped = esc(normalized)
     pattern = r'\[([^\]]+)\]\((https?://[^)\s]+|/[^)\s]+)\)'
     links: list[str] = []
     def markdown_link(match: re.Match[str]) -> str:
