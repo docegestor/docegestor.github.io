@@ -32,6 +32,13 @@ GEMINI_IMAGE_MODEL = os.getenv("GEMINI_IMAGE_MODEL") or "gemini-3.1-flash-image"
 DEEPSEEK_API_URL = os.getenv("DEEPSEEK_API_URL") or "https://api.deepseek.com/chat/completions"
 DEEPSEEK_MODEL = os.getenv("DEEPSEEK_MODEL") or "deepseek-chat"
 
+PT_MONTHS = ("janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro")
+
+
+def format_date_pt(value: str) -> str:
+    date = dt.date.fromisoformat(value)
+    return f"{date.day:02d} de {PT_MONTHS[date.month - 1]} de {date.year}"
+
 
 def slugify(value: str) -> str:
     value = value.lower().strip()
@@ -303,7 +310,7 @@ def render_html(article: dict[str, Any], topic: dict[str, Any], slug: str, relat
 <div style="background:#fff7f3;border-bottom:1px solid #f6ddd5"><div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 text-sm"><strong style="color:#3b1f1b">Doce &amp; Lucro</strong><a href="https://t.me/docelucro" style="color:#e65f47">Entrar na comunidade →</a></div></div>
 <header class="mx-auto flex max-w-6xl items-center justify-between px-4 py-5"><a href="/" class="font-bold">DG Doce Gestor</a><nav class="flex gap-4 text-sm"><a href="/">O app</a><a href="/#recursos">Recursos</a><a href="/#como-funciona">Como funciona</a><a href="/blog/">Blog</a><a href="https://www.mercadolivre.com.br/docegestor-sistema-para-confeitaria--precificacao-e-vendas/up/MLBU4686356819?pdp_filters=item_id:MLB7401439782">Comprar agora</a></nav></header>
 <main class="mx-auto max-w-3xl px-4 pb-16 pt-8"><div class="mb-6 text-sm opacity-70"><a href="/blog/">Voltar para o blog</a></div>
-<article><p class="mb-3 text-sm font-semibold uppercase tracking-wider" style="color:#f4775b">{esc(topic.get("categoria", "Gestão de confeitaria"))}</p><h1 class="mb-6 font-serif text-4xl font-bold leading-tight md:text-5xl">{esc(title)}</h1><p class="mb-4 text-xl opacity-80">{rich_text(article["intro"])}</p><p style="font-size:14px;opacity:.7;margin-bottom:30px">{dt.date.fromisoformat(published).strftime('%d de %B de %Y')} · 7 min de leitura · Por Equipe DoceGestor</p>
+<article><p class="mb-3 text-sm font-semibold uppercase tracking-wider" style="color:#f4775b">{esc(topic.get("categoria", "Gestão de confeitaria"))}</p><h1 class="mb-6 font-serif text-4xl font-bold leading-tight md:text-5xl">{esc(title)}</h1><p class="mb-4 text-xl opacity-80">{rich_text(article["intro"])}</p><p style="font-size:14px;opacity:.7;margin-bottom:30px">{format_date_pt(published)} · 7 min de leitura · Por Equipe DoceGestor</p>
 <figure style="margin:0 0 32px"><img src="{image_url}" alt="Ilustração relacionada a {esc(title)}" width="1600" height="900" loading="eager" fetchpriority="high" style="display:block;width:100%;height:auto;border-radius:24px;box-shadow:0 16px 40px rgba(59,31,27,.12)"><figcaption style="margin-top:8px;font-size:13px;opacity:.65">Conteúdo educativo para gestão de confeitaria.</figcaption></figure>
 <div style="background:#fff7f3;border:1px solid #f3c5b8;border-radius:16px;padding:18px 22px;margin:0 0 30px"><strong>Índice deste artigo</strong><ul style="margin:10px 0 0">{''.join(f'<li><a href="#sec-{i}">{esc(s.get("heading"))}</a></li>' for i, s in enumerate(article["sections"]))}</ul></div>
 <div class="space-y-6 text-base leading-8">{''.join(s.replace('<section class="article-section">', f'<section id="sec-{i}" class="article-section">', 1) for i, s in enumerate([render_section(s) for s in article["sections"]]))}{faq_html}<section class="article-section"><h2>Conclusão</h2><p>{rich_text(article["conclusion"])}</p></section>
@@ -327,30 +334,27 @@ def update_sitemap(slug: str, published: str) -> None:
 
 
 def update_blog_index(article: dict[str, Any], topic: dict[str, Any], slug: str, image_url: str, published: str) -> None:
-    path = ROOT / "blog" / "index.html"
-    text = path.read_text(encoding="utf-8")
-    start, end = "<!-- AUTOMATED_ARTICLES_START -->", "<!-- AUTOMATED_ARTICLES_END -->"
-    if start not in text or end not in text:
-        raise RuntimeError("blog/index.html não contém o bloco reservado para artigos automatizados.")
+    """Atualiza apenas o registro editorial; o /blog/ é renderizado pelo bundle React."""
     registry_path = ROOT / "data" / "artigos_automatizados.json"
     registry = load_json(registry_path, [])
-    item = {"slug": slug, "title": article["title"], "description": article["meta_description"], "category": topic.get("categoria", "Gestão"), "image": image_url, "published": published}
+    item = {
+        "slug": slug,
+        "title": article["title"],
+        "description": article["meta_description"],
+        "category": topic.get("categoria", "Gestão"),
+        "image": image_url,
+        "published": published,
+    }
     registry = [x for x in registry if x.get("slug") != slug]
     registry.insert(0, item)
-    cards = "".join(f'<a href="/artigos/{esc(x["slug"])}/" style="display:block;overflow:hidden;border:1px solid #f3c5b8;border-radius:18px;background:#fffaf8;text-decoration:none;color:#3b1f1b;box-shadow:0 8px 22px rgba(59,31,27,.06)"><img src="{esc(x.get("image", ""))}" alt="" width="800" height="450" loading="lazy" style="display:block;width:100%;aspect-ratio:16/9;object-fit:cover"><div style="padding:18px 20px"><small style="color:#e65f47;font-weight:700;text-transform:uppercase">{esc(x.get("category", "Gestão"))}</small><strong style="display:block;margin-top:6px;font-size:18px">{esc(x["title"])}</strong><span style="display:block;margin-top:8px;opacity:.75;line-height:1.5">{esc(x["description"])}</span><span style="display:block;margin-top:12px;color:#e65f47;font-weight:700">Ler artigo →</span></div></a>' for x in registry[:12])
-    block = f'''<!-- AUTOMATED_ARTICLES_START -->
-    <section id="automated-articles" style="display:none;max-width:1152px;margin:40px auto;padding:0 24px 60px;font-family:DM Sans,sans-serif">
-      <h2 style="font-family:Playfair Display,serif;font-size:32px;color:#3b1f1b">Novos artigos do DoceGestor</h2>
-      <div id="automated-articles-list" style="display:grid;gap:20px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">{cards}</div>
-    </section>
-    <!-- AUTOMATED_ARTICLES_END -->'''
-    text = text.split(start, 1)[0] + block + text.split(end, 1)[1]
-    payload = json.dumps(registry[:12], ensure_ascii=False, separators=(",", ":"))
-    sync_script = f'''<script id="automated-blog-sync">(function(){{const items={payload};function add(){{const grid=document.querySelector('.post-grid');if(!grid){{const fallback=document.getElementById('automated-articles');if(fallback)fallback.style.display='block';return}}items.slice().reverse().forEach(function(x){{if(grid.querySelector('[data-auto-slug="'+x.slug+'"]'))return;const card=document.createElement('article');card.className='post-card';card.dataset.autoSlug=x.slug;card.innerHTML='<a class="post-image" href="/artigos/'+x.slug+'/" aria-label="'+x.title.replace(/"/g,'&quot;')+'"><img src="'+x.image+'" alt="'+x.title.replace(/"/g,'&quot;')+'" loading="lazy"></a><div class="post-body"><div class="post-meta">'+x.category+' · '+x.published.split('-').reverse().join('/')+'</div><h2><a href="/artigos/'+x.slug+'/">'+x.title+'</a></h2><p>'+x.description+'</p><a class="read-link" href="/artigos/'+x.slug+'/">Ler artigo →</a></div>';grid.insertBefore(card,grid.firstChild);}})}}setTimeout(add,300);setTimeout(add,1200);new MutationObserver(add).observe(document.body,{{childList:true,subtree:true}});}})();</script>'''
-    text = re.sub(r'<script id="automated-blog-sync">.*?</script>', '', text, flags=re.S)
-    text = text.replace('</body>', sync_script + '</body>')
-    path.write_text(text, encoding="utf-8")
     registry_path.write_text(json.dumps(registry, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+    # Remove restos do sincronizador antigo, que inseria cards duplicados fora do React.
+    path = ROOT / "blog" / "index.html"
+    text = path.read_text(encoding="utf-8")
+    text = re.sub(r'\s*<!-- AUTOMATED_ARTICLES_START -->.*?<!-- AUTOMATED_ARTICLES_END -->', '', text, flags=re.S)
+    text = re.sub(r'\s*<script id="automated-blog-sync">.*?</script>', '', text, flags=re.S)
+    path.write_text(text, encoding="utf-8")
 
 
 def sync_react_blog_bundle(article: dict[str, Any], topic: dict[str, Any], slug: str, image_url: str, published: str) -> None:
@@ -362,10 +366,18 @@ def sync_react_blog_bundle(article: dict[str, Any], topic: dict[str, Any], slug:
     text = path.read_text(encoding="utf-8")
     marker_start, marker_end = ";/* DOCEGESTOR_AUTOMATIC_ARTICLES_START */", "/* DOCEGESTOR_AUTOMATIC_ARTICLES_END */;"
     text = re.sub(re.escape(marker_start) + r".*?" + re.escape(marker_end), "", text, flags=re.S)
-    keywords = json.dumps(article.get("keywords", []), ensure_ascii=False, separators=(",", ":"))
-    headings = json.dumps([s.get("heading", "") for s in article.get("sections", [])], ensure_ascii=False, separators=(",", ":"))
-    paragraphs = json.dumps([((s.get("subsections") or [{}])[0].get("paragraphs") or [""])[0] for s in article.get("sections", [])], ensure_ascii=False, separators=(",", ":"))
-    call = f'{marker_start}eo.push(oa({json.dumps(slug)},{json.dumps(article["title"], ensure_ascii=False)},{json.dumps(article["meta_description"], ensure_ascii=False)},{json.dumps(topic.get("categoria", "Gestão"), ensure_ascii=False)},{keywords},{json.dumps(published)},{json.dumps(image_url)},{headings},{paragraphs}));{marker_end}'
+    registry = load_json(ROOT / "data" / "artigos_automatizados.json", [])
+    calls = []
+    # O registro é mantido do mais novo para o mais antigo. Unshift em ordem
+    # inversa preserva essa ordem no array que o Blog.tsx renderiza.
+    for item in reversed(registry):
+        item_keywords = json.dumps(item.get("keywords", []), ensure_ascii=False, separators=(",", ":"))
+        item_headings = json.dumps([item.get("title", "")], ensure_ascii=False, separators=(",", ":"))
+        item_paragraphs = json.dumps([item.get("description", "")], ensure_ascii=False, separators=(",", ":"))
+        calls.append(
+            f'if(!eo.some(function(existing){{return existing.slug==={json.dumps(item["slug"])};}}))eo.unshift(oa({json.dumps(item["slug"])},{json.dumps(item["title"], ensure_ascii=False)},{json.dumps(item["description"], ensure_ascii=False)},{json.dumps(item.get("category", "Gestão"), ensure_ascii=False)},{item_keywords},{json.dumps(item.get("published", ""))},{json.dumps(item.get("image", ""), ensure_ascii=False)},{item_headings},{item_paragraphs}));'
+        )
+    call = f'{marker_start}{"".join(calls)}{marker_end}'
     anchor = ",ZD=" if ",ZD=" in text else ";const ZD="
     if anchor not in text:
         print("Bundle React mudou; os cards serão inseridos pelo sincronizador do blog.", file=sys.stderr)
@@ -406,6 +418,7 @@ def main() -> int:
     out.write_text(render_html(article, topic, slug, existing, image_url, published), encoding="utf-8")
     update_sitemap(slug, published)
     update_blog_index(article, topic, slug, image_url, published)
+    sync_react_blog_bundle(article, topic, slug, image_url, published)
     topic["status"] = "publicada"
     topic["slug_publicado"] = slug
     topic["publicada_em"] = published

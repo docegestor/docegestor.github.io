@@ -1,6 +1,6 @@
 # Automação de artigos SEO do DoceGestor
 
-Esta versão parte do site original enviado no arquivo `docegestorsite1.0.zip`. A página inicial, o bundle React, o CSS e os artigos antigos permanecem intactos. A automação apenas cria novas páginas em `artigos/<slug>/`, atualiza o sitemap e injeta novos cards dentro da página de blog existente.
+Esta versão parte do site original enviado no arquivo `docegestorsite1.0.zip`. A página inicial, o bundle React, o CSS e os artigos antigos permanecem intactos. A automação cria cada página individual em `artigos/<slug>/` — que é a rota correta dos artigos — e atualiza a listagem oficial em `/blog/`, além do sitemap. Ela não cria um segundo blog nem publica páginas soltas fora dessas rotas.
 
 ## Horário automático
 
@@ -33,7 +33,7 @@ Se o Pexels estiver indisponível, o workflow tenta a imagem do Gemini. Se nenhu
 4. Cria `artigos/<slug>/index.html` com o mesmo CSS e o mesmo padrão de cabeçalho, navegação, tipografia e banner de compra dos artigos do site.
 5. Atualiza o `sitemap.xml`.
 6. Atualiza `data/artigos_automatizados.json`.
-7. Insere o card no `.post-grid` do **blog original**, sem modificar o bundle React e sem criar um segundo blog.
+7. Atualiza a coleção de artigos do bundle que renderiza o **blog original**, usando a mesma estrutura visual, rota `/artigos/<slug>/` e ordem do mais novo para o mais antigo.
 8. Faz commit e push somente após todas as etapas concluírem.
 
 ## Primeiro teste
@@ -51,3 +51,7 @@ Esse modo somente seleciona a pauta. Depois execute com `dry_run: false` para ge
 Cada artigo inclui título, meta description, canonical, Open Graph, Twitter Card, JSON-LD `BlogPosting`, FAQ estruturado, headings hierárquicos, links internos, imagem com `alt`, CTA para o DoceGestor e inclusão no sitemap.
 
 A automação não promete posição no Google. A indexação depende do rastreamento do Google, da qualidade do conteúdo e da experiência da página.
+
+## Rotas usadas
+
+A página `https://docegestor.github.io/blog/` é a vitrine/listagem. Cada artigo individual fica em `https://docegestor.github.io/artigos/<slug>/`, exatamente como os artigos de referência do site. O gerador atualiza as duas partes no mesmo fluxo: a página individual e o card correspondente no `/blog/`.
