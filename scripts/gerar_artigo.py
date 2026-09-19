@@ -334,7 +334,7 @@ def update_sitemap(slug: str, published: str) -> None:
 
 
 def update_blog_index(article: dict[str, Any], topic: dict[str, Any], slug: str, image_url: str, published: str) -> None:
-    """Atualiza apenas o registro editorial; o /blog/ é renderizado pelo bundle React."""
+    """Atualiza a lista do /blog/ sem alterar o bundle React principal do site."""
     registry_path = ROOT / "data" / "artigos_automatizados.json"
     registry = load_json(registry_path, [])
     item = {
@@ -349,40 +349,52 @@ def update_blog_index(article: dict[str, Any], topic: dict[str, Any], slug: str,
     registry.insert(0, item)
     registry_path.write_text(json.dumps(registry, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
-    # Remove restos do sincronizador antigo, que inseria cards duplicados fora do React.
     path = ROOT / "blog" / "index.html"
     text = path.read_text(encoding="utf-8")
-    text = re.sub(r'\s*<!-- AUTOMATED_ARTICLES_START -->.*?<!-- AUTOMATED_ARTICLES_END -->', '', text, flags=re.S)
-    text = re.sub(r'\s*<script id="automated-blog-sync">.*?</script>', '', text, flags=re.S)
+    start_marker, end_marker = "<!-- AUTOMATED_ARTICLES_START -->", "<!-- AUTOMATED_ARTICLES_END -->"
+    if start_marker not in text or end_marker not in text:
+        raise RuntimeError("blog/index.html não contém o bloco reservado para artigos automatizados.")
+
+    cards = "".join(
+        f'<a href="/artigos/{esc(x["slug"])}/" style="display:block;overflow:hidden;border:1px solid #f3c5b8;border-radius:18px;background:#fffaf8;text-decoration:none;color:#3b1f1b;box-shadow:0 8px 22px rgba(59,31,27,.06)"><img src="{esc(x.get("image", ""))}" alt="{esc(x.get("title", ""))}" width="800" height="450" loading="lazy" style="display:block;width:100%;aspect-ratio:16/9;object-fit:cover"><div style="padding:18px 20px"><small style="color:#e65f47;font-weight:700;text-transform:uppercase">{esc(x.get("category", "Gestão"))}</small><strong style="display:block;margin-top:6px;font-size:18px">{esc(x["title"])}</strong><span style="display:block;margin-top:8px;opacity:.75;line-height:1.5">{esc(x["description"])}</span><span style="display:block;margin-top:12px;color:#e65f47;font-weight:700">Ler artigo →</span></div></a>'
+        for x in registry[:12]
+    )
+    block = f"""{start_marker}
+    <section id="automated-articles" style="display:none;max-width:1152px;margin:40px auto;padding:0 24px 60px;font-family:DM Sans,sans-serif">
+      <h2 style="font-family:Playfair Display,serif;font-size:32px;color:#3b1f1b">Novos artigos do DoceGestor</h2>
+      <div id="automated-articles-list" style="display:grid;gap:20px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">{cards}</div>
+    </section>
+    {end_marker}"""
+    text = text.split(start_marker, 1)[0] + block + text.split(end_marker, 1)[1]
+
+    payload = json.dumps(registry[:12], ensure_ascii=False, separators=(",", ":"))
+    sync_script = """<script id="automated-blog-sync">(function(){
+      const items=__PAYLOAD__;
+      function escape(value){return String(value ?? "").replace(/[&<>"']/g,function(char){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;", "'":"&#39;"}[char]});}
+      function add(){
+        const grid=document.querySelector('.post-grid');
+        const fallback=document.getElementById('automated-articles');
+        if(!grid){if(fallback)fallback.style.display='block';return;}
+        if(fallback)fallback.style.display='none';
+        items.slice().reverse().forEach(function(item){
+          if(grid.querySelector('[data-auto-slug="'+CSS.escape(item.slug)+'"]'))return;
+          const card=document.createElement('article');card.className='post-card';card.dataset.autoSlug=item.slug;
+          const href='/artigos/'+encodeURIComponent(item.slug)+'/';
+          card.innerHTML='<a class="post-image" href="'+href+'" aria-label="'+escape(item.title)+'"><img src="'+escape(item.image)+'" alt="'+escape(item.title)+'" loading="lazy"></a><div class="post-body"><div class="post-meta">'+escape(item.category)+' · '+escape(item.published.split('-').reverse().join('/'))+'</div><h2><a href="'+href+'">'+escape(item.title)+'</a></h2><p>'+escape(item.description)+'</p><a class="read-link" href="'+href+'">Ler artigo →</a></div>';
+          grid.insertBefore(card,grid.firstChild);
+        });
+      }
+      setTimeout(add,300);setTimeout(add,1200);new MutationObserver(add).observe(document.body,{childList:true,subtree:true});
+    })();</script>""".replace('__PAYLOAD__', payload)
+    text = re.sub(r'<script id="automated-blog-sync">.*?</script>', '', text, flags=re.S)
+    text = text.replace('</body>', sync_script + '</body>')
     path.write_text(text, encoding="utf-8")
 
 
+
 def sync_react_blog_bundle(article: dict[str, Any], topic: dict[str, Any], slug: str, image_url: str, published: str) -> None:
-    """Insere o artigo na fonte de dados compilada que o /blog/ realmente usa."""
-    path = next(iter((ROOT / "assets").glob("index-*.js")), None)
-    if not path:
-        print("Bundle React do blog não encontrado; mantendo o bloco HTML auxiliar.", file=sys.stderr)
-        return
-    text = path.read_text(encoding="utf-8")
-    marker_start, marker_end = ";/* DOCEGESTOR_AUTOMATIC_ARTICLES_START */", "/* DOCEGESTOR_AUTOMATIC_ARTICLES_END */;"
-    text = re.sub(re.escape(marker_start) + r".*?" + re.escape(marker_end), "", text, flags=re.S)
-    registry = load_json(ROOT / "data" / "artigos_automatizados.json", [])
-    calls = []
-    # O registro é mantido do mais novo para o mais antigo. Unshift em ordem
-    # inversa preserva essa ordem no array que o Blog.tsx renderiza.
-    for item in reversed(registry):
-        item_keywords = json.dumps(item.get("keywords", []), ensure_ascii=False, separators=(",", ":"))
-        item_headings = json.dumps([item.get("title", "")], ensure_ascii=False, separators=(",", ":"))
-        item_paragraphs = json.dumps([item.get("description", "")], ensure_ascii=False, separators=(",", ":"))
-        calls.append(
-            f'if(!eo.some(function(existing){{return existing.slug==={json.dumps(item["slug"])};}}))eo.unshift(oa({json.dumps(item["slug"])},{json.dumps(item["title"], ensure_ascii=False)},{json.dumps(item["description"], ensure_ascii=False)},{json.dumps(item.get("category", "Gestão"), ensure_ascii=False)},{item_keywords},{json.dumps(item.get("published", ""))},{json.dumps(item.get("image", ""), ensure_ascii=False)},{item_headings},{item_paragraphs}));'
-        )
-    call = f'{marker_start}{"".join(calls)}{marker_end}'
-    anchor = ",ZD=" if ",ZD=" in text else ";const ZD="
-    if anchor not in text:
-        print("Bundle React mudou; os cards serão inseridos pelo sincronizador do blog.", file=sys.stderr)
-        return
-    path.write_text(text.replace(anchor, call + ";const ZD=", 1), encoding="utf-8")
+    """Compatibilidade: o bundle global nunca é alterado pela automação."""
+    return
 
 
 def main() -> int:

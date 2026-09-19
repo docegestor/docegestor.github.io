@@ -33,7 +33,7 @@ Se o Pexels estiver indisponível, o workflow tenta a imagem do Gemini. Se nenhu
 4. Cria `artigos/<slug>/index.html` com o mesmo CSS e o mesmo padrão de cabeçalho, navegação, tipografia e banner de compra dos artigos do site.
 5. Atualiza o `sitemap.xml`.
 6. Atualiza `data/artigos_automatizados.json`.
-7. Atualiza a coleção de artigos do bundle que renderiza o **blog original**, usando a mesma estrutura visual, rota `/artigos/<slug>/` e ordem do mais novo para o mais antigo.
+7. Atualiza somente o HTML da página `/blog/` e seu registro de cards; o bundle React global da home permanece intacto para evitar que uma falha de conteúdo deixe o site inteiro em branco.
 8. Faz commit e push somente após todas as etapas concluírem.
 
 ## Primeiro teste
@@ -54,4 +54,4 @@ A automação não promete posição no Google. A indexação depende do rastrea
 
 ## Rotas usadas
 
-A página `https://docegestor.github.io/blog/` é a vitrine/listagem. Cada artigo individual fica em `https://docegestor.github.io/artigos/<slug>/`, exatamente como os artigos de referência do site. O gerador atualiza as duas partes no mesmo fluxo: a página individual e o card correspondente no `/blog/`.
+A página `https://docegestor.github.io/blog/` é a vitrine/listagem. Cada artigo individual fica em `https://docegestor.github.io/artigos/<slug>/`, exatamente como os artigos de referência do site. O gerador atualiza as duas partes no mesmo fluxo: a página individual e o card correspondente no `/blog/`. O JavaScript principal da home não é modificado pela automação.
