@@ -220,8 +220,15 @@ def rich_text(value: str) -> str:
     """Renderiza texto da IA com links Markdown seguros, sem deixar Markdown cru."""
     escaped = esc(value)
     pattern = r'\[([^\]]+)\]\((https?://[^)\s]+|/[^)\s]+)\)'
-    rendered = re.sub(pattern, lambda match: f'<a href="{esc(match.group(2))}">{match.group(1)}</a>', escaped)
-    return re.sub(r'(?<!["=])(https?://[^\s<]+)', lambda match: f'<a href="{match.group(1).rstrip(".,)")}">{match.group(1).rstrip(".,)")}</a>', rendered)
+    links: list[str] = []
+    def markdown_link(match: re.Match[str]) -> str:
+        links.append(f'<a href="{esc(match.group(2))}">{match.group(1)}</a>')
+        return f'__DOCE_LINK_{len(links)-1}__'
+    rendered = re.sub(pattern, markdown_link, escaped)
+    rendered = re.sub(r'(?<![A-Za-z0-9_])(https?://[^\s<]+)', lambda match: f'<a href="{match.group(1).rstrip(".,)")}">{match.group(1).rstrip(".,)")}</a>', rendered)
+    for index, link in enumerate(links):
+        rendered = rendered.replace(f'__DOCE_LINK_{index}__', link)
+    return rendered
 
 
 def render_section(section: dict[str, Any]) -> str:
