@@ -220,7 +220,8 @@ def rich_text(value: str) -> str:
     """Renderiza texto da IA com links Markdown seguros, sem deixar Markdown cru."""
     escaped = esc(value)
     pattern = r'\[([^\]]+)\]\((https?://[^)\s]+|/[^)\s]+)\)'
-    return re.sub(pattern, lambda match: f'<a href="{esc(match.group(2))}">{match.group(1)}</a>', escaped)
+    rendered = re.sub(pattern, lambda match: f'<a href="{esc(match.group(2))}">{match.group(1)}</a>', escaped)
+    return re.sub(r'(?<!["=])(https?://[^\s<]+)', lambda match: f'<a href="{match.group(1).rstrip(".,)")}">{match.group(1).rstrip(".,)")}</a>', rendered)
 
 
 def render_section(section: dict[str, Any]) -> str:
@@ -318,7 +319,7 @@ def update_blog_index(article: dict[str, Any], topic: dict[str, Any], slug: str,
     <!-- AUTOMATED_ARTICLES_END -->'''
     text = text.split(start, 1)[0] + block + text.split(end, 1)[1]
     payload = json.dumps(registry[:12], ensure_ascii=False, separators=(",", ":"))
-    sync_script = f'''<script id="automated-blog-sync">(function(){{const items={payload};function add(){{const grid=document.querySelector('.post-grid');if(!grid)return;items.forEach(function(x){{if(grid.querySelector('[data-auto-slug="'+x.slug+'"]'))return;const card=document.createElement('article');card.className='post-card';card.dataset.autoSlug=x.slug;card.innerHTML='<a class="post-image" href="/artigos/'+x.slug+'/" aria-label="'+x.title.replace(/"/g,'&quot;')+'"><img src="'+x.image+'" alt="'+x.title.replace(/"/g,'&quot;')+'" loading="lazy"></a><div class="post-body"><div class="post-meta">'+x.category+' · '+x.published.split('-').reverse().join('/')+'</div><h2><a href="/artigos/'+x.slug+'/">'+x.title+'</a></h2><p>'+x.description+'</p><a class="read-link" href="/artigos/'+x.slug+'/">Ler artigo →</a></div>';grid.insertBefore(card,grid.firstChild);}})}}setTimeout(add,300);setTimeout(add,1200);new MutationObserver(add).observe(document.body,{{childList:true,subtree:true}});}})();</script>'''
+    sync_script = f'''<script id="automated-blog-sync">(function(){{const items={payload};function add(){{const grid=document.querySelector('.post-grid');if(!grid){{const fallback=document.getElementById('automated-articles');if(fallback)fallback.style.display='block';return}}items.forEach(function(x){{if(grid.querySelector('[data-auto-slug="'+x.slug+'"]'))return;const card=document.createElement('article');card.className='post-card';card.dataset.autoSlug=x.slug;card.innerHTML='<a class="post-image" href="/artigos/'+x.slug+'/" aria-label="'+x.title.replace(/"/g,'&quot;')+'"><img src="'+x.image+'" alt="'+x.title.replace(/"/g,'&quot;')+'" loading="lazy"></a><div class="post-body"><div class="post-meta">'+x.category+' · '+x.published.split('-').reverse().join('/')+'</div><h2><a href="/artigos/'+x.slug+'/">'+x.title+'</a></h2><p>'+x.description+'</p><a class="read-link" href="/artigos/'+x.slug+'/">Ler artigo →</a></div>';grid.insertBefore(card,grid.firstChild);}})}}setTimeout(add,300);setTimeout(add,1200);new MutationObserver(add).observe(document.body,{{childList:true,subtree:true}});}})();</script>'''
     text = re.sub(r'<script id="automated-blog-sync">.*?</script>', '', text, flags=re.S)
     text = text.replace('</body>', sync_script + '</body>')
     path.write_text(text, encoding="utf-8")
