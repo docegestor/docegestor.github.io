@@ -54,4 +54,4 @@ A automação não promete posição no Google. A indexação depende do rastrea
 
 ## Rotas usadas
 
-A página `https://docegestor.github.io/blog/` é a vitrine/listagem. Cada artigo individual fica em `https://docegestor.github.io/artigos/<slug>/`, exatamente como os artigos de referência do site. O gerador atualiza as duas partes no mesmo fluxo: a página individual e o card correspondente no `/blog/`. O JavaScript principal da home não é modificado pela automação.
+A página `https://docegestor.github.io/blog/` é a vitrine/listagem. Cada artigo individual fica em `https://docegestor.github.io/blog/<slug>/`, exatamente como os artigos de referência do site. O gerador atualiza as duas partes no mesmo fluxo: a página individual e o card correspondente no `/blog/`. O JavaScript principal da home não é modificado pela automação.

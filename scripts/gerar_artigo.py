@@ -55,7 +55,7 @@ def load_json(path: Path, default: Any) -> Any:
 
 def existing_articles() -> list[dict[str, str]]:
     result = []
-    for path in sorted((ROOT / "artigos").glob("*/index.html")):
+    for path in sorted((ROOT / "blog").glob("*/index.html")):
         text = path.read_text(encoding="utf-8", errors="ignore")
         title = re.search(r"<title>(.*?)</title>", text, re.I | re.S)
         desc = re.search(r'<meta name="description" content="(.*?)"', text, re.I | re.S)
@@ -187,7 +187,7 @@ def write_fallback_cover(path: Path, title: str, category: str) -> None:
 
 
 def call_ai(topic: dict[str, Any], related: list[dict[str, str]]) -> dict[str, Any]:
-    related_text = "\n".join(f'- {x["title"]}: {BASE_URL}/artigos/{x["slug"]}/' for x in related[:8]) or "Nenhum artigo relacionado disponível."
+    related_text = "\n".join(f'- {x["title"]}: {BASE_URL}/blog/{x["slug"]}/' for x in related[:8]) or "Nenhum artigo relacionado disponível."
     system = "Você é uma especialista em SEO editorial, conteúdo útil e experiência de leitura para pequenas confeiteiras brasileiras. Escreva em português do Brasil natural, sem inventar estatísticas, fontes, preços ou promessas. O conteúdo deve demonstrar experiência prática, responder à intenção de busca e ser realmente útil."
     user = f'''Crie um artigo completo e original para o blog DoceGestor.
 Pauta: {topic["titulo"]}
@@ -292,8 +292,8 @@ def render_faq(faq: list[dict[str, str]]) -> tuple[str, list[dict[str, Any]]]:
 
 def render_html(article: dict[str, Any], topic: dict[str, Any], slug: str, related: list[dict[str, str]], image_url: str, published: str) -> str:
     title, description = article["title"], article["meta_description"]
-    canonical = f"{BASE_URL}/artigos/{slug}/"
-    related_html = ''.join(f'<li><a href="/artigos/{esc(x["slug"])}/">{esc(x["title"])}</a></li>' for x in related[:4])
+    canonical = f"{BASE_URL}/blog/{slug}/"
+    related_html = ''.join(f'<li><a href="/blog/{esc(x["slug"])}/">{esc(x["title"])}</a></li>' for x in related[:4])
     sections = ''.join(render_section(s) for s in article["sections"])
     faq_html, faq_schema = render_faq(article.get("faq", []))
     keywords = article.get("keywords", [])
@@ -326,7 +326,7 @@ def render_html(article: dict[str, Any], topic: dict[str, Any], slug: str, relat
 def update_sitemap(slug: str, published: str) -> None:
     path = ROOT / "sitemap.xml"
     text = path.read_text(encoding="utf-8")
-    url = f"{BASE_URL}/artigos/{slug}/"
+    url = f"{BASE_URL}/blog/{slug}/"
     if url in text:
         text = re.sub(rf'\s*<url><loc>{re.escape(url)}</loc>.*?</url>', f'\n  <url><loc>{url}</loc><lastmod>{published}</lastmod><priority>0.8</priority><changefreq>monthly</changefreq></url>', text, flags=re.S)
     else:
@@ -360,7 +360,7 @@ def update_blog_index(article: dict[str, Any], topic: dict[str, Any], slug: str,
         raise RuntimeError("blog/index.html não contém o bloco reservado para artigos automatizados.")
 
     cards = "".join(
-        f'<a href="/artigos/{esc(x["slug"])}/" style="display:block;overflow:hidden;border:1px solid #f3c5b8;border-radius:18px;background:#fffaf8;text-decoration:none;color:#3b1f1b;box-shadow:0 8px 22px rgba(59,31,27,.06)"><img src="{esc(x.get("image", ""))}" alt="{esc(x.get("title", ""))}" width="800" height="450" loading="lazy" style="display:block;width:100%;aspect-ratio:16/9;object-fit:cover"><div style="padding:18px 20px"><small style="color:#e65f47;font-weight:700;text-transform:uppercase">{esc(x.get("category", "Gestão"))}</small><strong style="display:block;margin-top:6px;font-size:18px">{esc(x["title"])}</strong><span style="display:block;margin-top:8px;opacity:.75;line-height:1.5">{esc(x["description"])}</span><span style="display:block;margin-top:12px;color:#e65f47;font-weight:700">Ler artigo →</span></div></a>'
+        f'<a href="/blog/{esc(x["slug"])}/" style="display:block;overflow:hidden;border:1px solid #f3c5b8;border-radius:18px;background:#fffaf8;text-decoration:none;color:#3b1f1b;box-shadow:0 8px 22px rgba(59,31,27,.06)"><img src="{esc(x.get("image", ""))}" alt="{esc(x.get("title", ""))}" width="800" height="450" loading="lazy" style="display:block;width:100%;aspect-ratio:16/9;object-fit:cover"><div style="padding:18px 20px"><small style="color:#e65f47;font-weight:700;text-transform:uppercase">{esc(x.get("category", "Gestão"))}</small><strong style="display:block;margin-top:6px;font-size:18px">{esc(x["title"])}</strong><span style="display:block;margin-top:8px;opacity:.75;line-height:1.5">{esc(x["description"])}</span><span style="display:block;margin-top:12px;color:#e65f47;font-weight:700">Ler artigo →</span></div></a>'
         for x in registry[:12]
     )
     block = f"""{start_marker}
@@ -383,7 +383,7 @@ def update_blog_index(article: dict[str, Any], topic: dict[str, Any], slug: str,
         items.slice().reverse().forEach(function(item){
           if(grid.querySelector('[data-auto-slug="'+CSS.escape(item.slug)+'"]'))return;
           const card=document.createElement('article');card.className='post-card';card.dataset.autoSlug=item.slug;
-          const href='/artigos/'+encodeURIComponent(item.slug)+'/';
+          const href='/blog/'+encodeURIComponent(item.slug)+'/';
           card.innerHTML='<a class="post-image" href="'+href+'" aria-label="'+escape(item.title)+'"><img src="'+escape(item.image)+'" alt="'+escape(item.title)+'" loading="lazy"></a><div class="post-body"><div class="post-meta">'+escape(item.category)+' · '+escape(item.published.split('-').reverse().join('/'))+'</div><h2><a href="'+href+'">'+escape(item.title)+'</a></h2><p>'+escape(item.description)+'</p><a class="read-link" href="'+href+'">Ler artigo →</a></div>';
           grid.insertBefore(card,grid.firstChild);
         });
@@ -416,7 +416,7 @@ def main() -> int:
         return 0
     article = call_ai(topic, existing)
     published = dt.date.today().isoformat()
-    out_dir = ROOT / "artigos" / slug
+    out_dir = ROOT / "blog" / slug
     if out_dir.exists():
         raise RuntimeError(f"Pasta já existe; nada foi sobrescrito: {out_dir}")
     out_dir.mkdir(parents=True)
@@ -429,7 +429,7 @@ def main() -> int:
     if not image_ok:
         image_path = out_dir / "capa.svg"
         write_fallback_cover(image_path, article["title"], topic.get("categoria", "Gestão"))
-    image_url = f"{BASE_URL}/artigos/{slug}/{image_path.name}"
+    image_url = f"{BASE_URL}/blog/{slug}/{image_path.name}"
     out = out_dir / "index.html"
     out.write_text(render_html(article, topic, slug, existing, image_url, published), encoding="utf-8")
     update_sitemap(slug, published)
@@ -441,7 +441,7 @@ def main() -> int:
     topics_path.write_text(json.dumps(topics, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(f"Artigo criado: {out}")
     print(f"Capa criada: {image_path}")
-    print(f"URL: {BASE_URL}/artigos/{slug}/")
+    print(f"URL: {BASE_URL}/blog/{slug}/")
     return 0
 
 
