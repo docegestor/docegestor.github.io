@@ -54,7 +54,9 @@ jobs:
           set -euo pipefail
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add artigos blog/index.html data sitemap.xml scripts/gerar_artigo.py
+          # Inclui a pasta completa do artigo: index.html, capa e demais arquivos.
+          # Antes, apenas blog/index.html era adicionado e o card ficava sem página.
+          git add artigos blog data sitemap.xml scripts/gerar_artigo.py
           if git diff --cached --quiet; then
             echo 'Nenhuma alteração para publicar.'
           else
