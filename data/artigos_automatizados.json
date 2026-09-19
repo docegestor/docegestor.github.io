@@ -1,10 +1,26 @@
 [
   {
-    "slug": "como-montar-um-cardapio-de-doces-para-encomendas",
-    "title": "Cardápio de doces para encomendas: como montar o seu",
-    "description": "Aprenda a montar um cardápio de doces para encomendas lucrativo, organizado e atraente. Dicas práticas para escolher produtos e vender mais.",
-    "category": "Vendas",
-    "image": "https://docegestor.github.io/artigos/como-montar-um-cardapio-de-doces-para-encomendas/capa.svg",
+    "slug": "como-calcular-o-preco-de-venda-de-um-cupcake",
+    "title": "Como calcular preço de cupcake: Guia para confeiteiras",
+    "description": "Aprenda como calcular preço de cupcake da forma correta. Descubra como somar ingredientes, embalagens e tempo para garantir lucro no seu negócio.",
+    "category": "Precificação",
+    "image": "https://docegestor.github.io/artigos/como-calcular-o-preco-de-venda-de-um-cupcake/capa.svg",
+    "published": "2026-09-18"
+  },
+  {
+    "slug": "margem-de-lucro-na-confeitaria-como-escolher-uma-margem-saudavel",
+    "title": "Margem de lucro na confeitaria: como definir uma ideal",
+    "description": "Aprenda a definir uma margem de lucro na confeitaria que garanta a saúde financeira do seu negócio sem afastar clientes. Veja dicas e exemplos!",
+    "category": "Precificação",
+    "image": "https://docegestor.github.io/artigos/margem-de-lucro-na-confeitaria-como-escolher-uma-margem-saudavel/capa.svg",
+    "published": "2026-09-18"
+  },
+  {
+    "slug": "como-calcular-o-custo-da-embalagem-dos-doces",
+    "title": "Como calcular o custo da embalagem dos doces sem erro",
+    "description": "Aprenda como calcular o custo da embalagem dos doces na confeitaria de forma simples e proteja o seu lucro em cada encomenda vendida.",
+    "category": "Custos",
+    "image": "https://docegestor.github.io/artigos/como-calcular-o-custo-da-embalagem-dos-doces/capa.svg",
     "published": "2026-09-19"
   },
   {
@@ -16,19 +32,11 @@
     "published": "2026-09-19"
   },
   {
-    "slug": "como-calcular-o-custo-da-embalagem-dos-doces",
-    "title": "Como calcular o custo da embalagem dos doces sem erro",
-    "description": "Aprenda como calcular o custo da embalagem dos doces na confeitaria de forma simples e proteja o seu lucro em cada encomenda vendida.",
-    "category": "Custos",
-    "image": "https://docegestor.github.io/artigos/como-calcular-o-custo-da-embalagem-dos-doces/capa.svg",
+    "slug": "como-montar-um-cardapio-de-doces-para-encomendas",
+    "title": "Cardápio de doces para encomendas: como montar o seu",
+    "description": "Aprenda a montar um cardápio de doces para encomendas lucrativo, organizado e atraente. Dicas práticas para escolher produtos e vender mais.",
+    "category": "Vendas",
+    "image": "https://docegestor.github.io/artigos/como-montar-um-cardapio-de-doces-para-encomendas/capa.svg",
     "published": "2026-09-19"
-  },
-  {
-    "slug": "como-calcular-o-preco-de-venda-de-um-cupcake",
-    "title": "Como calcular preço de cupcake: Guia para confeiteiras",
-    "description": "Aprenda como calcular preço de cupcake da forma correta. Descubra como somar ingredientes, embalagens e tempo para garantir lucro no seu negócio.",
-    "category": "Precificação",
-    "image": "https://docegestor.github.io/artigos/como-calcular-o-preco-de-venda-de-um-cupcake/capa.svg",
-    "published": "2026-09-18"
   }
 ]

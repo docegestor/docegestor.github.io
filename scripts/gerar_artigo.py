@@ -17,6 +17,7 @@ import re
 import sys
 import time
 import urllib.error
+import urllib.parse
 import urllib.request
 from pathlib import Path
 from typing import Any
@@ -149,6 +150,25 @@ def call_gemini_image(key: str, model: str, prompt: str, output: Path) -> bool:
     except (urllib.error.HTTPError, urllib.error.URLError, json.JSONDecodeError, KeyError, IndexError, TypeError) as exc:
         print(f"Capa Gemini indisponível; usando capa SVG: {exc}", file=sys.stderr)
     return False
+
+
+def call_pexels_image(api_key: str, query: str, output: Path) -> bool:
+    """Baixa uma foto horizontal do Pexels para a capa do artigo."""
+    params = urllib.parse.urlencode({"query": query[:80], "orientation": "landscape", "size": "large", "per_page": 1})
+    request = urllib.request.Request(f"https://api.pexels.com/v1/search?{params}", headers={"Authorization": api_key})
+    try:
+        with urllib.request.urlopen(request, timeout=40) as response:
+            data = json.loads(response.read().decode())
+        source = (data.get("photos") or [{}])[0].get("src", {})
+        image_url = source.get("large2x") or source.get("large") or source.get("original")
+        if not image_url:
+            return False
+        with urllib.request.urlopen(image_url, timeout=60) as response:
+            output.write_bytes(response.read())
+        return output.stat().st_size > 1000
+    except (urllib.error.HTTPError, urllib.error.URLError, json.JSONDecodeError, KeyError, IndexError, TypeError) as exc:
+        print(f"Imagem Pexels indisponível; usando capa SVG: {exc}", file=sys.stderr)
+        return False
 
 
 def write_fallback_cover(path: Path, title: str, category: str) -> None:
@@ -372,8 +392,12 @@ def main() -> int:
     if out_dir.exists():
         raise RuntimeError(f"Pasta já existe; nada foi sobrescrito: {out_dir}")
     out_dir.mkdir(parents=True)
-    image_path = out_dir / "capa.png"
-    image_ok = bool(os.getenv("GEMINI_API_KEY") and call_gemini_image(os.environ["GEMINI_API_KEY"], GEMINI_IMAGE_MODEL, article["image_prompt"], image_path))
+    image_path = out_dir / "capa.jpg"
+    pexels_query = f'{topic.get("keyword", topic["titulo"])} confeitaria doces'
+    image_ok = bool(os.getenv("PEXELS_API_KEY") and call_pexels_image(os.environ["PEXELS_API_KEY"], pexels_query, image_path))
+    if not image_ok and os.getenv("GEMINI_API_KEY"):
+        image_path = out_dir / "capa.png"
+        image_ok = call_gemini_image(os.environ["GEMINI_API_KEY"], GEMINI_IMAGE_MODEL, article["image_prompt"], image_path)
     if not image_ok:
         image_path = out_dir / "capa.svg"
         write_fallback_cover(image_path, article["title"], topic.get("categoria", "Gestão"))
@@ -382,7 +406,6 @@ def main() -> int:
     out.write_text(render_html(article, topic, slug, existing, image_url, published), encoding="utf-8")
     update_sitemap(slug, published)
     update_blog_index(article, topic, slug, image_url, published)
-    sync_react_blog_bundle(article, topic, slug, image_url, published)
     topic["status"] = "publicada"
     topic["slug_publicado"] = slug
     topic["publicada_em"] = published

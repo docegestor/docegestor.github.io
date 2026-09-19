@@ -1,52 +1,53 @@
 # Automação de artigos SEO do DoceGestor
 
-A automação publica diariamente um artigo estático no blog do DoceGestor pelo GitHub Actions. O fluxo escolhe a próxima pauta, gera conteúdo estruturado com Gemini, tenta criar uma capa visual relacionada, cria a página dentro de `artigos/<slug>/`, atualiza os cards do blog, atualiza o sitemap e faz commit no repositório.
+Esta versão parte do site original enviado no arquivo `docegestorsite1.0.zip`. A página inicial, o bundle React, o CSS e os artigos antigos permanecem intactos. A automação apenas cria novas páginas em `artigos/<slug>/`, atualiza o sitemap e injeta novos cards dentro da página de blog existente.
 
 ## Horário automático
 
-O workflow está configurado para executar às **9h da manhã no horário de Brasília**, todos os dias. O GitHub usa UTC, por isso o cron é:
+O workflow executa diariamente às **9h da manhã no horário de Brasília**. O GitHub usa UTC, por isso o cron é:
 
 ```yaml
 - cron: '0 12 * * *'
 ```
 
-O agendamento do GitHub pode apresentar alguns minutos de atraso. A execução manual continua disponível em **Actions → Publicar artigo SEO no blog → Run workflow**.
+Também é possível executar manualmente em **Actions → Publicar artigo SEO no blog → Run workflow**.
 
-## Secrets
+## Secrets necessários
 
-Para usar o Gemini, crie em **Settings → Secrets and variables → Actions**:
+Configure em **Settings → Secrets and variables → Actions**:
 
 | Secret | Obrigatório | Finalidade |
 |---|---:|---|
-| `GEMINI_API_KEY` | Sim | Chave da API do Google AI Studio |
-| `GEMINI_MODEL` | Não | Padrão: `gemini-3.6-flash` |
-| `GEMINI_FALLBACK_MODEL` | Não | Padrão: `gemini-3.5-flash-lite` |
-| `GEMINI_IMAGE_MODEL` | Não | Padrão: `gemini-3.1-flash-image` |
+| `GEMINI_API_KEY` | Sim | Geração do texto SEO |
+| `PEXELS_API_KEY` | Recomendado | Busca de uma foto horizontal para a capa |
 
-O valor `gen-lang-client-...` é um identificador de projeto, não substitui a API key. A chave deve ser criada no Google AI Studio e nunca deve ser colocada no código ou em arquivo público.
+O código não contém nenhuma chave. Como a chave do Pexels foi colada em uma mensagem, recomenda-se revogá-la e criar outra antes de cadastrá-la no GitHub como `PEXELS_API_KEY`.
 
-Os secrets de DeepSeek e OpenAI continuam aceitos como fallback opcional, mas não são necessários. Se a OpenAI estiver sem créditos, ela deve ser removida ou deixada apenas como último fallback.
+Se o Pexels estiver indisponível, o workflow tenta a imagem do Gemini. Se nenhum serviço de imagem responder, cria uma capa SVG de fallback para nunca publicar um artigo sem imagem.
 
 ## O que o workflow faz
 
-1. Escolhe a primeira pauta com status `pendente` em `data/pautas.json`.
-2. Envia ao Gemini um prompt editorial com intenção de busca, palavra-chave, estrutura H2/H3, leitura mobile, exemplo prático, erros comuns, checklist e perguntas frequentes.
-3. Exige título, meta description, introdução, seções, conclusão, FAQ, palavras-chave e prompt de imagem em JSON.
-4. Tenta criar uma capa horizontal 16:9 com Gemini e grava a imagem na pasta do artigo. Se o modelo de imagem não estiver disponível para a chave, grava uma capa SVG leve e não interrompe a publicação.
-5. Cria `artigos/<slug>/index.html` com o mesmo sistema visual do site, cabeçalho, navegação, tipografia, CTA e links relativos já usados no projeto.
-6. Inclui canonical, Open Graph, Twitter Card, JSON-LD `BlogPosting`, data de publicação, imagem, keywords e JSON-LD de FAQ.
-7. Atualiza `blog/index.html` dentro do bloco reservado `AUTOMATED_ARTICLES_START/END`, com cards, imagem, categoria, resumo e link para o artigo.
-8. Atualiza `data/artigos_automatizados.json`, `data/pautas.json` e `sitemap.xml` com `lastmod` e `changefreq`.
-9. Faz commit e push somente depois de todas as etapas terminarem.
+1. Escolhe a próxima pauta pendente em `data/pautas.json`.
+2. Envia ao Gemini um prompt editorial com intenção de busca, palavra-chave, estrutura H2/H3, exemplo prático, erros comuns, checklist, FAQ e CTA.
+3. Busca uma foto horizontal no Pexels usando `PEXELS_API_KEY`.
+4. Cria `artigos/<slug>/index.html` com o mesmo CSS e o mesmo padrão de cabeçalho, navegação, tipografia e banner de compra dos artigos do site.
+5. Atualiza o `sitemap.xml`.
+6. Atualiza `data/artigos_automatizados.json`.
+7. Insere o card no `.post-grid` do **blog original**, sem modificar o bundle React e sem criar um segundo blog.
+8. Faz commit e push somente após todas as etapas concluírem.
 
 ## Primeiro teste
 
-Antes de deixar o cron publicar, execute manualmente com `dry_run: true`. Esse modo somente seleciona a pauta e não chama a IA nem altera arquivos. Depois execute com `dry_run: false` para publicar de verdade.
+Execute primeiro com:
 
-Para escolher uma pauta específica, informe o slug no campo `topic`; caso contrário, o sistema escolhe a próxima pauta pendente.
+```text
+dry_run: true
+```
 
-## Boas práticas de SEO
+Esse modo somente seleciona a pauta. Depois execute com `dry_run: false` para gerar e publicar o artigo real.
 
-A automação não promete posição no Google. Ela prepara páginas tecnicamente rastreáveis e editorialmente úteis: conteúdo original, resposta direta à intenção de busca, títulos e descrições coerentes, headings hierárquicos, links internos, FAQ, dados estruturados, imagem com `alt`, canonical, sitemap e boa leitura em celular. O Google ainda pode levar tempo para rastrear e indexar cada URL; a qualidade real do conteúdo e a experiência da página continuam sendo decisivas.
+## SEO
 
-Revise os primeiros artigos publicados. A pauta, a palavra-chave e o texto devem continuar relevantes para o público da confeitaria, sem exageros, conteúdo repetitivo ou afirmações sem fonte.
+Cada artigo inclui título, meta description, canonical, Open Graph, Twitter Card, JSON-LD `BlogPosting`, FAQ estruturado, headings hierárquicos, links internos, imagem com `alt`, CTA para o DoceGestor e inclusão no sitemap.
+
+A automação não promete posição no Google. A indexação depende do rastreamento do Google, da qualidade do conteúdo e da experiência da página.
