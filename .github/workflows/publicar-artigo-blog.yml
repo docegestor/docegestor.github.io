@@ -1,12 +1,16 @@
-name: Publicar artigo estático no blog
+name: Gerar e publicar artigo no blog
 
 on:
   workflow_dispatch:
     inputs:
-      limit:
-        description: 'Quantidade de artigos revisados para publicar (0 a 3)'
+      topic:
+        description: 'Tema opcional; se vazio, usa a próxima pauta pendente'
         required: false
-        default: '1'
+        type: string
+      category:
+        description: 'Categoria opcional do artigo'
+        required: false
+        default: 'Gestão'
         type: string
   schedule:
     # 09h de Brasília em dias úteis; o conteúdo vem da fila local revisada.
@@ -31,26 +35,33 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Publicar artigo revisado em /blog
+      - name: Gerar artigo estruturado com Gemini
         env:
-          PUBLISH_LIMIT: ${{ inputs.limit || '1' }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_MODEL: gemini-2.0-flash
+          TOPIC: ${{ inputs.topic || '' }}
+          CATEGORY: ${{ inputs.category || 'Gestão' }}
         run: |
           set -euo pipefail
-          limit="$PUBLISH_LIMIT"
-          if ! [[ "$limit" =~ ^[0-3]$ ]]; then
-            echo 'O limite deve ser um número entre 0 e 3.' >&2
-            exit 1
+          if [ -n "$TOPIC" ]; then
+            python scripts/gerar_artigo.py --topic "$TOPIC" --category "$CATEGORY"
+          else
+            python scripts/gerar_artigo.py --category "$CATEGORY"
           fi
-          python scripts/publicar_artigo_estatico.py --limit "$limit"
+
+      - name: Formatar e publicar dentro de /blog
+        run: |
+          set -euo pipefail
+          python scripts/publicar_artigo_estatico.py --limit 1
 
       - name: Salvar página no repositório
         run: |
           set -euo pipefail
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add blog data/artigos_publicados_estaticos.json sitemap.xml scripts/publicar_artigo_estatico.py
+          git add blog data/artigos_pendentes.json data/artigos_publicados_estaticos.json sitemap.xml scripts/gerar_artigo.py scripts/publicar_artigo_estatico.py
           if git diff --cached --quiet; then
-            echo 'Nenhum artigo revisado aguardando publicação.'
+            echo 'Nenhuma alteração para publicar.'
           else
             git commit -m 'content: publicar artigo estático no blog'
             git push
