@@ -1,0 +1,57 @@
+name: Publicar receitas aprovadas
+
+on:
+  workflow_dispatch:
+    inputs:
+      limit:
+        description: 'Quantidade de receitas aprovadas para publicar (máximo 3)'
+        required: false
+        default: '1'
+        type: string
+  schedule:
+    # 08h, 12h e 16h no horário de Brasília (UTC-3)
+    - cron: '0 11,15,19 * * *'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: publicar-receitas
+  cancel-in-progress: false
+
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Baixar o site
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Publicar receitas aprovadas
+        env:
+          PUBLISH_LIMIT: ${{ inputs.limit || '1' }}
+        run: |
+          set -euo pipefail
+          limit="$PUBLISH_LIMIT"
+          if ! [[ "$limit" =~ ^[0-3]$ ]]; then
+            echo 'O limite deve ser um número entre 0 e 3.' >&2
+            exit 1
+          fi
+          python scripts/publicar_receitas.py --limit "$limit"
+
+      - name: Salvar páginas estáticas
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add receitas data/receitas_publicadas.json sitemap.xml scripts/publicar_receitas.py
+          if git diff --cached --quiet; then
+            echo 'Nenhuma receita aprovada aguardando publicação.'
+          else
+            git commit -m 'content: publicar receitas aprovadas'
+            git push
+          fi
