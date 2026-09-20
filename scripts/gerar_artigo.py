@@ -94,12 +94,65 @@ def validate_article(article: dict[str, Any]) -> None:
         raise RuntimeError("FAQ inválido.")
 
 
+def normalize_article_shape(article: Any) -> dict[str, Any]:
+    """Normaliza variações comuns do JSON devolvido pelos modelos Gemini."""
+    if not isinstance(article, dict):
+        raise RuntimeError("A IA retornou um artigo que não é um objeto JSON.")
+
+    sections = article.get("sections", [])
+    normalized_sections = []
+    if isinstance(sections, list):
+        for index, section in enumerate(sections, start=1):
+            if isinstance(section, str):
+                normalized_sections.append({
+                    "heading": f"Parte {index}",
+                    "subsections": [{"paragraphs": [section], "bullets": []}],
+                })
+            elif isinstance(section, dict):
+                heading = section.get("heading") or section.get("title") or f"Parte {index}"
+                subsections = section.get("subsections", [])
+                if isinstance(subsections, str):
+                    subsections = [{"paragraphs": [subsections], "bullets": []}]
+                elif not isinstance(subsections, list):
+                    subsections = []
+                clean_subsections = []
+                for subsection in subsections:
+                    if isinstance(subsection, str):
+                        clean_subsections.append({"paragraphs": [subsection], "bullets": []})
+                    elif isinstance(subsection, dict):
+                        paragraphs = subsection.get("paragraphs", [])
+                        bullets = subsection.get("bullets", [])
+                        if isinstance(paragraphs, str):
+                            paragraphs = [paragraphs]
+                        if isinstance(bullets, str):
+                            bullets = [bullets]
+                        clean_subsections.append({
+                            "heading": subsection.get("heading") or subsection.get("title", ""),
+                            "paragraphs": paragraphs if isinstance(paragraphs, list) else [],
+                            "bullets": bullets if isinstance(bullets, list) else [],
+                        })
+                if not clean_subsections:
+                    paragraphs = section.get("paragraphs", [])
+                    if isinstance(paragraphs, str):
+                        paragraphs = [paragraphs]
+                    clean_subsections = [{"paragraphs": paragraphs if isinstance(paragraphs, list) else [], "bullets": []}]
+                normalized_sections.append({"heading": heading, "subsections": clean_subsections})
+    article["sections"] = normalized_sections
+
+    faq = article.get("faq", [])
+    if isinstance(faq, dict):
+        faq = [faq]
+    article["faq"] = faq if isinstance(faq, list) else []
+    return article
+
+
 def parse_ai_content(content: str) -> dict[str, Any]:
     content = re.sub(r"^```(?:json)?\s*|\s*```$", "", content.strip(), flags=re.I)
     try:
         article = json.loads(content)
     except json.JSONDecodeError as exc:
         raise RuntimeError(f"A IA não retornou JSON válido: {exc}") from exc
+    article = normalize_article_shape(article)
     validate_article(article)
     return article
 
