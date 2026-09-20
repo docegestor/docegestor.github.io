@@ -38,7 +38,7 @@ jobs:
       - name: Gerar artigo estruturado com Gemini
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          GEMINI_MODEL: gemini-2.0-flash
+          GEMINI_MODEL: gemini-3.6-flash
           TOPIC: ${{ inputs.topic || '' }}
           CATEGORY: ${{ inputs.category || 'Gestão' }}
         run: |

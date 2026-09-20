@@ -7,7 +7,7 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 PAUTAS=ROOT/'data/pautas.json'
 QUEUE=ROOT/'data/artigos_pendentes.json'
-MODEL=os.getenv('GEMINI_MODEL','gemini-2.0-flash')
+MODEL=os.getenv('GEMINI_MODEL','gemini-3.6-flash')
 SCHEMA='''{"title":"até 90 caracteres","slug":"slug-em-minusculas","description":"meta description entre 120 e 170 caracteres","category":"categoria","intro":"introdução de 2 a 3 frases","sections":[{"heading":"título da seção","paragraphs":["parágrafo completo"],"bullets":["item opcional"]}],"faq":[{"question":"pergunta","answer":"resposta"}],"conclusion":"conclusão de 2 a 3 frases"}'''
 
 def extract_json(text: str) -> dict:

@@ -14,7 +14,7 @@ O catálogo anterior de `data/artigos_automatizados.json` foi sincronizado para 
 
 ## Secret necessário
 
-No repositório GitHub, mantenha um secret chamado `GEMINI_API_KEY`. O modelo padrão é `gemini-2.0-flash`, podendo ser alterado pela variável `GEMINI_MODEL` no workflow. Se a cota do Gemini estiver excedida, o job falha de forma explícita e não publica uma página incompleta.
+No repositório GitHub, mantenha um secret chamado `GEMINI_API_KEY`. O modelo padrão é `gemini-3.6-flash`, podendo ser alterado pela variável `GEMINI_MODEL` no workflow. Se a cota do Gemini estiver excedida, o job falha de forma explícita e não publica uma página incompleta.
 
 ## Execução manual
 
