@@ -41,11 +41,13 @@ jobs:
           PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
           GEMINI_MODEL: gemini-3.6-flash
           GEMINI_FALLBACK_MODEL: gemini-3.5-flash-lite
+          REQUESTED_TOPIC: ${{ inputs.topic || '' }}
+          DRY_RUN: ${{ inputs.dry_run || 'false' }}
         run: |
           set -euo pipefail
           args=()
-          if [ "${{ github.event.inputs.dry_run || 'false' }}" = "true" ]; then args+=(--dry-run); fi
-          if [ -n "${{ github.event.inputs.topic || '' }}" ]; then args+=(--topic "${{ github.event.inputs.topic }}"); fi
+          if [ "$DRY_RUN" = "true" ]; then args+=(--dry-run); fi
+          if [ -n "$REQUESTED_TOPIC" ]; then args+=(--topic "$REQUESTED_TOPIC"); fi
           python scripts/gerar_artigo.py "${args[@]}"
 
       - name: Publicar alterações
@@ -54,7 +56,7 @@ jobs:
           set -euo pipefail
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add artigos blog/index.html data sitemap.xml scripts/gerar_artigo.py
+          git add -A blog data sitemap.xml scripts/gerar_artigo.py
           if git diff --cached --quiet; then
             echo 'Nenhuma alteração para publicar.'
           else

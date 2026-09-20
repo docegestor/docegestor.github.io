@@ -2,7 +2,7 @@
 """Gera e publica um artigo SEO estático para o blog DoceGestor.
 
 O fluxo gera texto estruturado com Gemini, tenta criar uma capa com o mesmo
-serviço, grava a imagem em artigos/<slug>/, atualiza o blog e o sitemap e
+serviço, grava a imagem em blog/<slug>/, atualiza o blog e o sitemap e
 marca a pauta como publicada somente ao final.
 """
 from __future__ import annotations
@@ -244,22 +244,31 @@ def esc(value: str) -> str:
 
 
 def rich_text(value: str) -> str:
-    """Renderiza texto da IA com links seguros, aceitando Markdown e âncoras simples."""
-    # Alguns provedores retornam <a href="...">texto</a> apesar do prompt pedir
-    # texto/Markdown. Convertemos antes de escapar para não publicar HTML quebrado.
-    normalized = re.sub(r'<a\s+href=["\'](https?://[^"\']+)["\']\s*>(.*?)</a>', r'[\2](\1)', str(value or ""), flags=re.I | re.S)
+    """Renderiza Markdown/HTML simples sem escapar a marcação do link."""
+    # A IA pode devolver uma âncora HTML mesmo quando solicitamos Markdown.
+    normalized = re.sub(
+        r'<a\s+href=["\'](https?://[^"\']+|/[^"\']+)["\']\s*>(.*?)</a>',
+        r'[\2](\1)', str(value or ''), flags=re.I | re.S,
+    )
     normalized = re.sub(r'</?\w+[^>]*>', '', normalized)
-    escaped = esc(normalized)
-    pattern = r'\[([^\]]+)\]\((https?://[^)\s]+|/[^)\s]+)\)'
-    links: list[str] = []
-    def markdown_link(match: re.Match[str]) -> str:
-        links.append(f'<a href="{esc(match.group(2))}">{match.group(1)}</a>')
-        return f'__DOCE_LINK_{len(links)-1}__'
-    rendered = re.sub(pattern, markdown_link, escaped)
-    rendered = re.sub(r'(?<![A-Za-z0-9_])(https?://[^\s<]+)', lambda match: f'<a href="{match.group(1).rstrip(".,)")}">{match.group(1).rstrip(".,)")}</a>', rendered)
-    for index, link in enumerate(links):
-        rendered = rendered.replace(f'__DOCE_LINK_{index}__', link)
-    return rendered
+    link_pattern = re.compile(
+        r'\[([^\]]+)\]\((https?://[^)\s]+|/[^)\s]+)\)'
+        r'|(?<![A-Za-z0-9_])(https?://[^\s<>]+)'
+    )
+    chunks: list[str] = []
+    cursor = 0
+    for match in link_pattern.finditer(normalized):
+        chunks.append(esc(normalized[cursor:match.start()]))
+        if match.group(1) is not None:
+            label = match.group(1)
+            href = match.group(2)
+        else:
+            href = match.group(3).rstrip('.,)')
+            label = href
+        chunks.append(f'<a href="{esc(href)}">{esc(label)}</a>')
+        cursor = match.end()
+    chunks.append(esc(normalized[cursor:]))
+    return ''.join(chunks)
 
 
 def render_section(section: dict[str, Any]) -> str:
