@@ -79,7 +79,7 @@ def update_blog_index(registry: list[dict[str, Any]]) -> None:
     path=ROOT/'blog/index.html'; text=path.read_text(encoding='utf-8')
     if MARK_START not in text or MARK_END not in text: raise RuntimeError('blog/index.html não contém os marcadores da listagem automática.')
     cards=''.join(f'<a href="/blog/{esc(x["slug"])}/" class="automated-card"><small>{esc(x.get("category","Gestão"))}</small><strong>{esc(x["title"])}</strong><span>{esc(x["description"])}</span><b>Ler artigo →</b></a>' for x in registry[:12])
-    block=f'''{MARK_START}<section id="automated-articles" class="automated-articles"><h2>Artigos novos</h2><div class="automated-articles-list">{cards}</div></section>{MARK_END}'''
+    block=f'''{MARK_START}<section id="automated-articles" class="automated-articles"><h2>Artigos novos</h2><div class="automated-articles-list">{cards}</div></section>{MARK_END}<script id="automated-blog-placement">(function(){{function place(){{var section=document.getElementById('automated-articles');var footer=document.querySelector('#root .site-footer');if(section&&footer&&footer.parentNode&&section.parentNode!==footer.parentNode){{footer.parentNode.insertBefore(section,footer);return true}}return false}}if(!place()){{var root=document.getElementById('root');if(root){{var observer=new MutationObserver(place);observer.observe(root,{{childList:true,subtree:true}})}}}}}})();</script>'''
     text=text.split(MARK_START,1)[0]+block+text.split(MARK_END,1)[1]
     # O script anterior fazia cards via JS; a lista agora é HTML permanente.
     text=re.sub(r'<script id="automated-blog-sync">.*?</script>','',text,flags=re.S)
