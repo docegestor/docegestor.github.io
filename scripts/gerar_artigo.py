@@ -54,9 +54,6 @@ def load_json(path: Path, default: Any) -> Any:
 
 
 def existing_articles() -> list[dict[str, str]]:
-    registry = load_json(ROOT / "data" / "articles.json", [])
-    if registry:
-        return [{"slug": x["slug"], "title": x["title"], "description": x.get("description", "")} for x in registry]
     result = []
     for path in sorted((ROOT / "blog").glob("*/index.html")):
         text = path.read_text(encoding="utf-8", errors="ignore")
@@ -303,78 +300,27 @@ def render_html(article: dict[str, Any], topic: dict[str, Any], slug: str, relat
     schema = {"@context": "https://schema.org", "@type": "BlogPosting", "headline": title, "description": description, "image": [image_url], "datePublished": published, "dateModified": published, "author": {"@type": "Organization", "name": "Equipe DoceGestor"}, "publisher": {"@type": "Organization", "name": "DoceGestor"}, "articleSection": topic.get("categoria", "Gestão de confeitaria"), "keywords": keywords, "mainEntityOfPage": {"@type": "WebPage", "@id": canonical}}
     if faq_schema:
         schema["subjectOf"] = {"@type": "FAQPage", "mainEntity": faq_schema}
-    # Este template usa um <style> próprio, autocontido, em vez de classes do Tailwind
-    # (font-serif, max-w-3xl, rounded-2xl...). O CSS compilado do site (/assets/index-*.css)
-    # só contém as classes que o Tailwind encontrou no código-fonte React em tempo de build;
-    # como este script gera HTML fora desse build, classes pedidas aqui que não existem lá
-    # saem sem estilo nenhum — foi por isso que os artigos automáticos ficavam com aparência
-    # diferente do padrão do blog. Escrever o CSS aqui garante a mesma cara sempre.
-    mercado_livre = "https://www.mercadolivre.com.br/docegestor-sistema-para-confeitaria--precificacao-e-vendas/up/MLBU4686356819?pdp_filters=item_id:MLB7401439782"
-    indice_html = ''.join(f'<li><a href="#sec-{i}">{esc(s.get("heading"))}</a></li>' for i, s in enumerate(article["sections"]))
-    secoes_html = ''.join(
-        render_section(s).replace('<section class="article-section">', f'<section id="sec-{i}" class="article-section">', 1)
-        for i, s in enumerate(article["sections"])
-    )
-    style = '''
-    :root{--brand:#f4775b;--accent:#e65f47;--ink:#3b1f1b;--bg:#fffaf8;--card:#fff1ed;--border:#f3c5b8}
-    *{box-sizing:border-box}
-    body{margin:0;background:var(--bg);color:var(--ink);font-family:'DM Sans',Arial,sans-serif;font-size:17px;line-height:1.7}
-    a{color:var(--accent)}
-    .topbar{background:#fff7f3;border-bottom:1px solid #f6ddd5}
-    .topbar-inner{max-width:1152px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:10px 24px;font-size:14px}
-    .topbar strong{color:var(--ink)}
-    header.site-header{max-width:1152px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:20px 24px;flex-wrap:wrap;gap:10px}
-    header.site-header .logo{font-weight:700;font-size:18px;color:var(--ink);text-decoration:none}
-    header.site-header nav{display:flex;gap:18px;font-size:14px;flex-wrap:wrap}
-    header.site-header nav a{text-decoration:none;color:var(--ink)}
-    main{max-width:760px;margin:0 auto;padding:8px 24px 64px}
-    .back-link{font-size:14px;opacity:.7;margin-bottom:24px;display:block}
-    .eyebrow{display:block;margin-bottom:10px;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--brand)}
-    h1{font-family:'Playfair Display',Georgia,serif;font-weight:800;font-size:34px;line-height:1.2;margin:0 0 18px}
-    .lede{font-size:19px;line-height:1.6;opacity:.85;margin:0 0 10px}
-    .byline{font-size:14px;opacity:.7;margin:0 0 28px}
-    figure{margin:0 0 30px}
-    figure img{display:block;width:100%;height:auto;border-radius:20px;box-shadow:0 16px 40px rgba(59,31,27,.12)}
-    figcaption{margin-top:8px;font-size:13px;opacity:.65}
-    .toc{background:#fff7f3;border:1px solid var(--border);border-radius:16px;padding:18px 22px;margin:0 0 30px}
-    .toc ul{margin:10px 0 0;padding-left:20px}
-    article h2{font-family:'Playfair Display',Georgia,serif;font-size:25px;font-weight:700;margin:32px 0 14px}
-    article h3{font-size:18px;font-weight:700;margin:20px 0 10px}
-    article p{margin:0 0 16px}
-    article ul{margin:0 0 16px;padding-left:22px}
-    article li{margin-bottom:8px}
-    .cta-banner{margin:44px 0;padding:30px;border-radius:22px;background:linear-gradient(135deg,var(--brand),var(--accent));color:#fff;text-align:center}
-    .cta-banner h2{color:#fff;margin-top:0}
-    .cta-banner p{color:#fff;opacity:.95;max-width:480px;margin:0 auto 8px}
-    .cta-banner .btn{display:inline-block;margin-top:14px;background:#fff;color:var(--accent);font-weight:700;text-decoration:none;padding:14px 30px;border-radius:999px;font-size:16px}
-    .related{margin-top:40px}
-    .related h2{font-family:'Playfair Display',Georgia,serif;font-size:21px}
-    .related ul{padding-left:22px}
-    footer.site-footer{border-top:1px solid var(--border);padding:32px 24px;text-align:center;font-size:14px;opacity:.7}
-    footer.site-footer a{color:var(--ink);font-weight:700;text-decoration:none}
-    @media(min-width:640px){h1{font-size:42px}}
-    '''
     return f'''<!doctype html>
 <html lang="pt-BR"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#f4775b"><meta name="robots" content="index, follow"><meta name="author" content="DoceGestor">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
 <title>{esc(title)} | DoceGestor</title><meta name="description" content="{esc(description)}"><meta name="keywords" content="{esc(', '.join(keywords))}"><link rel="canonical" href="{canonical}">
 <meta property="og:type" content="article"><meta property="og:title" content="{esc(title)} | DoceGestor"><meta property="og:description" content="{esc(description)}"><meta property="og:url" content="{canonical}"><meta property="og:image" content="{image_url}"><meta property="og:locale" content="pt_BR">
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="{esc(title)} | DoceGestor"><meta name="twitter:description" content="{esc(description)}"><meta name="twitter:image" content="{image_url}">
 <script type="application/ld+json">{json.dumps(schema, ensure_ascii=False)}</script>
-<style>{style}</style></head><body>
-<div class="topbar"><div class="topbar-inner"><strong>Doce &amp; Lucro</strong><a href="https://t.me/docelucro">Entrar na comunidade →</a></div></div>
-<header class="site-header"><a href="/" class="logo">DG Doce Gestor</a><nav><a href="/">O app</a><a href="/#recursos">Recursos</a><a href="/#como-funciona">Como funciona</a><a href="/blog/">Blog</a><a href="{mercado_livre}">Comprar agora</a></nav></header>
-<main><a class="back-link" href="/blog/">← Voltar para o blog</a>
-<article><span class="eyebrow">{esc(topic.get("categoria", "Gestão de confeitaria"))}</span><h1>{esc(title)}</h1><p class="lede">{rich_text(article["intro"])}</p><p class="byline">{format_date_pt(published)} · 7 min de leitura · Por Equipe DoceGestor</p>
-<figure><img src="{image_url}" alt="Ilustração relacionada a {esc(title)}" width="1600" height="900" loading="eager" fetchpriority="high"><figcaption>Conteúdo educativo para gestão de confeitaria.</figcaption></figure>
-<div class="toc"><strong>Índice deste artigo</strong><ul>{indice_html}</ul></div>
-{secoes_html}{faq_html}<section class="article-section"><h2>Conclusão</h2><p>{rich_text(article["conclusion"])}</p></section>
-<section class="cta-banner"><h2>Do papel para o celular</h2><p><strong>Precifique com mais segurança no DoceGestor.</strong> Pagamento único, acesso vitalício e uso online ou offline para calcular custos, registrar vendas e acompanhar o lucro.</p><a class="btn" href="{mercado_livre}">Conhecer o app →</a></section>
-<section class="related"><h2>Leia também</h2><ul>{related_html}</ul></section></article></main>
-<footer class="site-footer"><a href="/">DoceGestor</a> · Gestão para confeitarias</footer></body></html>'''
+<link rel="stylesheet" href="/assets/index-D6y4RxRJ.css"></head><body style="background:#fffaf8;color:#3b1f1b">
+<div style="background:#fff7f3;border-bottom:1px solid #f6ddd5"><div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 text-sm"><strong style="color:#3b1f1b">Doce &amp; Lucro</strong><a href="https://t.me/docelucro" style="color:#e65f47">Entrar na comunidade →</a></div></div>
+<header class="mx-auto flex max-w-6xl items-center justify-between px-4 py-5"><a href="/" class="font-bold">DG Doce Gestor</a><nav class="flex gap-4 text-sm"><a href="/">O app</a><a href="/#recursos">Recursos</a><a href="/#como-funciona">Como funciona</a><a href="/blog/">Blog</a><a href="https://www.mercadolivre.com.br/docegestor-sistema-para-confeitaria--precificacao-e-vendas/up/MLBU4686356819?pdp_filters=item_id:MLB7401439782">Comprar agora</a></nav></header>
+<main class="mx-auto max-w-3xl px-4 pb-16 pt-8"><div class="mb-6 text-sm opacity-70"><a href="/blog/">Voltar para o blog</a></div>
+<article><p class="mb-3 text-sm font-semibold uppercase tracking-wider" style="color:#f4775b">{esc(topic.get("categoria", "Gestão de confeitaria"))}</p><h1 class="mb-6 font-serif text-4xl font-bold leading-tight md:text-5xl">{esc(title)}</h1><p class="mb-4 text-xl opacity-80">{rich_text(article["intro"])}</p><p style="font-size:14px;opacity:.7;margin-bottom:30px">{format_date_pt(published)} · 7 min de leitura · Por Equipe DoceGestor</p>
+<figure style="margin:0 0 32px"><img src="{image_url}" alt="Ilustração relacionada a {esc(title)}" width="1600" height="900" loading="eager" fetchpriority="high" style="display:block;width:100%;height:auto;border-radius:24px;box-shadow:0 16px 40px rgba(59,31,27,.12)"><figcaption style="margin-top:8px;font-size:13px;opacity:.65">Conteúdo educativo para gestão de confeitaria.</figcaption></figure>
+<div style="background:#fff7f3;border:1px solid #f3c5b8;border-radius:16px;padding:18px 22px;margin:0 0 30px"><strong>Índice deste artigo</strong><ul style="margin:10px 0 0">{''.join(f'<li><a href="#sec-{i}">{esc(s.get("heading"))}</a></li>' for i, s in enumerate(article["sections"]))}</ul></div>
+<div class="space-y-6 text-base leading-8">{''.join(s.replace('<section class="article-section">', f'<section id="sec-{i}" class="article-section">', 1) for i, s in enumerate([render_section(s) for s in article["sections"]]))}{faq_html}<section class="article-section"><h2>Conclusão</h2><p>{rich_text(article["conclusion"])}</p></section>
+<section class="rounded-2xl p-6" style="background:#fff1ed"><h2>Do papel para o celular</h2><p><strong>Precifique com mais segurança no DoceGestor.</strong></p><p>Pagamento único, acesso vitalício e uso online ou offline para calcular custos, registrar vendas e acompanhar o lucro.</p><p><a class="font-bold" style="color:#e65f47" href="https://www.mercadolivre.com.br/docegestor-sistema-para-confeitaria--precificacao-e-vendas/up/MLBU4686356819?pdp_filters=item_id:MLB7401439782">Conhecer o app →</a></p></section>
+<section><h2>Leia também</h2><ul>{related_html}</ul></section></div></article></main>
+<footer class="border-t px-4 py-8 text-center text-sm opacity-70"><a href="/">DoceGestor</a> · Gestão para confeitarias</footer></body></html>'''
 
 
 def update_sitemap(slug: str, published: str) -> None:
@@ -391,88 +337,68 @@ def update_sitemap(slug: str, published: str) -> None:
     path.write_text(text, encoding="utf-8")
 
 
-def load_registry() -> list[dict[str, Any]]:
-    return load_json(ROOT / "data" / "articles.json", [])
-
-
-def save_registry(registry: list[dict[str, Any]]) -> None:
-    registry = sorted(registry, key=lambda x: x.get("published", ""), reverse=True)
-    (ROOT / "data" / "articles.json").write_text(json.dumps(registry, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-
-
-def render_blog_index(registry: list[dict[str, Any]]) -> str:
-    """Gera /blog/index.html inteiro como página estática autocontida.
-
-    Não depende mais do bundle React nem de injeção de HTML/JS em cima dele:
-    isso é o que causava artigos "sumindo" da listagem ou aparecendo fora do
-    padrão visual. Esta função é a única responsável pelo conteúdo do arquivo,
-    reconstruído do zero a cada publicação a partir de data/articles.json.
-    """
-    cards = "".join(
-        f'''<a class="post-card" href="/blog/{esc(x["slug"])}/">
-<img src="{esc(x.get("image", ""))}" alt="{esc(x["title"])}" width="800" height="450" loading="lazy">
-<div class="post-body"><span class="post-meta">{esc(x.get("category", "Gestão"))} · {esc(format_date_pt(x["published"]))}</span>
-<h2>{esc(x["title"])}</h2><p>{esc(x["description"])}</p><span class="read-link">Ler artigo →</span></div></a>'''
-        for x in registry
-    )
-    style = '''
-    :root{--brand:#f4775b;--accent:#e65f47;--ink:#3b1f1b;--bg:#fffaf8;--border:#f3c5b8}
-    *{box-sizing:border-box}
-    body{margin:0;background:var(--bg);color:var(--ink);font-family:'DM Sans',Arial,sans-serif;line-height:1.6}
-    a{color:inherit}
-    .topbar{background:#fff7f3;border-bottom:1px solid #f6ddd5}
-    .topbar-inner{max-width:1152px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:10px 24px;font-size:14px}
-    .topbar a{color:var(--accent)}
-    header.site-header{max-width:1152px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:20px 24px;flex-wrap:wrap;gap:10px}
-    header.site-header .logo{font-weight:700;font-size:18px;text-decoration:none}
-    header.site-header nav{display:flex;gap:18px;font-size:14px;flex-wrap:wrap}
-    header.site-header nav a{text-decoration:none}
-    .hero{max-width:1152px;margin:0 auto;padding:20px 24px 10px}
-    .hero h1{font-family:'Playfair Display',Georgia,serif;font-size:38px;margin:0 0 10px}
-    .hero p{font-size:17px;opacity:.75;max-width:640px;margin:0}
-    .grid{max-width:1152px;margin:30px auto 60px;padding:0 24px;display:grid;gap:22px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
-    .post-card{display:block;overflow:hidden;border:1px solid var(--border);border-radius:18px;background:#fff;text-decoration:none;color:var(--ink);box-shadow:0 8px 22px rgba(59,31,27,.06);transition:transform .15s ease}
-    .post-card img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;background:#ffe3d8}
-    .post-body{padding:18px 20px}
-    .post-meta{color:var(--accent);font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:.03em}
-    .post-card h2{font-family:'Playfair Display',Georgia,serif;font-size:19px;margin:8px 0 8px;line-height:1.3}
-    .post-card p{margin:0 0 12px;font-size:14px;opacity:.75;line-height:1.5}
-    .read-link{color:var(--accent);font-weight:700;font-size:14px}
-    footer.site-footer{border-top:1px solid var(--border);padding:32px 24px;text-align:center;font-size:14px;opacity:.7}
-    footer.site-footer a{font-weight:700;text-decoration:none}
-    @media(min-width:640px){.hero h1{font-size:46px}}
-    '''
-    return f'''<!doctype html>
-<html lang="pt-BR"><head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#f4775b"><meta name="robots" content="index, follow"><meta name="author" content="DoceGestor">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
-<title>Blog DoceGestor | Precificação e gestão para confeitaria</title>
-<meta name="description" content="Guias práticos para calcular preços, organizar encomendas, controlar custos e aumentar o lucro da sua confeitaria.">
-<link rel="canonical" href="{BASE_URL}/blog/">
-<meta property="og:type" content="website"><meta property="og:title" content="Blog DoceGestor | Precificação e gestão para confeitaria"><meta property="og:description" content="Guias práticos para calcular preços, organizar encomendas, controlar custos e aumentar o lucro da sua confeitaria."><meta property="og:url" content="{BASE_URL}/blog/">
-<script type="application/ld+json">{json.dumps({"@context": "https://schema.org", "@type": "Blog", "name": "Blog DoceGestor", "url": f"{BASE_URL}/blog/"}, ensure_ascii=False)}</script>
-<style>{style}</style></head><body>
-<div class="topbar"><div class="topbar-inner"><strong>Doce &amp; Lucro</strong><a href="https://t.me/docelucro">Entrar na comunidade →</a></div></div>
-<header class="site-header"><a href="/" class="logo">DG Doce Gestor</a><nav><a href="/">O app</a><a href="/#recursos">Recursos</a><a href="/#como-funciona">Como funciona</a><a href="/blog/">Blog</a><a href="https://www.mercadolivre.com.br/docegestor-sistema-para-confeitaria--precificacao-e-vendas/up/MLBU4686356819?pdp_filters=item_id:MLB7401439782">Comprar agora</a></nav></header>
-<section class="hero"><h1>Blog DoceGestor</h1><p>Guias práticos para calcular preços, organizar encomendas, controlar custos e vender mais na sua confeitaria.</p></section>
-<section class="grid">{cards}</section>
-<footer class="site-footer"><a href="/">DoceGestor</a> · Gestão para confeitarias</footer></body></html>'''
-
-
 def update_blog_index(article: dict[str, Any], topic: dict[str, Any], slug: str, image_url: str, published: str) -> None:
-    registry = [x for x in load_registry() if x.get("slug") != slug]
-    registry.append({
+    """Atualiza a lista do /blog/ sem alterar o bundle React principal do site."""
+    registry_path = ROOT / "data" / "artigos_automatizados.json"
+    registry = load_json(registry_path, [])
+    item = {
         "slug": slug,
         "title": article["title"],
         "description": article["meta_description"],
         "category": topic.get("categoria", "Gestão"),
         "image": image_url,
         "published": published,
-    })
-    save_registry(registry)
-    (ROOT / "blog" / "index.html").write_text(render_blog_index(registry), encoding="utf-8")
+    }
+    registry = [x for x in registry if x.get("slug") != slug]
+    registry.insert(0, item)
+    registry_path.write_text(json.dumps(registry, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+    path = ROOT / "blog" / "index.html"
+    text = path.read_text(encoding="utf-8")
+    start_marker, end_marker = "<!-- AUTOMATED_ARTICLES_START -->", "<!-- AUTOMATED_ARTICLES_END -->"
+    if start_marker not in text or end_marker not in text:
+        raise RuntimeError("blog/index.html não contém o bloco reservado para artigos automatizados.")
+
+    cards = "".join(
+        f'<a href="/blog/{esc(x["slug"])}/" style="display:block;overflow:hidden;border:1px solid #f3c5b8;border-radius:18px;background:#fffaf8;text-decoration:none;color:#3b1f1b;box-shadow:0 8px 22px rgba(59,31,27,.06)"><img src="{esc(x.get("image", ""))}" alt="{esc(x.get("title", ""))}" width="800" height="450" loading="lazy" style="display:block;width:100%;aspect-ratio:16/9;object-fit:cover"><div style="padding:18px 20px"><small style="color:#e65f47;font-weight:700;text-transform:uppercase">{esc(x.get("category", "Gestão"))}</small><strong style="display:block;margin-top:6px;font-size:18px">{esc(x["title"])}</strong><span style="display:block;margin-top:8px;opacity:.75;line-height:1.5">{esc(x["description"])}</span><span style="display:block;margin-top:12px;color:#e65f47;font-weight:700">Ler artigo →</span></div></a>'
+        for x in registry[:12]
+    )
+    block = f"""{start_marker}
+    <section id="automated-articles" style="display:none;max-width:1152px;margin:40px auto;padding:0 24px 60px;font-family:DM Sans,sans-serif">
+      <h2 style="font-family:Playfair Display,serif;font-size:32px;color:#3b1f1b">Novos artigos do DoceGestor</h2>
+      <div id="automated-articles-list" style="display:grid;gap:20px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">{cards}</div>
+    </section>
+    {end_marker}"""
+    text = text.split(start_marker, 1)[0] + block + text.split(end_marker, 1)[1]
+
+    payload = json.dumps(registry[:12], ensure_ascii=False, separators=(",", ":"))
+    sync_script = """<script id="automated-blog-sync">(function(){
+      const items=__PAYLOAD__;
+      function escape(value){return String(value ?? "").replace(/[&<>"']/g,function(char){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;", "'":"&#39;"}[char]});}
+      function add(){
+        const grid=document.querySelector('.post-grid');
+        const fallback=document.getElementById('automated-articles');
+        if(!grid){if(fallback)fallback.style.display='block';return;}
+        if(fallback)fallback.style.display='none';
+        items.slice().reverse().forEach(function(item){
+          if(grid.querySelector('[data-auto-slug="'+CSS.escape(item.slug)+'"]'))return;
+          const card=document.createElement('article');card.className='post-card';card.dataset.autoSlug=item.slug;
+          const href='/blog/'+encodeURIComponent(item.slug)+'/';
+          card.innerHTML='<a class="post-image" href="'+href+'" aria-label="'+escape(item.title)+'"><img src="'+escape(item.image)+'" alt="'+escape(item.title)+'" loading="lazy"></a><div class="post-body"><div class="post-meta">'+escape(item.category)+' · '+escape(item.published.split('-').reverse().join('/'))+'</div><h2><a href="'+href+'">'+escape(item.title)+'</a></h2><p>'+escape(item.description)+'</p><a class="read-link" href="'+href+'">Ler artigo →</a></div>';
+          grid.insertBefore(card,grid.firstChild);
+        });
+      }
+      setTimeout(add,300);setTimeout(add,1200);new MutationObserver(add).observe(document.body,{childList:true,subtree:true});
+    })();</script>""".replace('__PAYLOAD__', payload)
+    text = re.sub(r'<script id="automated-blog-sync">.*?</script>', '', text, flags=re.S)
+    text = text.replace('</body>', sync_script + '</body>')
+    path.write_text(text, encoding="utf-8")
+
+
+
+def sync_react_blog_bundle(article: dict[str, Any], topic: dict[str, Any], slug: str, image_url: str, published: str) -> None:
+    """Compatibilidade: o bundle global nunca é alterado pela automação."""
+    return
 
 
 def main() -> int:
@@ -508,6 +434,7 @@ def main() -> int:
     out.write_text(render_html(article, topic, slug, existing, image_url, published), encoding="utf-8")
     update_sitemap(slug, published)
     update_blog_index(article, topic, slug, image_url, published)
+    sync_react_blog_bundle(article, topic, slug, image_url, published)
     topic["status"] = "publicada"
     topic["slug_publicado"] = slug
     topic["publicada_em"] = published
