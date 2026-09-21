@@ -1,23 +1,21 @@
-# Blog automático do DoceGestor
+# Automação única do blog
 
-O projeto agora usa uma única estrutura para o conteúdo automático: a página de listagem fica em `/blog/` e cada publicação completa fica em `/blog/<slug>/index.html`. As pastas antigas de artigos legados dentro de `/blog/` foram removidas da listagem e não recebem novas publicações.
+Todo conteúdo gerado pela IA agora termina no mesmo lugar: `/blog/<slug>/index.html`. A pasta antiga `/artigos/` é apenas legado e não recebe novos conteúdos.
 
-A página `/blog/` mantém o hero, o header e a identidade visual do DoceGestor, mas exibe somente os artigos publicados pela automação. Os cards mostram categoria, título, resumo, data, tempo de leitura, autoria, imagem de capa e link para a página completa.
+## Fluxo do GitHub Actions
 
-## Workflow
+1. O workflow `Gerar e publicar artigo no blog` escolhe a próxima pauta de `data/pautas.json` ou usa o tema informado na execução manual.
+2. `scripts/gerar_artigo.py` chama o Gemini usando `GEMINI_API_KEY` e exige um objeto JSON estruturado. A resposta é validada; respostas vazias, truncadas ou com JSON inválido interrompem o job sem commit.
+3. `scripts/publicar_artigo_estatico.py` normaliza pequenas variações do JSON, escapa o conteúdo, cria o HTML no padrão editorial do blog, gera SEO/canonical/JSON-LD, navegação e links relacionados.
+4. A pasta `blog/<slug>/` é criada, a listagem `blog/index.html` recebe um card HTML permanente e `sitemap.xml` recebe a URL canônica.
+5. O Actions faz commit e push somente quando a página e os índices foram realmente alterados.
 
-O workflow `Gerar e publicar artigo no blog` executa todos os dias às **7h no horário de Brasília**. O GitHub usa UTC, por isso o agendamento é `0 10 * * *`.
+O catálogo anterior de `data/artigos_automatizados.json` foi sincronizado para `data/artigos_publicados_estaticos.json`, de modo que os posts antigos também aparecem no mesmo bloco de artigos do blog. Nenhuma nova postagem é criada em `artigos/`.
 
-A execução manual continua disponível em **Actions → Gerar e publicar artigo no blog → Run workflow**. O campo de categoria oferece cinco opções: **Receitas e produtos**, **Precificação**, **Organização de encomendas**, **Gestão financeira** e **Vendas e marketing**.
+## Secret necessário
 
-## Secrets
+No repositório GitHub, mantenha um secret chamado `GEMINI_API_KEY`. O modelo padrão é `gemini-3.6-flash`, podendo ser alterado pela variável `GEMINI_MODEL` no workflow. Se a cota do Gemini estiver excedida, o job falha de forma explícita e não publica uma página incompleta.
 
-Configure `GEMINI_API_KEY` em **Settings → Secrets and variables → Actions**. O workflow prioriza o modelo que já funcionava, `gemini-3.6-flash`, e tenta automaticamente `gemini-3.5-flash-lite` e `gemini-2.5-flash` se houver indisponibilidade temporária, como HTTP 503 ou limite HTTP 429. O fallback `gemini-2.0-flash-lite` foi removido porque o próprio Google informa que esse modelo não está mais disponível e devolve HTTP 404. Cada modelo recebe quatro tentativas com espera progressiva. A capa usa um SVG de fallback local para que a publicação não dependa do Pexels, que está indisponível no momento. Nenhuma chave de API deve ser colocada em arquivos públicos.
+## Execução manual
 
-## Fluxo de publicação
-
-O Gemini recebe um prompt SEO, escolhe uma das cinco categorias, gera título, slug, meta description, introdução, cinco a sete seções, FAQ, conclusão e CTA. O publicador valida o JSON, normaliza o slug e a categoria, gera a capa fallback, cria o artigo em `/blog/<slug>/`, atualiza `data/artigos_publicados_estaticos.json`, reconstrói a página `/blog/` com o novo artigo em primeiro e atualiza o sitemap.
-
-Cada artigo inclui header padronizado, favicon, categoria, data, tempo de leitura, autoria, imagem com texto alternativo, índice, headings, FAQ, canonical, Open Graph, JSON-LD `BlogPosting`, CTA do DoceGestor e links relacionados.
-
-O site principal, o bundle React original, receitas e e-books permanecem separados. A automação não altera o backend da página inicial.
+Na aba **Actions**, escolha **Gerar e publicar artigo no blog**. É possível informar `topic` e `category`; deixando `topic` vazio, o workflow usa a próxima pauta com status `pendente`.

@@ -8,8 +8,6 @@ ROOT=Path(__file__).resolve().parents[1]
 PAUTAS=ROOT/'data/pautas.json'
 QUEUE=ROOT/'data/artigos_pendentes.json'
 MODEL=os.getenv('GEMINI_MODEL','gemini-3.6-flash')
-FALLBACK_MODELS=[m.strip() for m in os.getenv('GEMINI_FALLBACK_MODELS','gemini-3.5-flash-lite,gemini-2.5-flash').split(',') if m.strip()]
-VALID_CATEGORIES=['Receitas e produtos','Precificação','Organização de encomendas','Gestão financeira','Vendas e marketing']
 SCHEMA='''{"title":"até 90 caracteres","slug":"slug-em-minusculas","description":"meta description entre 120 e 170 caracteres","category":"categoria","intro":"introdução de 2 a 3 frases","sections":[{"heading":"título da seção","paragraphs":["parágrafo completo"],"bullets":["item opcional"]}],"faq":[{"question":"pergunta","answer":"resposta"}],"conclusion":"conclusão de 2 a 3 frases"}'''
 
 def extract_json(text: str) -> dict:
@@ -24,44 +22,37 @@ def extract_json(text: str) -> dict:
 def call_gemini(prompt: str) -> dict:
     key=os.getenv('GEMINI_API_KEY')
     if not key: raise RuntimeError('GEMINI_API_KEY não está configurada nos Secrets do GitHub.')
+    url=f'https://generativelanguage.googleapis.com/v1beta/models/{MODEL}:generateContent?key={key}'
     payload={'contents':[{'parts':[{'text':prompt}]}],'generationConfig':{'temperature':0.7,'responseMimeType':'application/json','maxOutputTokens':6000}}
+    request=urllib.request.Request(url,data=json.dumps(payload,ensure_ascii=False).encode(),headers={'Content-Type':'application/json'},method='POST')
     last=''
-    models=[]
-    for model in [MODEL, *FALLBACK_MODELS]:
-        if model and model not in models: models.append(model)
-    for model in models:
-        for attempt in range(4):
-            try:
-                url=f'https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={key}'
-                request=urllib.request.Request(url,data=json.dumps(payload,ensure_ascii=False).encode(),headers={'Content-Type':'application/json'},method='POST')
-                with urllib.request.urlopen(request,timeout=90) as response: data=json.load(response)
-                parts=data.get('candidates',[{}])[0].get('content',{}).get('parts',[])
-                text=''.join(p.get('text','') for p in parts)
-                if not text: raise RuntimeError('Resposta do Gemini veio vazia.')
-                print(f'Modelo Gemini utilizado: {model}')
-                return extract_json(text)
-            except urllib.error.HTTPError as exc:
-                body=exc.read().decode('utf-8','replace'); last=f'{model}: HTTP {exc.code}: {body[:500]}'
-                if exc.code not in (429,500,502,503): break
-                time.sleep(5 * (2 ** attempt))
-            except (urllib.error.URLError, TimeoutError) as exc:
-                last=f'{model}: {exc}'; time.sleep(5 * (2 ** attempt))
-        print(f'Aviso: {model} indisponível; tentando o próximo modelo.', file=sys.stderr)
-    raise RuntimeError(f'Gemini indisponível após testar {len(models)} modelos: {last}')
+    for attempt in range(3):
+        try:
+            with urllib.request.urlopen(request,timeout=90) as response: data=json.load(response)
+            parts=data.get('candidates',[{}])[0].get('content',{}).get('parts',[])
+            text=''.join(p.get('text','') for p in parts)
+            if not text: raise RuntimeError('Resposta do Gemini veio vazia.')
+            return extract_json(text)
+        except urllib.error.HTTPError as exc:
+            body=exc.read().decode('utf-8','replace'); last=f'HTTP {exc.code}: {body[:500]}'
+            if exc.code not in (429,500,502,503): break
+            time.sleep(2 ** attempt)
+        except (urllib.error.URLError, TimeoutError) as exc:
+            last=str(exc); time.sleep(2 ** attempt)
+    raise RuntimeError(f'Gemini indisponível após 3 tentativas: {last}')
 
 def main() -> int:
     ap=argparse.ArgumentParser(); ap.add_argument('--topic'); ap.add_argument('--category'); ap.add_argument('--output',type=Path,default=QUEUE); args=ap.parse_args()
-    topic=args.topic; category=args.category if args.category in VALID_CATEGORIES else ''
+    topic=args.topic; category=args.category or 'Gestão'
     if not topic:
         pautas=json.loads(PAUTAS.read_text(encoding='utf-8')) if PAUTAS.exists() else []
         pauta=next((x for x in pautas if x.get('status')=='pendente'),None)
         if not pauta: raise RuntimeError('Nenhuma pauta pendente encontrada.')
-        topic=pauta.get('titulo') or pauta.get('title'); category=pauta.get('categoria') if pauta.get('categoria') in VALID_CATEGORIES else category
-    prompt=f'''Você é redator SEO brasileiro especializado em confeitaria e gestão de pequenos negócios. Crie um artigo original sobre: {topic}.
-Escolha exatamente uma categoria desta lista: {', '.join(VALID_CATEGORIES)}. Categoria sugerida pelo fluxo: {category or 'escolha a mais adequada'}.
+        topic=pauta.get('titulo') or pauta.get('title'); category=pauta.get('categoria') or category
+    prompt=f'''Você é redator SEO brasileiro especializado em confeitaria e gestão de pequenos negócios. Crie um artigo original sobre: {topic}. Categoria: {category}.
 Responda SOMENTE com JSON válido, sem markdown, sem comentários e sem HTML. Siga exatamente este formato: {SCHEMA}
-Regras: escreva em português do Brasil; escolha um título SEO de até 65 caracteres; crie um slug em minúsculas sem acentos; meta description de 120 a 170 caracteres; seja útil e específico para confeiteiras; produza 5 a 7 seções; cada seção deve ter 1 a 3 parágrafos e, quando útil, 2 a 4 bullets; inclua 3 a 5 perguntas frequentes; termine com conclusão e CTA natural para o DoceGestor; não invente dados estatísticos, promessas ou fontes; não use emojis; não copie textos de terceiros.'''
-    article=call_gemini(prompt); article['category']=article.get('category') if article.get('category') in VALID_CATEGORIES else (category or 'Gestão financeira')
+Regras: escreva em português do Brasil; seja útil e específico para confeiteiras; produza 4 a 6 seções; cada seção deve ter 1 a 3 parágrafos e, quando útil, 2 a 4 bullets; inclua 3 perguntas frequentes; não invente dados estatísticos, promessas ou fontes; não use emojis; não copie textos de terceiros.'''
+    article=call_gemini(prompt); article['category']=article.get('category') or category
     args.output.parent.mkdir(parents=True,exist_ok=True)
     current=json.loads(args.output.read_text(encoding='utf-8')) if args.output.exists() else []
     if isinstance(current,dict): current=[current]

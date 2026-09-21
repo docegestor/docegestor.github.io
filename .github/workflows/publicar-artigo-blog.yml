@@ -10,17 +10,11 @@ on:
       category:
         description: 'Categoria opcional do artigo'
         required: false
-        default: 'Gestão financeira'
-        type: choice
-        options:
-          - Receitas e produtos
-          - Precificação
-          - Organização de encomendas
-          - Gestão financeira
-          - Vendas e marketing
+        default: 'Gestão'
+        type: string
   schedule:
-    # 07h de Brasília (10h UTC), todos os dias.
-    - cron: '0 10 * * *'
+    # 09h de Brasília em dias úteis; o conteúdo vem da fila local revisada.
+    - cron: '0 12 * * 1-5'
 
 permissions:
   contents: write
@@ -45,9 +39,8 @@ jobs:
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GEMINI_MODEL: gemini-3.6-flash
-          GEMINI_FALLBACK_MODELS: gemini-3.5-flash-lite,gemini-2.5-flash
           TOPIC: ${{ inputs.topic || '' }}
-          CATEGORY: ${{ inputs.category || 'Gestão financeira' }}
+          CATEGORY: ${{ inputs.category || 'Gestão' }}
         run: |
           set -euo pipefail
           if [ -n "$TOPIC" ]; then
@@ -66,7 +59,7 @@ jobs:
           set -euo pipefail
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add blog data/artigos_pendentes.json data/artigos_publicados_estaticos.json sitemap.xml favicon.svg README-AUTOMACAO-BLOG.md scripts/gerar_artigo.py scripts/publicar_artigo_estatico.py
+          git add blog data/artigos_pendentes.json data/artigos_publicados_estaticos.json sitemap.xml scripts/gerar_artigo.py scripts/publicar_artigo_estatico.py
           if git diff --cached --quiet; then
             echo 'Nenhuma alteração para publicar.'
           else
