@@ -66,9 +66,21 @@ def next_topic(explicit: str | None) -> str:
 def main() -> int:
     ap = argparse.ArgumentParser(); ap.add_argument('--topic'); ap.add_argument('--output', type=Path, default=QUEUE); args = ap.parse_args()
     topic = next_topic(args.topic)
-    prompt = f'''Você é um chef confeiteiro brasileiro e redator de receitas autorais. Crie uma receita original sobre: {topic}.
-Responda SOMENTE com JSON válido, sem markdown, comentários, HTML ou links. Siga exatamente este formato: {SCHEMA}
-Regras obrigatórias: escreva em português do Brasil; use exatamente a categoria Bolos ou Doces; a receita deve ser de bolo, doce, sobremesa doce, brigadeiro, trufa, pudim, torta doce ou produto de confeitaria; informe quantidades realistas; tenha pelo menos 5 ingredientes e 5 passos; seja clara para quem cozinha em casa ou vende por encomenda; não copie nem parafraseie receitas de sites, livros ou redes sociais; não mencione fontes externas; não invente alegações de saúde; use "Receita autoral DoceGestor" em source_name e string vazia em source_url; crie título e slug específicos para não repetir receitas comuns.'''
+    prompt = f'''Você é um chef confeiteiro brasileiro, testador de receitas e redator editorial do DoceGestor. Crie uma receita AUTORAL, prática e reproduzível sobre o tema: {topic}.
+Responda SOMENTE com um único objeto JSON válido, sem markdown, comentários, HTML, links ou texto antes/depois. Siga exatamente este formato: {SCHEMA}
+
+Regras obrigatórias de conteúdo:
+- Escreva em português do Brasil e use exatamente uma categoria: "Bolos" ou "Doces".
+- A receita deve ser adequada para confeitaria caseira ou venda por encomenda; não crie bebida, prato salgado ou receita fora do tema.
+- Use um título específico e diferente de receitas comuns; o slug deve ser minúsculo, sem acentos, com hífens e derivado do título.
+- A descrição deve ter entre 120 e 170 caracteres, explicar o resultado final e mencionar uma vantagem prática, sem promessas de saúde.
+- Liste de 6 a 12 ingredientes. Cada item deve trazer quantidade e unidade claras (g, ml, unidade, colher ou xícara); separe ingredientes de etapas diferentes quando necessário.
+- Liste de 6 a 10 passos em ordem, com ações completas, temperaturas e tempos quando fizer sentido. Não agrupe todo o preparo em uma única etapa e não use instruções vagas.
+- Informe preparo, cozimento, rendimento realista e dicas de ponto, armazenamento, padronização ou venda.
+- A receita deve ser tecnicamente coerente: ingredientes usados nos passos, rendimento compatível com quantidades e tempo compatível com o método.
+- Não copie nem parafraseie receitas de sites, livros ou redes sociais; não cite fontes externas; use "Receita autoral DoceGestor" em source_name e string vazia em source_url.
+- Não use emojis, alegações medicinais, promessas nutricionais ou ingredientes sem quantidade. Não deixe campos vazios, placeholders ou observações para o redator preencher.
+- Gere apenas uma receita e evite repetir literalmente o tema quando ele produzir um título genérico.'''
     recipe = call_gemini(prompt)
     recipe['category'] = recipe.get('category') if recipe.get('category') in VALID else 'Doces'
     recipe['topic'] = topic

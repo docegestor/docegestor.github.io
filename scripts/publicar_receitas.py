@@ -13,8 +13,6 @@ import json
 import re
 from pathlib import Path
 from typing import Any
-from content_similarity import ensure_unique
-from site_shell import normalize_file
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE_URL = "https://docegestor.github.io"
@@ -44,8 +42,6 @@ def validate(item: dict[str, Any]) -> None:
         raise RuntimeError(f"Ingredientes e preparo devem ser listas: {item.get('slug')}")
     if len(item["ingredients"]) < 2 or len(item["steps"]) < 2:
         raise RuntimeError(f"Receita curta demais: {item.get('slug')}")
-    if item.get("category") not in ("Bolos", "Doces"):
-        raise RuntimeError(f"Categoria não permitida para receita: {item.get('category')}")
 
 
 def render_recipe(item: dict[str, Any], published: str) -> str:
@@ -69,17 +65,15 @@ def render_recipe(item: dict[str, Any], published: str) -> str:
 <html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{esc(item["title"])} | Receitas DoceGestor</title><meta name="description" content="{esc(item["description"])}"><link rel="canonical" href="{canonical}">
 <meta property="og:type" content="article"><meta property="og:title" content="{esc(item["title"])}"><meta property="og:description" content="{esc(item["description"])}"><meta property="og:url" content="{canonical}"><script type="application/ld+json">{json.dumps(schema, ensure_ascii=False)}</script>
-<style>body{{margin:0;background:#fffaf8;color:#3b1f1b;font:16px/1.7 Arial,sans-serif}}a{{color:#d9553c}}header,main,footer{{max-width:920px;margin:auto;padding:24px}}header{{display:flex;justify-content:space-between;gap:20px;align-items:center;border-bottom:1px solid #f2d9d1}}header a{{font-weight:bold;text-decoration:none}}main{{padding-top:42px}}.tag{{color:#d9553c;text-transform:uppercase;font-size:13px;font-weight:bold;letter-spacing:.08em}}h1{{font:700 44px/1.15 Georgia,serif;margin:12px 0}}h2{{font:700 27px Georgia,serif;margin-top:34px}}.lead{{font-size:20px;color:#654a45}}.meta,.source{{font-size:14px;color:#806b65}}.card{{background:#fff1ed;border:1px solid #f2cfc5;border-radius:16px;padding:20px;margin:24px 0}}li{{margin:8px 0}}footer{{border-top:1px solid #f2d9d1;margin-top:50px;font-size:14px;color:#806b65}}@media(max-width:600px){{h1{{font-size:36px}}header{{display:block}}}}</style><style id="doce-lucro-shell">.dl-topbar{{background:#fff7f3;border-bottom:1px solid #f6ddd5;padding:9px 24px;display:flex;justify-content:space-between;align-items:center;gap:16px;font:13px/1.4 DM Sans,Arial,sans-serif;color:#3b1f1b}}.dl-topbar a{{color:#e65f47;text-decoration:none}}.dl-topbar a span{{margin-left:10px;font-weight:700}}.dl-header{{max-width:1152px;margin:auto;min-height:72px;padding:0 24px;display:flex;align-items:center;justify-content:space-between;gap:24px;box-sizing:border-box}}.dl-brand{{font:800 20px/1.2 DM Sans,Arial,sans-serif;color:#3b1f1b!important;text-decoration:none;white-space:nowrap}}.dl-brand span{{color:#e65f47;margin-right:4px}}.dl-nav{{display:flex;gap:4px;align-items:center;justify-content:flex-end;flex-wrap:wrap}}.dl-nav a{{color:#5b3a35!important;text-decoration:none;font:700 14px/1.2 DM Sans,Arial,sans-serif;padding:8px 9px;border-radius:8px}}.dl-nav a:hover{{background:#fff1ed}}.dl-nav .dl-buy{{background:#e65f47;color:#fff!important;padding:10px 14px}}.dl-footer{{border-top:1px solid #f2d9d1;text-align:center;padding:28px 24px;color:#806b65;font:14px/1.8 DM Sans,Arial,sans-serif;margin-top:40px}}.dl-footer a{{color:#d9553c;text-decoration:none}}.dl-footer a:hover{{text-decoration:underline}}@media(max-width:800px){{.dl-topbar{{align-items:flex-start;flex-direction:column;padding:9px 16px}}.dl-topbar a span{{display:block;margin:2px 0 0}}.dl-header{{align-items:flex-start;flex-direction:column;padding:16px}}.dl-nav{{justify-content:flex-start}}.dl-nav a{{padding-left:0;padding-right:12px}}}} </style></head>
-<body><div class="dl-topbar"><strong>Doce &amp; Lucro</strong><a href="https://t.me/docelucro" rel="noopener">Gestão simples para quem transforma ingredientes em renda.<span>Entrar na comunidade →</span></a></div>
-<header class="dl-header"><a class="dl-brand" href="/"><span>DG</span> DoceGestor</a><nav class="dl-nav" aria-label="Navegação principal"><a href="/">Início</a><a href="/blog/">Blog</a><a href="/receitas/">Receitas</a><a href="/ebooks/">E-books</a><a href="/#recursos">Recursos</a><a href="/#como-funciona">Como funciona</a><a class="dl-buy" href="https://www.mercadolivre.com.br/docegestor-sistema-para-confeitaria--precificacao-e-vendas/up/MLBU4686356819?pdp_filters=item_id:MLB7401439782" rel="sponsored noopener">Conhecer o app</a></nav></header>
+<style>body{{margin:0;background:#fffaf8;color:#3b1f1b;font:16px/1.7 Arial,sans-serif}}a{{color:#d9553c}}header,main,footer{{max-width:920px;margin:auto;padding:24px}}header{{display:flex;justify-content:space-between;gap:20px;align-items:center;border-bottom:1px solid #f2d9d1}}header a{{font-weight:bold;text-decoration:none}}main{{padding-top:42px}}.tag{{color:#d9553c;text-transform:uppercase;font-size:13px;font-weight:bold;letter-spacing:.08em}}h1{{font:700 44px/1.15 Georgia,serif;margin:12px 0}}h2{{font:700 27px Georgia,serif;margin-top:34px}}.lead{{font-size:20px;color:#654a45}}.meta,.source{{font-size:14px;color:#806b65}}.card{{background:#fff1ed;border:1px solid #f2cfc5;border-radius:16px;padding:20px;margin:24px 0}}li{{margin:8px 0}}footer{{border-top:1px solid #f2d9d1;margin-top:50px;font-size:14px;color:#806b65}}@media(max-width:600px){{h1{{font-size:36px}}header{{display:block}}}}</style></head>
+<body><header><a href="/receitas/">Receitas DoceGestor</a><nav><a href="/blog/">Blog</a> · <a href="/">Página inicial</a></nav></header>
 <main><div class="tag">{esc(item.get("category", "Receitas"))}</div><h1>{esc(item["title"])}</h1><p class="lead">{esc(item["description"])}</p><p class="meta">Preparo: {esc(item.get("prep_time", "não informado"))} · Forno/fogo: {esc(item.get("cook_time", "não informado"))} · Rendimento: {esc(item.get("yield", "não informado"))}</p>
-<section class="card"><h2>Ingredientes</h2><ul>{ingredients}</ul></section><section><h2>Modo de preparo</h2><ol>{steps}</ol></section>{f'<section class="card"><h2>Dicas</h2><ul>{tips}</ul></section>' if tips else ''}{source}<p class="meta">Publicado em {published}</p></main><footer class="dl-footer"><div><strong>DoceGestor</strong> · Gestão simples para confeitarias</div><div><a href="/">Início</a> · <a href="/blog/">Blog</a> · <a href="/receitas/">Receitas</a> · <a href="/ebooks/">E-books</a></div><div>Desenvolvido por <a href="https://saulomgg.github.io" target="_blank" rel="noopener noreferrer">saulomgg</a></div></footer></body></html>'''
+<section class="card"><h2>Ingredientes</h2><ul>{ingredients}</ul></section><section><h2>Modo de preparo</h2><ol>{steps}</ol></section>{f'<section class="card"><h2>Dicas</h2><ul>{tips}</ul></section>' if tips else ''}{source}<p class="meta">Publicado em {published}</p></main><footer>Receitas autorais e conteúdo editorial do DoceGestor.</footer></body></html>'''
 
 
 def update_index(registry: list[dict[str, Any]]) -> None:
     cards = "".join(f'<article class="card"><div class="tag">{esc(x.get("category", "Receitas"))}</div><h2><a href="/receitas/{esc(x["slug"])}/">{esc(x["title"])}</a></h2><p>{esc(x["description"])}</p><a href="/receitas/{esc(x["slug"])}/">Ver receita →</a></article>' for x in registry)
-    page = f'''<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Receitas de doces e bolos | DoceGestor</title><meta name="description" content="Receitas de doces e bolos para preparar, testar e organizar sua produção."><link rel="canonical" href="{BASE_URL}/receitas/"><style>body{{margin:0;background:#fffaf8;color:#3b1f1b;font:16px/1.7 Arial,sans-serif}}header,main,footer{{max-width:1080px;margin:auto;padding:24px}}header{{display:flex;justify-content:space-between;border-bottom:1px solid #f2d9d1}}a{{color:#d9553c}}h1{{font:700 44px Georgia,serif}}.intro{{font-size:20px;color:#654a45;max-width:720px}}.grid{{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;margin-top:32px}}.card{{background:white;border:1px solid #f2d9d1;border-radius:16px;padding:22px;box-shadow:0 8px 22px #3b1f1b0d}}.card h2{{font:700 25px Georgia,serif}}.tag{{color:#d9553c;text-transform:uppercase;font-size:13px;font-weight:bold;letter-spacing:.08em}}footer{{border-top:1px solid #f2d9d1;margin-top:50px;color:#806b65}}</style><style id="doce-lucro-shell">.dl-topbar{{background:#fff7f3;border-bottom:1px solid #f6ddd5;padding:9px 24px;display:flex;justify-content:space-between;align-items:center;gap:16px;font:13px/1.4 DM Sans,Arial,sans-serif;color:#3b1f1b}}.dl-topbar a{{color:#e65f47;text-decoration:none}}.dl-topbar a span{{margin-left:10px;font-weight:700}}.dl-header{{max-width:1152px;margin:auto;min-height:72px;padding:0 24px;display:flex;align-items:center;justify-content:space-between;gap:24px;box-sizing:border-box}}.dl-brand{{font:800 20px/1.2 DM Sans,Arial,sans-serif;color:#3b1f1b!important;text-decoration:none;white-space:nowrap}}.dl-brand span{{color:#e65f47;margin-right:4px}}.dl-nav{{display:flex;gap:4px;align-items:center;justify-content:flex-end;flex-wrap:wrap}}.dl-nav a{{color:#5b3a35!important;text-decoration:none;font:700 14px/1.2 DM Sans,Arial,sans-serif;padding:8px 9px;border-radius:8px}}.dl-nav a:hover{{background:#fff1ed}}.dl-nav .dl-buy{{background:#e65f47;color:#fff!important;padding:10px 14px}}.dl-footer{{border-top:1px solid #f2d9d1;text-align:center;padding:28px 24px;color:#806b65;font:14px/1.8 DM Sans,Arial,sans-serif;margin-top:40px}}.dl-footer a{{color:#d9553c;text-decoration:none}}.dl-footer a:hover{{text-decoration:underline}}@media(max-width:800px){{.dl-topbar{{align-items:flex-start;flex-direction:column;padding:9px 16px}}.dl-topbar a span{{display:block;margin:2px 0 0}}.dl-header{{align-items:flex-start;flex-direction:column;padding:16px}}.dl-nav{{justify-content:flex-start}}.dl-nav a{{padding-left:0;padding-right:12px}}}} </style></head><body><div class="dl-topbar"><strong>Doce &amp; Lucro</strong><a href="https://t.me/docelucro" rel="noopener">Gestão simples para quem transforma ingredientes em renda.<span>Entrar na comunidade →</span></a></div>
-<header class="dl-header"><a class="dl-brand" href="/"><span>DG</span> DoceGestor</a><nav class="dl-nav" aria-label="Navegação principal"><a href="/">Início</a><a href="/blog/">Blog</a><a href="/receitas/">Receitas</a><a href="/ebooks/">E-books</a><a href="/#recursos">Recursos</a><a href="/#como-funciona">Como funciona</a><a class="dl-buy" href="https://www.mercadolivre.com.br/docegestor-sistema-para-confeitaria--precificacao-e-vendas/up/MLBU4686356819?pdp_filters=item_id:MLB7401439782" rel="sponsored noopener">Conhecer o app</a></nav></header><main><h1>Receitas de doces e bolos</h1><p class="intro">Uma área estática para receitas autorais, revisadas e organizadas para a rotina de confeitaria.</p><div class="grid">{cards}</div></main><footer class="dl-footer"><div><strong>DoceGestor</strong> · Gestão simples para confeitarias</div><div><a href="/">Início</a> · <a href="/blog/">Blog</a> · <a href="/receitas/">Receitas</a> · <a href="/ebooks/">E-books</a></div><div>Desenvolvido por <a href="https://saulomgg.github.io" target="_blank" rel="noopener noreferrer">saulomgg</a></div></footer></body></html>'''
+    page = f'''<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Receitas de doces e bolos | DoceGestor</title><meta name="description" content="Receitas de doces e bolos para preparar, testar e organizar sua produção."><link rel="canonical" href="{BASE_URL}/receitas/"><style>body{{margin:0;background:#fffaf8;color:#3b1f1b;font:16px/1.7 Arial,sans-serif}}header,main,footer{{max-width:1080px;margin:auto;padding:24px}}header{{display:flex;justify-content:space-between;border-bottom:1px solid #f2d9d1}}a{{color:#d9553c}}h1{{font:700 44px Georgia,serif}}.intro{{font-size:20px;color:#654a45;max-width:720px}}.grid{{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;margin-top:32px}}.card{{background:white;border:1px solid #f2d9d1;border-radius:16px;padding:22px;box-shadow:0 8px 22px #3b1f1b0d}}.card h2{{font:700 25px Georgia,serif}}.tag{{color:#d9553c;text-transform:uppercase;font-size:13px;font-weight:bold;letter-spacing:.08em}}footer{{border-top:1px solid #f2d9d1;margin-top:50px;color:#806b65}}</style></head><body><header><a href="/receitas/"><strong>Receitas DoceGestor</strong></a><nav><a href="/blog/">Blog</a> · <a href="/">Página inicial</a></nav></header><main><h1>Receitas de doces e bolos</h1><p class="intro">Uma área estática para receitas autorais, revisadas e organizadas para a rotina de confeitaria.</p><div class="grid">{cards}</div></main><footer>DoceGestor · Receitas e gestão para confeiteiras</footer></body></html>'''
     (ROOT / "receitas" / "index.html").write_text(page, encoding="utf-8")
 
 
@@ -100,29 +94,32 @@ def main() -> int:
     parser.add_argument("--limit", type=int, default=1)
     args = parser.parse_args()
     queue = load(QUEUE, [])
+    if isinstance(queue, dict):
+        queue = [queue]
     registry = load(REGISTRY, [])
-    used = {x["slug"] for x in registry}
-    existing = list(registry)
-    for queued in queue:
-        if queued.get("slug") not in {x.get("slug") for x in existing}:
-            existing.append(queued)
-    pending = [x for x in queue if x.get("slug") not in used]
+    used = {slugify(str(x.get("slug", ""))) for x in registry if x.get("slug")}
+    pending = []
+    consumed = set()
+    for item in queue:
+        normalized_slug = slugify(str(item.get("slug") or item.get("title") or ""))
+        if normalized_slug in used:
+            consumed.add(normalized_slug)
+            continue
+        item["slug"] = normalized_slug
+        pending.append(item)
     today = dt.date.today().isoformat()
     selected = pending[: max(0, args.limit)]
     for item in selected:
-        item["slug"] = slugify(item.get("slug") or item["title"])
         validate(item)
-        ensure_unique(item, [old for old in existing if old is not item], kind="recipe")
         out_dir = ROOT / "receitas" / item["slug"]
         out_dir.mkdir(parents=True, exist_ok=False)
         item["published"] = today
         (out_dir / "index.html").write_text(render_recipe(item, today), encoding="utf-8")
-        normalize_file(out_dir / "index.html")
         registry.insert(0, {key: item[key] for key in ("slug", "title", "description", "category", "published", "source_name", "source_url", "ingredients", "steps", "tips") if key in item})
-        existing.insert(0, item)
+        consumed.add(item["slug"])
+    QUEUE.write_text(json.dumps([item for item in queue if slugify(str(item.get("slug") or item.get("title") or "")) not in consumed], ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     REGISTRY.write_text(json.dumps(registry, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     update_index(registry)
-    normalize_file(ROOT / "receitas" / "index.html")
     update_sitemap(registry)
     print(f"Receitas publicadas: {len(selected)}")
     return 0
