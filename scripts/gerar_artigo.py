@@ -7,8 +7,8 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 PAUTAS=ROOT/'data/pautas.json'
 QUEUE=ROOT/'data/artigos_pendentes.json'
-MODEL=os.getenv('GEMINI_MODEL','gemini-2.5-flash-lite')
-FALLBACK_MODELS=[m.strip() for m in os.getenv('GEMINI_FALLBACK_MODELS','gemini-2.5-flash,gemini-2.0-flash-lite').split(',') if m.strip()]
+MODEL=os.getenv('GEMINI_MODEL','gemini-3.6-flash')
+FALLBACK_MODELS=[m.strip() for m in os.getenv('GEMINI_FALLBACK_MODELS','gemini-3.5-flash-lite,gemini-2.5-flash').split(',') if m.strip()]
 VALID_CATEGORIES=['Receitas e produtos','Precificação','Organização de encomendas','Gestão financeira','Vendas e marketing']
 SCHEMA='''{"title":"até 90 caracteres","slug":"slug-em-minusculas","description":"meta description entre 120 e 170 caracteres","category":"categoria","intro":"introdução de 2 a 3 frases","sections":[{"heading":"título da seção","paragraphs":["parágrafo completo"],"bullets":["item opcional"]}],"faq":[{"question":"pergunta","answer":"resposta"}],"conclusion":"conclusão de 2 a 3 frases"}'''
 

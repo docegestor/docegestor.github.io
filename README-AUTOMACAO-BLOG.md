@@ -12,7 +12,7 @@ A execução manual continua disponível em **Actions → Gerar e publicar artig
 
 ## Secrets
 
-Configure `GEMINI_API_KEY` em **Settings → Secrets and variables → Actions**. O workflow começa pelo `gemini-2.5-flash-lite` e tenta automaticamente `gemini-2.5-flash` e `gemini-2.0-flash-lite` se houver indisponibilidade temporária, como HTTP 503 ou limite HTTP 429. Cada modelo recebe quatro tentativas com espera progressiva. A capa usa um SVG de fallback local para que a publicação não dependa do Pexels, que está indisponível no momento. Nenhuma chave de API deve ser colocada em arquivos públicos.
+Configure `GEMINI_API_KEY` em **Settings → Secrets and variables → Actions**. O workflow prioriza o modelo que já funcionava, `gemini-3.6-flash`, e tenta automaticamente `gemini-3.5-flash-lite` e `gemini-2.5-flash` se houver indisponibilidade temporária, como HTTP 503 ou limite HTTP 429. O fallback `gemini-2.0-flash-lite` foi removido porque o próprio Google informa que esse modelo não está mais disponível e devolve HTTP 404. Cada modelo recebe quatro tentativas com espera progressiva. A capa usa um SVG de fallback local para que a publicação não dependa do Pexels, que está indisponível no momento. Nenhuma chave de API deve ser colocada em arquivos públicos.
 
 ## Fluxo de publicação
 
