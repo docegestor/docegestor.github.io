@@ -4,55 +4,63 @@
     "title": "Como calcular o custo de uma encomenda de doces",
     "description": "Aprenda a somar ingredientes, embalagem, mão de obra e custos fixos para formar um preço seguro para cada encomenda.",
     "category": "Custos e precificação",
-    "published": "2026-09-20"
+    "published": "2026-09-20",
+    "image": "https://docegestor.github.io/blog/como-calcular-o-custo-de-uma-encomenda/capa.svg"
   },
   {
     "slug": "controle-de-validade-dos-ingredientes-metodo-simples",
     "title": "Controle de validade dos ingredientes na confeitaria",
     "description": "Aprenda a organizar a validade dos ingredientes na confeitaria de forma simples. Evite desperdícios, garanta segurança e proteja o lucro da sua produção.",
     "category": "Estoque",
-    "published": "2026-09-19"
+    "published": "2026-09-19",
+    "image": "https://docegestor.github.io/blog/controle-de-validade-dos-ingredientes-metodo-simples/capa.svg"
   },
   {
     "slug": "como-organizar-pedidos-de-confeitaria-pelo-celular",
     "title": "Organizar pedidos de confeitaria pelo celular: guia prático",
     "description": "Aprenda a organizar pedidos de confeitaria pelo celular sem perder prazos. Veja passos práticos, checklists e dicas para rotina na cozinha.",
     "category": "Organização",
-    "published": "2026-09-19"
+    "published": "2026-09-19",
+    "image": "https://docegestor.github.io/blog/como-organizar-pedidos-de-confeitaria-pelo-celular/capa.svg"
   },
   {
     "slug": "como-calcular-o-preco-de-venda-de-um-cupcake",
     "title": "Como calcular preço de cupcake: Guia para confeiteiras",
     "description": "Aprenda como calcular preço de cupcake da forma correta. Descubra como somar ingredientes, embalagens e tempo para garantir lucro no seu negócio.",
     "category": "Precificação",
-    "published": "2026-09-18"
+    "published": "2026-09-18",
+    "image": "https://docegestor.github.io/blog/como-calcular-o-preco-de-venda-de-um-cupcake/capa.svg"
   },
   {
     "slug": "margem-de-lucro-na-confeitaria-como-escolher-uma-margem-saudavel",
     "title": "Margem de lucro na confeitaria: como definir uma ideal",
     "description": "Aprenda a definir uma margem de lucro na confeitaria que garanta a saúde financeira do seu negócio sem afastar clientes. Veja dicas e exemplos!",
     "category": "Precificação",
-    "published": "2026-09-18"
+    "published": "2026-09-18",
+    "image": "https://docegestor.github.io/blog/margem-de-lucro-na-confeitaria-como-escolher-uma-margem-saudavel/capa.svg"
   },
   {
     "slug": "como-calcular-o-custo-da-embalagem-dos-doces",
     "title": "Como calcular o custo da embalagem dos doces sem erro",
     "description": "Aprenda como calcular o custo da embalagem dos doces na confeitaria de forma simples e proteja o seu lucro em cada encomenda vendida.",
     "category": "Custos",
-    "published": "2026-09-19"
+    "published": "2026-09-19",
+    "image": "https://docegestor.github.io/blog/como-calcular-o-custo-da-embalagem-dos-doces/capa.svg"
   },
   {
     "slug": "ficha-tecnica-de-brigadeiro-ingredientes-rendimento-e-custo",
     "title": "Ficha técnica de brigadeiro: como calcular custo e rendimento",
     "description": "Aprenda a montar a ficha técnica de brigadeiro passo a passo. Descubra como calcular ingredientes, rendimento e custo real para ter mais lucro na confeitaria.",
     "category": "Ficha técnica",
-    "published": "2026-09-19"
+    "published": "2026-09-19",
+    "image": "https://docegestor.github.io/blog/ficha-tecnica-de-brigadeiro-ingredientes-rendimento-e-custo/capa.svg"
   },
   {
     "slug": "como-montar-um-cardapio-de-doces-para-encomendas",
     "title": "Cardápio de doces para encomendas: como montar o seu",
     "description": "Aprenda a montar um cardápio de doces para encomendas lucrativo, organizado e atraente. Dicas práticas para escolher produtos e vender mais.",
     "category": "Vendas",
-    "published": "2026-09-19"
+    "published": "2026-09-19",
+    "image": "https://docegestor.github.io/blog/como-montar-um-cardapio-de-doces-para-encomendas/capa.svg"
   }
 ]
