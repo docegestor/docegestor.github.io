@@ -1,0 +1,74 @@
+name: Gerar e publicar receita doce
+
+on:
+  workflow_dispatch:
+    inputs:
+      topic:
+        description: 'Tema opcional; se vazio, escolhe uma pauta de receita'
+        required: false
+        type: string
+      limit:
+        description: 'Quantidade de receitas para publicar (máximo 1)'
+        required: false
+        default: '1'
+        type: string
+  schedule:
+    # 18h de Brasília (UTC-3) = 21h UTC.
+    - cron: '0 21 * * *'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: publicar-receitas
+  cancel-in-progress: false
+
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Baixar o site
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Gerar receita autoral com Gemini
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_MODEL: gemini-3.6-flash
+          GEMINI_FALLBACK_MODELS: gemini-3.5-flash-lite,gemini-2.5-flash
+          TOPIC: ${{ inputs.topic || '' }}
+        run: |
+          set -euo pipefail
+          if [ -n "$TOPIC" ]; then
+            python scripts/gerar_receita.py --topic "$TOPIC"
+          else
+            python scripts/gerar_receita.py
+          fi
+      - name: Publicar receita dentro de /receitas
+        env:
+          PUBLISH_LIMIT: ${{ inputs.limit || '1' }}
+        run: |
+          set -euo pipefail
+          limit="$PUBLISH_LIMIT"
+          if ! [[ "$limit" =~ ^[0-1]$ ]]; then
+            echo 'O limite deve ser 0 ou 1.' >&2
+            exit 1
+          fi
+          python scripts/publicar_receitas.py --limit "$limit"
+
+      - name: Salvar receita no repositório
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add receitas data/receitas_pendentes.json data/receitas_publicadas.json sitemap.xml scripts/gerar_receita.py scripts/publicar_receitas.py
+          if git diff --cached --quiet; then
+            echo 'Nenhuma alteração para publicar.'
+          else
+            git commit -m 'content: gerar e publicar receita doce'
+            git push
+          fi
