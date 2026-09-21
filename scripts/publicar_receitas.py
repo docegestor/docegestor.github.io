@@ -13,6 +13,7 @@ import json
 import re
 from pathlib import Path
 from typing import Any
+from content_similarity import ensure_unique
 from site_shell import normalize_file
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -43,6 +44,8 @@ def validate(item: dict[str, Any]) -> None:
         raise RuntimeError(f"Ingredientes e preparo devem ser listas: {item.get('slug')}")
     if len(item["ingredients"]) < 2 or len(item["steps"]) < 2:
         raise RuntimeError(f"Receita curta demais: {item.get('slug')}")
+    if item.get("category") not in ("Bolos", "Doces"):
+        raise RuntimeError(f"Categoria não permitida para receita: {item.get('category')}")
 
 
 def render_recipe(item: dict[str, Any], published: str) -> str:
@@ -99,18 +102,24 @@ def main() -> int:
     queue = load(QUEUE, [])
     registry = load(REGISTRY, [])
     used = {x["slug"] for x in registry}
+    existing = list(registry)
+    for queued in queue:
+        if queued.get("slug") not in {x.get("slug") for x in existing}:
+            existing.append(queued)
     pending = [x for x in queue if x.get("slug") not in used]
     today = dt.date.today().isoformat()
     selected = pending[: max(0, args.limit)]
     for item in selected:
         item["slug"] = slugify(item.get("slug") or item["title"])
         validate(item)
+        ensure_unique(item, [old for old in existing if old is not item], kind="recipe")
         out_dir = ROOT / "receitas" / item["slug"]
         out_dir.mkdir(parents=True, exist_ok=False)
         item["published"] = today
         (out_dir / "index.html").write_text(render_recipe(item, today), encoding="utf-8")
         normalize_file(out_dir / "index.html")
-        registry.insert(0, {key: item[key] for key in ("slug", "title", "description", "category", "published", "source_name", "source_url") if key in item})
+        registry.insert(0, {key: item[key] for key in ("slug", "title", "description", "category", "published", "source_name", "source_url", "ingredients", "steps", "tips") if key in item})
+        existing.insert(0, item)
     REGISTRY.write_text(json.dumps(registry, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     update_index(registry)
     normalize_file(ROOT / "receitas" / "index.html")

@@ -5,6 +5,7 @@ import argparse, datetime as dt, html, json, re
 from pathlib import Path
 from typing import Any
 from site_shell import normalize_file
+from content_similarity import ensure_unique
 
 ROOT=Path(__file__).resolve().parents[1]
 BASE_URL='https://docegestor.github.io'
@@ -63,7 +64,7 @@ def main():
         if old.get('slug') and old['slug'] not in known: registry.append({'slug':old['slug'],'title':old.get('title',''),'description':old.get('description',''),'category':old.get('category','Gestão financeira'),'published':old.get('published',dt.date.today().isoformat())}); known.add(old['slug'])
     selected=[]
     for item in raw:
-        a=normalize(item); validate(a)
+        a=normalize(item); validate(a); ensure_unique(a, registry, kind='article')
         if a['slug'] not in known: selected.append(a)
     selected=selected[:args.limit]; today=dt.date.today().isoformat()
     if args.dry_run: print(f'Artigos validados (dry-run): {len(selected)}'); return 0

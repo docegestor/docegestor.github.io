@@ -16,7 +16,7 @@ Configure `GEMINI_API_KEY` em **Settings → Secrets and variables → Actions**
 
 ## Fluxo de publicação
 
-O Gemini recebe um prompt SEO, escolhe uma das cinco categorias, gera título, slug, meta description, introdução, cinco a sete seções, FAQ, conclusão e CTA. O publicador valida o JSON, normaliza o slug e a categoria, gera a capa fallback, cria o artigo em `/blog/<slug>/`, atualiza `data/artigos_publicados_estaticos.json`, reconstrói a página `/blog/` com o novo artigo em primeiro e atualiza o sitemap.
+O Gemini recebe um prompt SEO, escolhe uma das cinco categorias, gera título, slug, meta description, introdução, cinco a sete seções, FAQ, conclusão e CTA. O publicador valida o JSON, normaliza o slug e a categoria, verifica se título e conteúdo não são muito parecidos com artigos já publicados, gera a capa fallback, cria o artigo em `/blog/<slug>/`, atualiza `data/artigos_publicados_estaticos.json`, reconstrói a página `/blog/` com o novo artigo em primeiro e atualiza o sitemap. O prompt e o horário do blog permanecem inalterados.
 
 Cada artigo inclui header padronizado, favicon, categoria, data, tempo de leitura, autoria, imagem com texto alternativo, índice, headings, FAQ, canonical, Open Graph, JSON-LD `BlogPosting`, CTA do DoceGestor e links relacionados.
 
