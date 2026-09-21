@@ -94,30 +94,19 @@ def main() -> int:
     parser.add_argument("--limit", type=int, default=1)
     args = parser.parse_args()
     queue = load(QUEUE, [])
-    if isinstance(queue, dict):
-        queue = [queue]
     registry = load(REGISTRY, [])
-    used = {slugify(str(x.get("slug", ""))) for x in registry if x.get("slug")}
-    pending = []
-    consumed = set()
-    for item in queue:
-        normalized_slug = slugify(str(item.get("slug") or item.get("title") or ""))
-        if normalized_slug in used:
-            consumed.add(normalized_slug)
-            continue
-        item["slug"] = normalized_slug
-        pending.append(item)
+    used = {x["slug"] for x in registry}
+    pending = [x for x in queue if x.get("slug") not in used]
     today = dt.date.today().isoformat()
     selected = pending[: max(0, args.limit)]
     for item in selected:
+        item["slug"] = slugify(item.get("slug") or item["title"])
         validate(item)
         out_dir = ROOT / "receitas" / item["slug"]
         out_dir.mkdir(parents=True, exist_ok=False)
         item["published"] = today
         (out_dir / "index.html").write_text(render_recipe(item, today), encoding="utf-8")
-        registry.insert(0, {key: item[key] for key in ("slug", "title", "description", "category", "published", "source_name", "source_url", "ingredients", "steps", "tips") if key in item})
-        consumed.add(item["slug"])
-    QUEUE.write_text(json.dumps([item for item in queue if slugify(str(item.get("slug") or item.get("title") or "")) not in consumed], ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        registry.insert(0, {key: item[key] for key in ("slug", "title", "description", "category", "published", "source_name", "source_url") if key in item})
     REGISTRY.write_text(json.dumps(registry, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     update_index(registry)
     update_sitemap(registry)

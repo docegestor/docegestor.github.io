@@ -61,23 +61,16 @@ def main():
     for old in load(LEGACY_REGISTRY,[]):
         if old.get('slug') and old['slug'] not in known: registry.append({'slug':old['slug'],'title':old.get('title',''),'description':old.get('description',''),'category':old.get('category','Gestão financeira'),'published':old.get('published',dt.date.today().isoformat())}); known.add(old['slug'])
     selected=[]
-    skipped_slugs=set()
     for item in raw:
         a=normalize(item); validate(a)
-        if a['slug'] in known:
-            skipped_slugs.add(a['slug'])
-            continue
-        selected.append(a)
+        if a['slug'] not in known: selected.append(a)
     selected=selected[:args.limit]; today=dt.date.today().isoformat()
     if args.dry_run: print(f'Artigos validados (dry-run): {len(selected)}'); return 0
     for a in selected:
         out=ROOT/'blog'/a['slug']; out.mkdir(parents=True,exist_ok=False); cover=out/'capa.svg'; write_cover(cover,a['title'],a['category']); image=f'{BASE_URL}/blog/{a["slug"]}/capa.svg'; a['image']=image; (out/'index.html').write_text(render(a,today,registry,image),encoding='utf-8'); registry.insert(0,{'slug':a['slug'],'title':a['title'],'description':a['description'],'category':a['category'],'published':today,'image':image})
     if selected or registry!=load(REGISTRY,[]): REGISTRY.write_text(json.dumps(registry,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
     (ROOT/'blog/index.html').write_text(render_blog(registry),encoding='utf-8'); update_sitemap(registry)
-    queue_path=args.input or QUEUE
-    if queue_path.exists():
-        consumed=skipped_slugs | {a['slug'] for a in selected}
-        queue_path.write_text(json.dumps([x for x in raw if slugify(str(x.get('slug') or x.get('title') or '')) not in consumed],ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+    if args.input and args.input.exists(): args.input.write_text(json.dumps([x for x in raw if slugify(str(x.get('slug') or x.get('title') or '')) not in {a['slug'] for a in selected}],ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
     print(f'Artigos publicados no blog: {len(selected)}')
 if __name__=='__main__':
     try: main()
