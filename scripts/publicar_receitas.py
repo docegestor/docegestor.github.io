@@ -13,6 +13,7 @@ import json
 import re
 from pathlib import Path
 from typing import Any
+from site_shell import normalize_file
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE_URL = "https://docegestor.github.io"
@@ -108,9 +109,11 @@ def main() -> int:
         out_dir.mkdir(parents=True, exist_ok=False)
         item["published"] = today
         (out_dir / "index.html").write_text(render_recipe(item, today), encoding="utf-8")
+        normalize_file(out_dir / "index.html")
         registry.insert(0, {key: item[key] for key in ("slug", "title", "description", "category", "published", "source_name", "source_url") if key in item})
     REGISTRY.write_text(json.dumps(registry, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     update_index(registry)
+    normalize_file(ROOT / "receitas" / "index.html")
     update_sitemap(registry)
     print(f"Receitas publicadas: {len(selected)}")
     return 0
