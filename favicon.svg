@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="DoceGestor">
+  <defs><linearGradient id="g" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#ff9b7a"/><stop offset="1" stop-color="#e65f47"/></linearGradient></defs>
+  <rect width="64" height="64" rx="18" fill="#fff4ef"/>
+  <path d="M15 31c0-8 7-14 17-14s17 6 17 14v12c0 5-4 8-8 8H23c-5 0-8-3-8-8V31Z" fill="url(#g)"/>
+  <path d="M20 31c1-5 6-8 12-8s11 3 12 8" fill="none" stroke="#fff8f5" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="25" cy="37" r="2.2" fill="#fff8f5"/><circle cx="39" cy="37" r="2.2" fill="#fff8f5"/>
+  <path d="M27 44c2 2 8 2 10 0" fill="none" stroke="#fff8f5" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M32 17c-2-5 2-7 2-10 4 4 4 8 0 11" fill="#ffd18f"/>
+</svg>
