@@ -31,7 +31,7 @@ def nav(active: str = "") -> str:
 
 
 def footer() -> str:
-    return f'''<section class="community-callout"><div><p class="eyebrow">Doce &amp; Lucro</p><h2>Gestão simples para quem transforma ingredientes em renda.</h2><p>Entre na comunidade e receba ideias práticas para vender melhor, organizar a produção e cuidar do seu lucro.</p></div><a class="button button-light" href="{TELEGRAM_URL}" target="_blank" rel="noopener">Entrar na comunidade <span aria-hidden="true">→</span></a></section>
+    return f'''<section class="community-callout"><div><p class="eyebrow">Doce &amp; Lucro</p><h2>Ideias práticas para sua confeitaria.</h2><p>Receba conteúdos curtos sobre produção, vendas e organização.</p></div><a class="button button-light" href="{TELEGRAM_URL}" target="_blank" rel="noopener">Entrar na comunidade <span aria-hidden="true">→</span></a></section>
 <footer class="site-footer"><div class="footer-grid"><div><a class="footer-brand" href="/"><span class="brand-mark">DG</span><span>DoceGestor</span></a><p>Gestão, receitas e recursos para confeiteiras.</p></div><div><h3>Explorar</h3><a href="/">O app</a><a href="/blog/">Blog</a><a href="/receitas/">Receitas</a><a href="/ebooks/">E-books</a></div><div><h3>Comunidade</h3><a href="{TELEGRAM_URL}" target="_blank" rel="noopener">Telegram Doce &amp; Lucro</a><a href="{WHATSAPP_URL}" target="_blank" rel="noopener">Grupo no WhatsApp</a></div><div><h3>Comprar</h3><a href="{MARKET_URL}" target="_blank" rel="sponsored noopener">Comprar no Mercado Livre</a></div></div><div class="footer-bottom"><span>© 2026 DoceGestor · Dados locais no seu aparelho</span><span>Desenvolvido por <a href="https://saulomgg.github.io" target="_blank" rel="noopener">Saulo</a></span></div></footer>'''
 
 
