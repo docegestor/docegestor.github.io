@@ -4,21 +4,21 @@ import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
-from migrate_frontend import BASE_URL, blog_index, ebooks_index, footer, recipes_index, shell
+from migrate_frontend import blog_index, community_strip, ebooks_index, recipes_index
 
-# Rebuild the three landing pages so their callout comes from the same shared helper.
+# Rebuild landing pages with the shared shell; the shared shell now has no community banner.
 blog_index()
 recipes_index()
 ebooks_index()
-
-callout = '''<section class="community-callout"><div><p class="eyebrow">Doce &amp; Lucro</p><h2>Ideias práticas para sua confeitaria.</h2><p>Receba conteúdos curtos sobre produção, vendas e organização.</p></div><a class="button button-light" href="https://t.me/docelucro" target="_blank" rel="noopener">Entrar na comunidade <span aria-hidden="true">→</span></a></section>'''
 
 for directory in ("blog", "receitas", "ebooks"):
     for path in (ROOT / directory).glob("*/index.html"):
         text = path.read_text(encoding="utf-8")
         text = re.sub(r'\s*<section class="community-callout">.*?</section>\s*', '\n', text, flags=re.S)
-        marker = '<footer class="site-footer">'
-        if marker in text:
-            text = text.replace(marker, callout + marker, 1)
+        text = re.sub(r'\s*<aside class="community-strip".*?</aside>\s*', '\n', text, flags=re.S)
+        if '<main' in text:
+            text = text.replace('<footer class="site-footer">', community_strip() + '<footer class="site-footer">', 1)
+        elif 'id="root"' in text:
+            text = text.replace('</body>', community_strip() + '</body>', 1)
         path.write_text(text, encoding="utf-8")
-print("callouts normalizados")
+print("banners de comunidade removidos das páginas internas")

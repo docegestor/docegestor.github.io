@@ -5,7 +5,7 @@ import argparse, datetime as dt, html, json, re
 from pathlib import Path
 from typing import Any
 
-from migrate_frontend import BASE_URL, MARKET_URL, ROOT, footer, nav
+from migrate_frontend import BASE_URL, MARKET_URL, ROOT, community_strip, footer, nav
 
 QUEUE = ROOT / "data" / "artigos_pendentes.json"
 REGISTRY = ROOT / "data" / "artigos_publicados_estaticos.json"
@@ -67,7 +67,7 @@ def render(a: dict[str, Any], published: str, related: list[dict[str, Any]]) -> 
     body = f'''<main class="article-main"><div class="content-back"><a href="/blog/">← Voltar para o blog</a></div><section class="article-hero"><div class="tag">{esc(a["category"])}</div><h1>{esc(a["title"])}</h1><p class="lead">{esc(a["intro"])}</p><p class="meta">Publicado em {published} · Equipe DoceGestor</p></section><div class="toc"><strong>Neste artigo</strong><ul>{''.join(f'<li><a href="#sec-{i}">{esc(s["heading"])}</a></li>' for i,s in enumerate(a["sections"]))}</ul></div>{''.join(sections)}{faq_html}<section class="article-section"><h2>Conclusão</h2><p>{esc(a["conclusion"])}</p></section><section class="article-section card"><strong>Quer simplificar a rotina da sua confeitaria?</strong><p>Conheça o DoceGestor para acompanhar custos, vendas e lucro em um só lugar.</p><p><a href="{MARKET_URL}" target="_blank" rel="sponsored noopener">Conhecer o app →</a></p></section><section class="article-section"><h2>Leia também</h2><ul>{related_html}</ul></section></main>'''
     title = f"{a['title']} | DoceGestor"
     description = a["description"].replace('"', '&quot;')
-    return f'''<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f4775b"><meta name="robots" content="index,follow"><meta name="author" content="DoceGestor"><meta name="description" content="{description}"><title>{esc(title)}</title><link rel="canonical" href="{canonical}"><meta property="og:type" content="article"><meta property="og:title" content="{esc(a['title'])}"><meta property="og:description" content="{description}"><meta property="og:url" content="{canonical}"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="stylesheet" href="/assets/editorial.css"><script type="application/ld+json">{json.dumps(schema, ensure_ascii=False)}</script></head><body class="editorial-page">{nav("Blog")}{body}{footer()}</body></html>'''
+    return f'''<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f4775b"><meta name="robots" content="index,follow"><meta name="author" content="DoceGestor"><meta name="description" content="{description}"><title>{esc(title)}</title><link rel="canonical" href="{canonical}"><meta property="og:type" content="article"><meta property="og:title" content="{esc(a['title'])}"><meta property="og:description" content="{description}"><meta property="og:url" content="{canonical}"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="stylesheet" href="/assets/editorial.css"><script type="application/ld+json">{json.dumps(schema, ensure_ascii=False)}</script></head><body class="editorial-page">{nav("Blog")}{body}{community_strip()}{footer()}</body></html>'''
 
 def update_blog_index(registry: list[dict[str, Any]]) -> None:
     # Rebuild only the index shell/cards; the registry remains the source of truth.
