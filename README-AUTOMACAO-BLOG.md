@@ -1,5 +1,7 @@
 # Automação única do blog
 
+O workflow está programado para executar todos os dias às 08:00 no horário de Brasília (11:00 UTC).
+
 Todo conteúdo gerado pela IA agora termina no mesmo lugar: `/blog/<slug>/index.html`. A pasta antiga `/artigos/` é apenas legado e não recebe novos conteúdos.
 
 ## Fluxo do GitHub Actions
@@ -14,7 +16,7 @@ O catálogo anterior de `data/artigos_automatizados.json` foi sincronizado para 
 
 ## Secret necessário
 
-No repositório GitHub, mantenha um secret chamado `GEMINI_API_KEY`. O modelo padrão é `gemini-3.6-flash`, podendo ser alterado pela variável `GEMINI_MODEL` no workflow. Se a cota do Gemini estiver excedida, o job falha de forma explícita e não publica uma página incompleta.
+No repositório GitHub, mantenha um secret chamado `GEMINI_API_KEY`. O modelo padrão é `gemini-3.6-flash`, podendo ser alterado pela variável `GEMINI_MODEL` no workflow. Em caso de indisponibilidade temporária (HTTP 429, 500, 502 ou 503), o workflow tenta novamente e passa para `gemini-3.5-flash-lite` e `gemini-2.5-flash` antes de falhar de forma explícita, sem publicar uma página incompleta.
 
 ## Execução manual
 
