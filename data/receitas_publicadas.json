@@ -1,5 +1,45 @@
 [
   {
+    "slug": "bolo-de-pote-prestigio-cremoso-com-chocolate-e-coco",
+    "title": "Bolo de Pote Prestígio Cremoso com Chocolate e Coco",
+    "description": "Aprenda a fazer um irresistível bolo de pote de chocolate com creme de coco caseiro. Receita perfeita para venda por encomenda ou lanche em família.",
+    "category": "Bolos",
+    "published": "2026-09-23",
+    "source_name": "Receita autoral DoceGestor",
+    "source_url": "",
+    "ingredients": [
+      "2 xícaras de chá de farinha de trigo",
+      "1 xícara de chá de açúcar refinado",
+      "1 xícara de chá de cacau em pó 50%",
+      "1 xícara de chá de leite integral",
+      "1/2 xícara de chá de óleo de girassol",
+      "2 ovos inteiros",
+      "1 colher de sopa de fermento em pó químico",
+      "1 lata de leite condensado",
+      "1 vidro de 200 ml de leite de coco",
+      "100 gramas de coco ralado em flocos",
+      "1 caixa de creme de leite 200 gramas",
+      "1 xícara de chá de leite com achocolatado para umedecer"
+    ],
+    "steps": [
+      "Em um recipiente, misture a farinha de trigo, o açúcar e o cacau em pó.",
+      "Adicione os ovos, o óleo e o leite integral, mexendo com um fouet até obter uma massa homogênea.",
+      "Incorpore o fermento em pó delicadamente à massa do bolo de chocolate.",
+      "Despeje a massa em uma assadeira untada e enfarinhada, levando ao forno preaquecido a 180 graus Celsius por 35 minutos.",
+      "Retire o bolo do forno, espere esfriar completamente e esfarele a massa com as mãos.",
+      "Em uma panela, coloque o leite condensado, o leite de coco, o creme de leite e metade do coco ralado.",
+      "Cozinhe o creme em fogo médio, mexendo sempre até obter o ponto de brigadeiro de colher.",
+      "Em potes higienizados com capacidade de 250 ml, alterne camadas de massa esfarelada umedecida e camadas do creme de coco.",
+      "Finalize a última camada de massa com o restante do creme de coco e polvilhe o coco em flocos restante por cima.",
+      "Tampe os potes e leve à geladeira por pelo menos duas horas antes de servir ou comercializar."
+    ],
+    "tips": [
+      "Para aumentar a durabilidade na venda por encomenda, mantenha os bolos refrigerados por até 4 dias.",
+      "Utilize potes de vidro ou acrílico transparente para valorizar visualmente as camadas do doce.",
+      "O creme de coco atinge o ponto ideal quando começa a se soltar do fundo da panela."
+    ]
+  },
+  {
     "slug": "beijinho-de-coco-para-enrolar",
     "title": "Beijinho de coco para enrolar",
     "description": "Beijinho de coco simples, delicado e fácil de padronizar para festas e encomendas.",
