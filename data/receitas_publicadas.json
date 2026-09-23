@@ -1,5 +1,41 @@
 [
   {
+    "slug": "bolo-de-pote-de-chocolate-com-creme-de-coco",
+    "title": "Bolo de Pote de Chocolate com Creme de Coco",
+    "description": "Delicioso bolo de pote feito com massa fofinha de cacau 100% e recheio cremoso de coco. Perfeito para vender por encomenda ou servir em festas.",
+    "category": "Bolos",
+    "published": "2026-09-23",
+    "source_name": "Receita autoral DoceGestor",
+    "source_url": "",
+    "ingredients": [
+      "3 ovos inteiros",
+      "200g de açúcar refinado",
+      "100ml de óleo vegetal",
+      "150ml de leite integral",
+      "180g de farinha de trigo",
+      "60g de cacau em pó 50%",
+      "10g de fermento químico em pó",
+      "395g de leite condensado",
+      "200g de creme de leite",
+      "200ml de leite de coco",
+      "100g de coco ralado sem açúcar"
+    ],
+    "steps": [
+      "Em uma batedeira, bata 3 ovos com 200g de açúcar refinado por 5 minutos até obter um creme claro e volumoso.",
+      "Adicione 100ml de óleo vegetal e 150ml de leite integral, misturando delicadamente em velocidade baixa.",
+      "Peneire 180g de farinha de trigo e 60g de cacau em pó sobre a mistura e incorpore com um fouet; finalize adicionando 10g de fermento químico em pó.",
+      "Despeje a massa em uma assadeira untada e asse em forno pré-aquecido a 180°C por 30 minutos ou até passar no teste do palito.",
+      "Em uma panela de fundo grosso, junte 395g de leite condensado, 200g de creme de leite, 200ml de leite de coco e 100g de coco ralado.",
+      "Leve a panela ao fogo médio, mexendo sempre, por cerca de 12 a 15 minutos até atingir o ponto de brigadeiro mole de colher.",
+      "Aguarde o bolo e o creme de coco esfriarem totalmente antes de iniciar a montagem nos potes descartáveis.",
+      "Esfarele a massa de chocolate e monte os potes alternando camadas de bolo e camadas de creme de coco, finalizando com coco ralado no topo."
+    ],
+    "tips": [
+      "Mantenha os potes refrigerados entre 2°C e 6°C com validade de até 5 dias mantendo a cremosidade.",
+      "Para venda, utilize potes transparentes de 200ml a 250ml e adicione uma etiqueta com a data de fabricação."
+    ]
+  },
+  {
     "slug": "bolo-de-pote-prestigio-cremoso-docegestor",
     "title": "Bolo de Pote Prestígio Cremoso DoceGestor",
     "description": "Aprenda a fazer um irresistível bolo de pote de chocolate com recheio cremoso de coco. Receita autoral testada, perfeita para consumo ou venda.",
