@@ -8,29 +8,139 @@
     "sections": [
       {
         "heading": "Comece pelos ingredientes",
-        "paragraphs": ["Liste todos os ingredientes usados na receita e registre o preço pago e a quantidade da embalagem. Depois, calcule quanto custa a quantidade realmente consumida."],
-        "bullets": ["Anote perdas previsíveis, como aparas e sobras.", "Use uma ficha técnica para repetir o cálculo com consistência."]
+        "paragraphs": [
+          "Liste todos os ingredientes usados na receita e registre o preço pago e a quantidade da embalagem. Depois, calcule quanto custa a quantidade realmente consumida."
+        ],
+        "bullets": [
+          "Anote perdas previsíveis, como aparas e sobras.",
+          "Use uma ficha técnica para repetir o cálculo com consistência."
+        ]
       },
       {
         "heading": "Inclua embalagem e mão de obra",
-        "paragraphs": ["Some caixa, forminhas, etiquetas, laços e qualquer material entregue ao cliente. Em seguida, estime o tempo de produção e defina um valor para cada hora de trabalho."],
-        "bullets": ["Separe tempo de preparo, montagem e limpeza.", "Não trate sua mão de obra como custo zero."]
+        "paragraphs": [
+          "Some caixa, forminhas, etiquetas, laços e qualquer material entregue ao cliente. Em seguida, estime o tempo de produção e defina um valor para cada hora de trabalho."
+        ],
+        "bullets": [
+          "Separe tempo de preparo, montagem e limpeza.",
+          "Não trate sua mão de obra como custo zero."
+        ]
       },
       {
         "heading": "Distribua os custos fixos",
-        "paragraphs": ["Energia, gás, aluguel, internet e manutenção também participam da operação. Uma forma simples é dividir o total mensal de custos fixos pela quantidade média de encomendas do mês."],
-        "bullets": ["Revise a média quando o volume de pedidos mudar.", "Mantenha uma margem para imprevistos."]
+        "paragraphs": [
+          "Energia, gás, aluguel, internet e manutenção também participam da operação. Uma forma simples é dividir o total mensal de custos fixos pela quantidade média de encomendas do mês."
+        ],
+        "bullets": [
+          "Revise a média quando o volume de pedidos mudar.",
+          "Mantenha uma margem para imprevistos."
+        ]
       },
       {
         "heading": "Confira o preço antes de enviar",
-        "paragraphs": ["Some os custos diretos e a parcela dos custos fixos. Só depois aplique a margem desejada e compare o resultado com o posicionamento do produto e o prazo de entrega."],
-        "bullets": ["Apresente o que está incluído no orçamento.", "Registre sinal, saldo e data de entrega."]
+        "paragraphs": [
+          "Some os custos diretos e a parcela dos custos fixos. Só depois aplique a margem desejada e compare o resultado com o posicionamento do produto e o prazo de entrega."
+        ],
+        "bullets": [
+          "Apresente o que está incluído no orçamento.",
+          "Registre sinal, saldo e data de entrega."
+        ]
       }
     ],
     "faq": [
-      {"question": "Preciso calcular a mão de obra em toda encomenda?", "answer": "Sim. Mesmo que você use uma média, o valor precisa aparecer no cálculo para que o preço reflita o trabalho envolvido."},
-      {"question": "Como lidar com custos que variam?", "answer": "Atualize ingredientes, embalagens e taxas sempre que houver mudança relevante no fornecedor ou no tipo de pedido."}
+      {
+        "question": "Preciso calcular a mão de obra em toda encomenda?",
+        "answer": "Sim. Mesmo que você use uma média, o valor precisa aparecer no cálculo para que o preço reflita o trabalho envolvido."
+      },
+      {
+        "question": "Como lidar com custos que variam?",
+        "answer": "Atualize ingredientes, embalagens e taxas sempre que houver mudança relevante no fornecedor ou no tipo de pedido."
+      }
     ],
     "conclusion": "Um cálculo simples e registrado vale mais do que uma estimativa feita de cabeça. Com uma ficha técnica e uma rotina de conferência, você consegue negociar com mais segurança e enxergar o lucro real de cada encomenda."
+  },
+  {
+    "title": "Margem de lucro na confeitaria: como escolher o valor ideal",
+    "slug": "margem-de-lucro-na-confeitaria-como-escolher",
+    "description": "Aprenda a definir uma margem de lucro saudável para o seu negócio de confeitaria. Descubra como precificar seus doces e garantir o crescimento sustentável.",
+    "category": "Precificação",
+    "intro": "Muitas confeiteiras iniciam seus negócios cobrando apenas o valor dos ingredientes mais uma pequena taxa simbólica pelo tempo. No entanto, sem calcular a margem de lucro de forma correta, o negócio acaba gerando muito trabalho e pouco retorno financeiro no fim do mês.",
+    "sections": [
+      {
+        "heading": "O que é margem de lucro e por que ela importa",
+        "paragraphs": [
+          "A margem de lucro é a porcentagem adicionada ao custo total de produção de um doce que representa o ganho real do seu negócio. É essa porcentagem que vai garantir que você tenha dinheiro para reinvestir na produção, comprar novos utensílios e pagar seu pró-labore.",
+          "Confundir faturamento com lucro é um dos erros mais comuns na confeitaria artesanal. Vender muito não significa ganhar muito se os custos de produção e operação não forem devidamente cobertos pelo preço final."
+        ],
+        "bullets": [
+          "Faturamento é todo o dinheiro que entra no caixa",
+          "Lucro é o valor que sobra após pagar todas as despesas",
+          "Pró-labore é o salário da confeiteira"
+        ]
+      },
+      {
+        "heading": "Custos fixos e variáveis na produção de doces",
+        "paragraphs": [
+          "Para definir uma margem de lucro saudável, você precisa mapear com precisão todos os custos envolvidos no seu negócio. Os custos variáveis mudam conforme o volume de produção, como leite condensado, chocolate, embalagens e gás.",
+          "Já os custos fixos são aqueles que você paga todo mês, independentemente de vender muito ou pouco, como aluguel, internet, energia elétrica e manutenção de equipamentos."
+        ],
+        "bullets": [
+          "Custos variáveis: ingredientes, fitas, caixas, formas descartáveis",
+          "Custos fixos: água, luz, internet, taxas de maquininha de cartão",
+          "Horas trabalhadas: o tempo dedicado ao preparo e atendimento"
+        ]
+      },
+      {
+        "heading": "Qual é a margem de lucro ideal para confeitaria",
+        "paragraphs": [
+          "Na confeitaria artesanal, a margem de lucro líquida costuma variar entre trinta por cento e cem por cento sobre o custo total, dependendo do tipo de produto e do mercado de atuação. Produtos personalizados e artesanais refinados permitem margens maiores devido ao tempo e à técnica exigidos.",
+          "Avalie também o posicionamento da sua marca e o poder aquisitivo do seu público-alvo antes de fixar o percentual final de lucro."
+        ],
+        "bullets": [
+          "Bolos decorados e festas: margem geralmente mais alta",
+          "Docinhos tradicionais para festa: margem menor, compensada pelo volume",
+          "Confeitaria saudável ou inclusiva: maior valor agregado"
+        ]
+      },
+      {
+        "heading": "Passo a passo para calcular o preço de venda",
+        "paragraphs": [
+          "O cálculo correto começa somando o custo dos ingredientes utilizados na receita, proporcionalmente à quantidade gasta. Em seguida, adicione uma porcentagem referente aos custos fixos e às horas gastas na produção.",
+          "Com o custo total de produção definido, aplique a margem de lucro escolhida para chegar ao preço final que será cobrado do cliente."
+        ],
+        "bullets": [
+          "Some ingredientes mais embalagens",
+          "Adicione uma fração dos custos fixos mensais",
+          "Multiplique pelo fator de marcação correspondente à margem de lucro"
+        ]
+      },
+      {
+        "heading": "Erros comuns ao precificar doces",
+        "paragraphs": [
+          "O erro mais grave é copiar o preço da concorrência sem saber quais são os custos operacionais da outra pessoa. Cada negócio tem uma estrutura de gastos diferente e o que funciona para outro confeiteiro pode gerar prejuízo para você.",
+          "Outro erro frequente é esquecer de embutir as taxas das maquininhas de cartão e os desperdícios que acontecem durante os testes e preparos na cozinha."
+        ],
+        "bullets": [
+          "Ignorar desperdícios e quebras de ingredientes",
+          "Não cobrar taxa de entrega quando houver deslocamento",
+          "Esquecer de reajustar os preços quando os insumos aumentarem"
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "question": "Como saber se minha margem de lucro está correta?",
+        "answer": "Sua margem está correta se, após pagar todas as contas da produção e retirar seu salário, o negócio ainda acumular capital para reinvestimento e expansão."
+      },
+      {
+        "question": "Devo cobrar o mesmo preço para vendas no atacado e no varejo?",
+        "answer": "Não. Vendas em grande escala no atacado costumam ter margens de lucro menores por unidade, pois o volume compensa a redução no preço final."
+      },
+      {
+        "question": "Com que frequência devo atualizar os meus preços?",
+        "answer": "O ideal é revisar os preços a cada três meses ou sempre que houver aumento significativo no valor dos insumos básicos, como leite condensado e açúcar."
+      }
+    ],
+    "conclusion": "Definir uma margem de lucro saudável é um passo fundamental para transformar sua paixão pela confeitaria em um negócio lucrativo e duradouro. Dedique tempo para calcular seus custos corretamente e valorize o seu trabalho artesanal."
   }
 ]
