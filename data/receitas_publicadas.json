@@ -1,5 +1,44 @@
 [
   {
+    "slug": "bolo-de-pote-prestigio-cremoso-docegestor",
+    "title": "Bolo de Pote Prestígio Cremoso DoceGestor",
+    "description": "Aprenda a fazer um irresistível bolo de pote de chocolate com recheio cremoso de coco. Receita autoral testada, perfeita para consumo ou venda.",
+    "category": "Bolos",
+    "published": "2026-09-23",
+    "source_name": "Receita autoral DoceGestor",
+    "source_url": "",
+    "ingredients": [
+      "2 xícaras de chá de farinha de trigo",
+      "1 xícara de chá de açúcar refinado",
+      "1/2 xícara de chá de cacau em pó",
+      "3 ovos inteiros",
+      "1 xícara de chá de leite integral",
+      "1/2 xícara de chá de óleo de girassol",
+      "1 colher de sopa de fermento em pó químico",
+      "1 lata de leite condensado",
+      "200 gramas de creme de leite",
+      "100 gramas de coco flocado seco",
+      "1 xícara de chá de leite de coco para regar"
+    ],
+    "steps": [
+      "Em um recipiente, misture a farinha de trigo, o açúcar e o cacau em pó peneirados.",
+      "Adicione os ovos, o leite e o óleo, mexendo com um fuet até obter uma massa homogênea.",
+      "Incorpore o fermento em pó delicadamente à massa do bolo com uma espátula.",
+      "Despeje a massa em uma assadeira untada e enfarinhada, assando em forno preaquecido a 180 graus Celsius por aproximadamente 35 minutos.",
+      "Retire do forno, deixe esfriar completamente e esfarele a massa de chocolate para a montagem.",
+      "Em uma panela em fogo baixo, misture o leite condensado, o creme de leite e o coco flocado, mexendo sempre até atingir o ponto de brigadeiro de colher.",
+      "Deixe o creme de coco esfriar em temperatura ambiente antes de iniciar a montagem.",
+      "Em potes higienizados de 250 ml, alterne camadas de massa de chocolate esfarelada umedecida com leite de coco e camadas generosas do creme de coco.",
+      "Finalize a última camada com o creme de coco e polvilhe um pouco de coco flocado por cima para decorar.",
+      "Tampe os potes e leve à geladeira por no mínimo 2 horas antes de servir ou comercializar."
+    ],
+    "tips": [
+      "Para venda por encomenda, mantenha os bolos refrigerados por até 4 dias ou congelados por até 15 dias sem perder a textura.",
+      "O ponto correto do creme de coco é quando ele solta levemente do fundo da panela mas ainda mantém cremosidade para facilitar a montagem.",
+      "Padronize a quantidade de massa e recheio usando uma balança culinária para garantir o mesmo peso e lucro em todos os potes."
+    ]
+  },
+  {
     "slug": "bolo-de-pote-prestigio-cremoso-com-chocolate-e-coco",
     "title": "Bolo de Pote Prestígio Cremoso com Chocolate e Coco",
     "description": "Aprenda a fazer um irresistível bolo de pote de chocolate com creme de coco caseiro. Receita perfeita para venda por encomenda ou lanche em família.",
