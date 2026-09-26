@@ -1,5 +1,41 @@
 [
   {
+    "slug": "bolo-de-pote-prestigio-com-creme-de-coco",
+    "title": "Bolo de Pote Prestígio com Creme de Coco",
+    "description": "Bolo de pote super fofinho de chocolate intenso recheado com creme aveludado de coco. Perfeito para vender, servir em festas ou saborear como sobremesa.",
+    "category": "Bolos",
+    "published": "2026-09-26",
+    "source_name": "Receita autoral DoceGestor",
+    "source_url": "",
+    "ingredients": [
+      "3 ovos inteiros",
+      "200g de açúcar refinado",
+      "100ml de óleo vegetal",
+      "200ml de leite integral",
+      "90g de cacau em pó 50%",
+      "200g de farinha de trigo",
+      "10g de fermento químico em pó",
+      "395g de leite condensado",
+      "200g de creme de leite",
+      "200ml de leite de coco",
+      "100g de coco ralado seco sem açúcar"
+    ],
+    "steps": [
+      "Na batedeira ou à mão, bata os 3 ovos com os 200g de açúcar refinado até obter um creme claro e volumoso.",
+      "Adicione os 100ml de óleo vegetal, os 200ml de leite integral e os 90g de cacau em pó 50%, misturando delicadamente até homogeneizar.",
+      "Peneire os 200g de farinha de trigo e os 10g de fermento químico sobre a massa e incorpore com um fouet sem bater em excesso.",
+      "Despeje a massa em uma fôrma untada e asse em forno pré-aquecido a 180°C por cerca de 30 minutos; retire, deixe esfriar e esfarele.",
+      "Para o creme, misture em uma panela os 395g de leite condensado, os 200g de creme de leite, os 200ml de leite de coco e os 100g de coco ralado.",
+      "Cozinhe o creme em fogo médio, mexendo continuamente por cerca de 10 minutos até atingir o ponto de brigadeiro mole, depois aguarde esfriar.",
+      "Em potes individuais de 220ml, monte camadas alternadas de massa esfarelada e de creme de coco frio até preencher o recipiente.",
+      "Finalize com uma camada de creme de coco, decore com raspas de chocolate ou coco ralado e leve à geladeira por 4 horas antes de servir."
+    ],
+    "tips": [
+      "Mantenha os potes refrigerados entre 2°C e 6°C com validade de até 5 dias.",
+      "Para comercialização, utilize embalagens transparentes de 220ml com lacre de segurança e etiqueta informando a data de fabricação."
+    ]
+  },
+  {
     "slug": "bolo-de-pote-de-chocolate-com-creme-de-coco",
     "title": "Bolo de Pote de Chocolate com Creme de Coco",
     "description": "Delicioso bolo de pote feito com massa fofinha de cacau 100% e recheio cremoso de coco. Perfeito para vender por encomenda ou servir em festas.",
