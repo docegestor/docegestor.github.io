@@ -517,5 +517,89 @@
       }
     ],
     "conclusion": "Definir uma margem de lucro saudavel na confeitaria exige rigor com os custos e valorizacao do proprio trabalho. Ao aplicar esses conceitos, voce transforma sua paixao por doces em um negocio lucrativo, profissional e duradouro."
+  },
+  {
+    "title": "Margem de lucro na confeitaria: como escolher uma",
+    "slug": "margem-de-lucro-na-confeitaria-como-escolher",
+    "description": "Descubra como definir uma margem de lucro saudável para o seu negócio de confeitaria e garanta o crescimento sustentável da sua produção artesanal.",
+    "category": "Precificação",
+    "intro": "Muitas confeiteiras iniciam no ramo cobrando apenas o valor dos ingredientes somados ao tempo de trabalho, esquecendo-se da margem de lucro real. Escolher a margem correta é o que diferencia um hobby lucrativo de um negócio sustentável e capaz de crescer no mercado.",
+    "sections": [
+      {
+        "heading": "Entenda a diferenca entre custo e lucro",
+        "paragraphs": [
+          "O erro mais comum na confeitaria caseira é confundir o faturamento com o lucro. O dinheiro que entra no caixa nao e todo seu, pois grande parte dele precisa cobrir os custos de producao e a reposicao de insumos.",
+          "Para calcular o custo exato de cada receita, voce deve mapear todos os gastos envolvidos, desde a farinha e o acoteite ate a embalagem, fita e o gas de cozinha usado no forno."
+        ],
+        "bullets": [
+          "Liste todos os ingredientes usados na receita",
+          "Calcule o custo proporcional das embalagens",
+          "Inclua uma taxa para cobrir contas de agua, luz e gas"
+        ]
+      },
+      {
+        "heading": "Custos fixos e variaveis na confeitaria",
+        "paragraphs": [
+          "Os custos variaveis mudam conforme a quantidade de bolos e doces que voce produz, como leite condensado, chocolate e forminhas. Ja os custos fixos ocorrem todos os meses, independentemente das vendas.",
+          "Ignorar os custos fixos e um dos principais motivos que levam confeiteiras a fechar as portas por falta de capital de giro. Aluguel, internet, manutencao de equipamentos e pro-labore entram nessa conta."
+        ],
+        "bullets": [
+          "Custos variaveis: ingredientes e embalagens",
+          "Custos fixos: aluguel, internet e taxas de maquininha",
+          "Pro-labore: o seu salario como confeiteira"
+        ]
+      },
+      {
+        "heading": "Qual e a margem de lucro ideal para doces",
+        "paragraphs": [
+          "No setor de confeitaria, a margem de lucro recomendada costuma variar entre cem por cento e trezentos por cento sobre o custo total de producao. Essa amplitude existe porque produtos mais elaborados exigem mais tecnica e tempo.",
+          "Bolos decorados e doces finos para festas permitem cobrar uma margem maior devido ao valor agregado do design. Ja doces de pronta-entrega ou salgados podem ter margens ajustadas para garantir giro rapido."
+        ],
+        "bullets": [
+          "Bolos decorados: margens mais altas pelo design",
+          "Doces tradicionais: foco em volume e giro",
+          "Salgados e congelados: analise da concorrencia local"
+        ]
+      },
+      {
+        "heading": "Como aplicar o markup na sua precificacao",
+        "paragraphs": [
+          "O markup e o indice multiplicador que voce aplica sobre o custo total para chegar ao preco de venda. Ele garante que todas as despesas da confeitaria sejam pagas e que ainda sobre o lucro desejado.",
+          "Ao multiplicar o custo dos ingredientes e despesas pelo seu indice de markup, voce evita calcular o preco de cabeca e protege sua margem de oscilacoes no mercado."
+        ],
+        "bullets": [
+          "Some todos os custos da receita",
+          "Defina o indice multiplicador ideal",
+          "Multiplique o custo total pelo markup"
+        ]
+      },
+      {
+        "heading": "Erros comuns ao definir o preco dos doces",
+        "paragraphs": [
+          "Praticar precos baseados apenas na concorrencia e um perigo para quem esta comecando na confeitaria. Cada negocio tem custos diferentes de aluguel, fornecedores e estrutura operacional.",
+          "Outro erro grave e nao embutir as taxas de cartao de credito e de delivery no preco final do produto, o que acaba comendo o lucro que deveria ir para o caixa da empresa."
+        ],
+        "bullets": [
+          "Copiar o preco da concorrencia sem calcular custos",
+          "Esquecer de embutir taxas de cartao e entrega",
+          "Nao cobrar pelo seu tempo de trabalho"
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "question": "Qual deve ser a margem de lucro minima na confeitaria?",
+        "answer": "A margem minima recomendada costuma ser de cem por cento sobre o custo total, garantindo que o negocio pague suas contas e gere caixa para reinvestimentos."
+      },
+      {
+        "question": "Como calcular o meu salario na confeitaria?",
+        "answer": "Defina um valor fixo mensal realista para o seu pro-labore e divida esse valor estimado pelo numero de horas ou produtos que voce consegue produzir no mes."
+      },
+      {
+        "question": "Devo cobrar mais caro em bolos personalizados?",
+        "answer": "Sim. Bolos personalizados exigem mais tempo de execucao, estudo de tecnicas e materiais especificos, o que justifica a aplicacao de uma margem de lucro superior."
+      }
+    ],
+    "conclusion": "Definir uma margem de lucro saudavel e um processo continuo que exige organizacao e disciplina financeira. Ao precificar seus bolos e doces com base em dados reais e custos claros, sua confeitaria ganha forca para crescer com seguranca."
   }
 ]
