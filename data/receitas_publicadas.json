@@ -1,5 +1,41 @@
 [
   {
+    "slug": "bolo-de-pote-de-chocolate-com-creme-de-coco-cremoso",
+    "title": "Bolo de Pote de Chocolate com Creme de Coco Cremoso",
+    "description": "Deliciosa combinação de bolo de chocolate úmido com recheio cremoso de coco. Perfeito para vender em potes de 200ml ou servir em festas.",
+    "category": "Bolos",
+    "published": "2026-09-29",
+    "source_name": "Receita autoral DoceGestor",
+    "source_url": "",
+    "ingredients": [
+      "4 ovos inteiros",
+      "200g de açúcar refinado",
+      "100ml de óleo vegetal",
+      "200g de farinha de trigo",
+      "60g de cacau em pó 50%",
+      "150ml de leite integral morno",
+      "10g de fermento químico em pó",
+      "395g de leite condensado",
+      "200g de creme de leite",
+      "200ml de leite de coco",
+      "100g de coco ralado sem açúcar"
+    ],
+    "steps": [
+      "Em uma batedeira, bata os 4 ovos com os 200g de açúcar refinado por 5 minutos até obter um creme claro e fofo.",
+      "Adicione os 100ml de óleo e os 150ml de leite integral morno, misturando delicadamente em velocidade baixa.",
+      "Peneire os 200g de farinha de trigo com os 60g de cacau em pó e incorpore à massa suavemente. Adicione os 10g de fermento em pó por último.",
+      "Despeje em uma assadeira untada e asse em forno pré-aquecido a 180°C por cerca de 30 minutos. Deixe esfriar e esfarele o bolo.",
+      "Em uma panela, misture os 395g de leite condensado, 200g de creme de leite, 200ml de leite de coco e 100g de coco ralado.",
+      "Cozinhe em fogo médio por aproximadamente 10 minutos mexendo constantemente até atingir o ponto de brigadeiro mole, depois deixe esfriar totalmente.",
+      "Monte em potes individuais alternando camadas do bolo esfarelado e do creme de coco, finalizando a superfície com creme e coco ralado."
+    ],
+    "tips": [
+      "Mantenha os potes sob refrigeração de 2°C a 6°C com validade de até 5 dias.",
+      "Umedeça a massa com uma calda leve de leite condensado diluído em leite para manter o bolo bem molhadinho.",
+      "Utilize embalagens de 200ml bem vedadas e personalize com colheres e etiquetas com a data de fabricação para aumentar as vendas."
+    ]
+  },
+  {
     "slug": "bolo-de-pote-prestigio-com-creme-de-coco",
     "title": "Bolo de Pote Prestígio com Creme de Coco",
     "description": "Bolo de pote super fofinho de chocolate intenso recheado com creme aveludado de coco. Perfeito para vender, servir em festas ou saborear como sobremesa.",
