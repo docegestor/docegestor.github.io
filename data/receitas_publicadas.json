@@ -1,5 +1,42 @@
 [
   {
+    "slug": "bolo-de-pote-de-chocolate-com-cremoso-de-coco",
+    "title": "Bolo de Pote de Chocolate com Cremoso de Coco",
+    "description": "Delicioso bolo de pote feito com bolo de chocolate fofinho, recheado com cremoso de coco e calda suave. Ideal para vender e lucrar.",
+    "category": "Bolos",
+    "published": "2026-09-30",
+    "source_name": "Receita autoral DoceGestor",
+    "source_url": "",
+    "ingredients": [
+      "4 ovos inteiros",
+      "200g de açúcar refinado",
+      "100ml de óleo vegetal",
+      "200ml de leite integral",
+      "200g de farinha de trigo",
+      "60g de cacau em pó 50%",
+      "10g de fermento químico em pó",
+      "395g de leite condensado",
+      "200g de creme de leite",
+      "200ml de leite de coco",
+      "100g de coco ralado úmido e adoçado"
+    ],
+    "steps": [
+      "Em uma batedeira, bata 4 ovos inteiros com 200g de açúcar refinado por 5 minutos até obter um creme claro e volumoso.",
+      "Adicione 100ml de óleo vegetal e 200ml de leite integral, misturando delicadamente com um batedor de arame.",
+      "Peneire 200g de farinha de trigo e 60g de cacau em pó 50% sobre a mistura, incorporando suavemente, e finalize adicionando 10g de fermento químico em pó.",
+      "Despeje a massa em uma assadeira untada e asse em forno pré-aquecido a 180°C por 30 minutos. Deixe esfriar completamente e esfarele a massa.",
+      "Para o recheio, em uma panela, misture 395g de leite condensado, 200g de creme de leite, 200ml de leite de coco e 100g de coco ralado.",
+      "Leve a panela ao fogo médio, mexendo sempre por cerca de 10 minutos, até atingir o ponto de brigadeiro mole de colher, e deixe esfriar.",
+      "Faça a montagem nos potes alternando uma camada de bolo esfarelado e uma camada do creme de coco frio, finalizando com o creme.",
+      "Decore a última camada com um pouco de coco ralado polvilhado e tampe hermeticamente os potes antes de levar à geladeira."
+    ],
+    "tips": [
+      "Mantenha os potes refrigerados por até 5 dias para garantir a frescura e validade para venda.",
+      "Utilize embalagens transparentes de 200ml a 250ml para destacar as camadas do bolo e valorizar a apresentação visual do produto.",
+      "Para deixar a massa ainda mais úmida no pote, regue levemente cada camada de bolo com uma calda de leite condensado diluído em água."
+    ]
+  },
+  {
     "slug": "bolo-de-pote-de-chocolate-com-creme-de-coco-cremoso",
     "title": "Bolo de Pote de Chocolate com Creme de Coco Cremoso",
     "description": "Deliciosa combinação de bolo de chocolate úmido com recheio cremoso de coco. Perfeito para vender em potes de 200ml ou servir em festas.",
