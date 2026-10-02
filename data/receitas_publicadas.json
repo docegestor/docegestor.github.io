@@ -1,5 +1,42 @@
 [
   {
+    "slug": "bolo-de-pote-trufado-de-chocolate-com-creme-de-coco",
+    "title": "Bolo de Pote Trufado de Chocolate com Creme de Coco",
+    "description": "Aprenda a fazer um delicioso bolo de pote com massa de chocolate fofinha e recheio cremoso de coco. Perfeito para saborear ou vender muito.",
+    "category": "Bolos",
+    "published": "2026-10-02",
+    "source_name": "Receita autoral DoceGestor",
+    "source_url": "",
+    "ingredients": [
+      "2 xícaras de chá de farinha de trigo",
+      "1 xícara de chá de açúcar refinado",
+      "1/2 xícara de chá de cacau em pó",
+      "1 colher de sopa de fermento em pó",
+      "3 ovos inteiros",
+      "1 xícara de chá de leite integral",
+      "1/2 xícara de chá de óleo de girassol",
+      "1 lata de leite condensado",
+      "1 vidro de 200 ml de leite de coco",
+      "100 gramas de coco ralado em flocos",
+      "1 colher de sopa de manteiga sem sal"
+    ],
+    "steps": [
+      "Em um recipiente, misture a farinha de trigo, o açúcar, o cacau em pó e o fermento em pó até obter uma base homogênea.",
+      "Adicione os ovos, o leite integral e o óleo de girassol, batendo com um fouet até a massa ficar lisa e brilhante.",
+      "Despeje a massa em uma assadeira untada e enfarinhada, levando ao forno preaquecido a 180 graus celsius por aproximadamente 35 minutos.",
+      "Retire o bolo do forno, espere esfriar completamente e esfarele a massa com as mãos para utilizar na montagem.",
+      "Em uma panela, coloque o leite condensado, o leite de coco, o coco ralado e a manteiga sem sal.",
+      "Cozinhe o creme de coco em fogo médio, mexendo sempre sem parar até desgrudar do fundo da panela.",
+      "Retire o creme do fogo e deixe esfriar em temperatura ambiente antes de iniciar a montagem dos potes.",
+      "Em potes higienizados com capacidade para duzentos mililitros, alterne camadas do bolo esfarelado e do creme de coco.",
+      "Finalize a última camada com o creme de coco e decore polvilhando um pouco de coco ralado por cima de cada pote."
+    ],
+    "tips": [
+      "Guarde os potes fechados na geladeira por até cinco dias para garantir a qualidade e a segurança alimentar.",
+      "Para comercialização, utilize potes de acrílico transparente e adicione uma etiqueta com a data de fabricação e validade."
+    ]
+  },
+  {
     "slug": "bolo-de-pote-de-chocolate-com-cremoso-de-coco",
     "title": "Bolo de Pote de Chocolate com Cremoso de Coco",
     "description": "Delicioso bolo de pote feito com bolo de chocolate fofinho, recheado com cremoso de coco e calda suave. Ideal para vender e lucrar.",
