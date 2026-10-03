@@ -1,5 +1,42 @@
 [
   {
+    "slug": "bolo-de-pote-prestigio-de-chocolate-com-cremoso-de-coco",
+    "title": "Bolo de Pote Prestígio de Chocolate com Cremoso de Coco",
+    "description": "Uma combinação perfeita de bolo fofinho de chocolate com um cremoso recheio de coco e cobertura suave, ideal para vender em potes ou servir em festas.",
+    "category": "Bolos",
+    "published": "2026-10-03",
+    "source_name": "Receita autoral DoceGestor",
+    "source_url": "",
+    "ingredients": [
+      "4 unidades de ovo",
+      "200g de açúcar refinado",
+      "160g de farinha de trigo",
+      "50g de cacau em pó 50%",
+      "100ml de leite integral",
+      "10g de fermento químico em pó",
+      "395g de leite condensado",
+      "200g de creme de leite",
+      "200ml de leite de coco",
+      "100g de coco ralado sem açúcar",
+      "100g de chocolate meio amargo picado"
+    ],
+    "steps": [
+      "Bata os ovos com o açúcar refinado na batedeira por 5 minutos até obter um creme claro e volumoso.",
+      "Adicione o leite integral e intercale com a farinha de trigo e o cacau em pó peneirados, misturando delicadamente com um fouet.",
+      "Incorpore o fermento químico em pó por último e despeje a massa em uma assadeira untada de 30x20 cm.",
+      "Asse em forno pré-aquecido a 180°C por cerca de 25 minutos ou até passar no teste do palito, e depois deixe esfriar completamente.",
+      "Em uma panela, misture o leite condensado, 100g de creme de leite, o leite de coco e o coco ralado.",
+      "Cozinhe o recheio de coco em fogo médio por cerca de 10 minutos, mexendo sempre até atingir o ponto de brigadeiro mole, e deixe esfriar.",
+      "Derreta o chocolate meio amargo com os 100g restantes de creme de leite para formar uma ganache lisa para a cobertura.",
+      "Monte os potes alternando camadas da massa de chocolate esfarelada e do recheio cremoso de coco, finalizando com a ganache de chocolate."
+    ],
+    "tips": [
+      "Mantenha os potes refrigerados entre 2°C e 6°C com validade de até 5 dias.",
+      "Para aumentar as vendas, utilize potes transparentes de 200ml e adicione etiquetas personalizadas com a data de fabricação.",
+      "Umedeça a massa esfarelada com uma mistura de leite e leite condensado para manter a umidade ideal no pote."
+    ]
+  },
+  {
     "slug": "bolo-de-pote-trufado-de-chocolate-com-creme-de-coco",
     "title": "Bolo de Pote Trufado de Chocolate com Creme de Coco",
     "description": "Aprenda a fazer um delicioso bolo de pote com massa de chocolate fofinha e recheio cremoso de coco. Perfeito para saborear ou vender muito.",
