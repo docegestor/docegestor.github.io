@@ -1,5 +1,41 @@
 [
   {
+    "slug": "bolo-de-pote-supremo-de-chocolate-com-coco",
+    "title": "Bolo de Pote Supremo de Chocolate com Coco",
+    "description": "Aprenda a fazer um irresistível bolo de pote de chocolate com creme de coco. Receita autoral perfeita para consumo caseiro ou para alavancar suas vendas.",
+    "category": "Bolos",
+    "published": "2026-10-04",
+    "source_name": "Receita autoral DoceGestor",
+    "source_url": "",
+    "ingredients": [
+      "2 xícaras de farinha de trigo",
+      "1 xícara de açúcar refinado",
+      "1/2 xícara de cacau em pó",
+      "1 xícara de leite integral",
+      "1/2 xícara de óleo de soja",
+      "3 ovos inteiros",
+      "1 colher de sopa de fermento em pó químico",
+      "1 lata de leite condensado",
+      "1 vidro de leite de coco de 200 ml",
+      "1 xícara de coco ralado fresco",
+      "1 caixinha de creme de leite de 200 g"
+    ],
+    "steps": [
+      "Preaqueça o forno a 180 graus Celsius e unte uma assadeira retangular com manteiga e cacau em pó.",
+      "Em uma tigela, misture a farinha de trigo, o açúcar e o cacau em pó até obter uma base homogênea.",
+      "Adicione os ovos, o óleo e o leite à mistura seca, batendo vigorosamente com um fouet por 3 minutos até a massa ficar lisa.",
+      "Incorpore o fermento em pó delicadamente com uma espátula, despeje na assadeira e leve ao forno por 40 minutos.",
+      "Para o creme de coco, coloque em uma panela o leite condensado, o leite de coco, o coco ralado e o creme de leite.",
+      "Cozinhe o creme em fogo médio, mexendo sem parar por 10 minutos, até atingir o ponto de umbelical espesso.",
+      "Espere o bolo assado esfriar completamente e esfarele a massa com as mãos para obter uma textura rústica.",
+      "Em potes de 250 ml higienizados, alterne camadas de massa esfarelada e camadas generosas do creme de coco.",
+      "Finalize a montagem polvilhando um pouco de coco ralado fresco na última camada e tampe os potes firmemente."
+    ],
+    "tips": [
+      "Para venda por encomenda, mantenha os potes refrigerados por até 4 dias ou congelados por até 20 dias sem perder a cremosidade."
+    ]
+  },
+  {
     "slug": "bolo-de-pote-prestigio-de-chocolate-com-cremoso-de-coco",
     "title": "Bolo de Pote Prestígio de Chocolate com Cremoso de Coco",
     "description": "Uma combinação perfeita de bolo fofinho de chocolate com um cremoso recheio de coco e cobertura suave, ideal para vender em potes ou servir em festas.",
