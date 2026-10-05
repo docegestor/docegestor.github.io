@@ -1016,5 +1016,77 @@
       }
     ],
     "conclusion": "Escolher uma margem de lucro saudável na confeitaria exige rigor no controle de custos e valorização do seu trabalho artesanal. Revise sua precificação periodicamente para garantir que seu negócio continue crescendo de forma sustentável e lucrativa."
+  },
+  {
+    "title": "Margem de Lucro na Confeitaria: Como Definir uma Porcentagem Saudável",
+    "slug": "margem-de-lucro-na-confeitaria-como-escolher",
+    "description": "Descubra como calcular e escolher a margem de lucro ideal na confeitaria para garantir a sustentabilidade e o crescimento financeiro do seu negócio.",
+    "category": "Precificação",
+    "intro": "Definir a margem de lucro correta é um dos maiores desafios para quem trabalha com confeitaria artesanal. Muitas confeiteiras confundem faturamento com lucro e acabam vendendo muito sem ver a cor do dinheiro no fim do mês. Compreender a diferença entre custo, preço e margem é o primeiro passo para construir um negócio próspero e sustentável.",
+    "sections": [
+      {
+        "heading": "A diferença entre prolabore e lucro da confeitaria",
+        "paragraphs": [
+          "Antes de definir a margem de lucro, é fundamental separar o salário da confeiteira da lucratividade da empresa. O prolabore é a remuneração pelo seu trabalho operacional na cozinha, devendo entrar no custo fixo da produção.",
+          "O lucro, por sua vez, é o valor que sobra para a empresa após o pagamento de todas as despesas e salários. É esse montante que permite criar uma reserva de emergência, investir em novos equipamentos e expandir a marca."
+        ],
+        "bullets": [
+          "Prolabore: pagamento pelo seu tempo e mão de obra cobrados na receita",
+          "Lucro líquido: valor retido pelo negócio para crescimento e investimentos",
+          "Custos fixos: despesas recorrentes como água, luz, aluguel e prolabore"
+        ]
+      },
+      {
+        "heading": "Qual é a margem de lucro ideal na confeitaria?",
+        "paragraphs": [
+          "No setor de confeitaria artesanal, a margem de lucro líquida costuma variar entre 15% e 30%, a depender do modelo de vendas e do público-alvo. Vendas diretas ao consumidor final geralmente permitem margens maiores do que o fornecimento no atacado.",
+          "Trabalhar com margens abaixo de 15% pode colocar o negócio em risco diante de oscilações no preço dos ingredientes ou perdas operacionais. Por outro lado, buscar margens exageradas sem agregar valor percebido pode afastar os clientes."
+        ],
+        "bullets": [
+          "Vendas sob encomenda: margens entre 20% e 35%",
+          "Pronta entrega e loja física: margens entre 15% e 25% devido a custos fixos altos",
+          "Vendas no atacado ou revenda: margens entre 10% e 15% focadas em volume"
+        ]
+      },
+      {
+        "heading": "Fatores que impactam a sua margem de lucro",
+        "paragraphs": [
+          "A escolha da margem de lucro não depende apenas da vontade da confeiteira, mas de variáveis do mercado e da operação diária. O desperdício de insumos, por exemplo, reduz diretamente a margem planejada se não for controlado rigorosamente.",
+          "Além disso, a sazonalidade e a precificação dos concorrentes diretos influenciam o quanto o público está disposto a pagar. Agregar valor através da apresentação, embalagem e atendimento permite praticar margens mais saudáveis."
+        ],
+        "bullets": [
+          "Desperdício e erros de produção na cozinha",
+          "Custo das embalagens e apresentação do produto",
+          "Posicionamento de marca e percepção de valor pelo cliente"
+        ]
+      },
+      {
+        "heading": "Passo a passo para calcular a margem de lucro correta",
+        "paragraphs": [
+          "Para determinar a margem real, você deve somar todos os custos diretos da receita, incluir uma porcentagem para custos fixos e impostos, e adicionar o percentual de lucro desejado sobre o preço final.",
+          "Lembre-se de recalcular suas fichas técnicas periodicamente. A inflação dos ingredientes pode corroer a margem de lucro se os preços de venda permanecerem estáticos por muito tempo."
+        ],
+        "bullets": [
+          "Some custos de ingredientes e embalagens via ficha técnica",
+          "Adicione a taxa de custos fixos e taxa de cartão de crédito",
+          "Aplique a margem de lucro desejada para obter o preço de venda final"
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "question": "Multiplicar o custo dos ingredientes por três garante lucro?",
+        "answer": "Não. A regra de multiplicar por três é genérica e perigosa, pois ignora custos fixos específicos, taxas de cartão, impostos e o tempo de mão de obra gasto na produção."
+      },
+      {
+        "question": "Como aumentar a margem de lucro sem subir os preços?",
+        "answer": "Você pode aumentar a margem reduzindo desperdícios na cozinha, negociando melhores preços com fornecedores ou otimizando os processos de produção para gastar menos tempo."
+      },
+      {
+        "question": "Devo aplicar a mesma margem em todos os produtos do cardápio?",
+        "answer": "Não necessariamente. Produtos de alta saída podem ter margens menores focadas no volume, enquanto produtos exclusivos ou de alta complexidade devem ter margens mais altas."
+      }
+    ],
+    "conclusion": "Escolher uma margem de lucro saudável é essencial para transformar o amor pela confeitaria em um negócio sustentável e rentável. Mantendo fichas técnicas atualizadas e controlando os custos, você garante a saúde financeira do seu empreendimento e abre espaço para o crescimento contínuo."
   }
 ]
