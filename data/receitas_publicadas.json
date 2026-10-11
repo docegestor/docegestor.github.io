@@ -1,5 +1,41 @@
 [
   {
+    "slug": "bolo-de-pote-prestigio-cremoso-de-chocolate-e-coco",
+    "title": "Bolo de Pote Prestígio Cremoso de Chocolate e Coco",
+    "description": "Delicioso bolo de pote de chocolate bem molhadinho alternado com creme aveludado de coco. Perfeito para vender por encomenda ou saborear em casa.",
+    "category": "Bolos",
+    "published": "2026-10-11",
+    "source_name": "Receita autoral DoceGestor",
+    "source_url": "",
+    "ingredients": [
+      "3 ovos inteiros",
+      "200g de açúcar refinado",
+      "100ml de óleo vegetal",
+      "200ml de leite integral",
+      "180g de farinha de trigo",
+      "60g de cacau em pó 50%",
+      "10g de fermento químico em pó",
+      "395g de leite condensado",
+      "200g de creme de leite",
+      "200ml de leite de coco",
+      "100g de coco ralado seco sem açúcar"
+    ],
+    "steps": [
+      "Em uma tigela grande, bata os 3 ovos inteiros com 200g de açúcar refinado utilizando um batedor de arame até formar uma mistura clara e leve.",
+      "Adicione 100ml de óleo vegetal e 200ml de leite integral, mexendo bem até integrar totalmente os ingredientes líquidos.",
+      "Peneire 180g de farinha de trigo e 60g de cacau em pó 50% sobre a mistura, incorporando suavemente com o batedor até a massa ficar homogênea.",
+      "Adicione 10g de fermento químico em pó e misture delicadamente. Despeje em uma assadeira untada e asse em forno pré-aquecido a 180°C por 30 minutos.",
+      "Em uma panela, junte 395g de leite condensado, 200g de creme de leite, 200ml de leite de coco e 100g de coco ralado seco.",
+      "Cozinhe em fogo médio por cerca de 12 minutos, mexendo sempre até obter um creme de coco espesso em ponto de colher, e deixe esfriar.",
+      "Após o bolo esfriar completamente, desenforme e esfarele a massa de forma uniforme com as mãos ou garfo.",
+      "Monte nos potes intercalando camadas de bolo esfarelado e creme de coco, finalizando com o creme e mantendo sob refrigeração até servir."
+    ],
+    "tips": [
+      "Mantenha os potes refrigerados entre 2°C e 6°C para garantir validade de até 5 dias nas vendas por encomenda.",
+      "Umedeça levemente as camadas de bolo com uma calda simples de leite e açúcar para deixar o bolo ainda mais molhadinho."
+    ]
+  },
+  {
     "slug": "bolo-de-pote-supremo-de-chocolate-com-coco",
     "title": "Bolo de Pote Supremo de Chocolate com Coco",
     "description": "Aprenda a fazer um irresistível bolo de pote de chocolate com creme de coco. Receita autoral perfeita para consumo caseiro ou para alavancar suas vendas.",
