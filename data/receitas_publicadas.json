@@ -1,5 +1,43 @@
 [
   {
+    "slug": "bolo-de-pote-de-chocolate-com-creme-suave-de-coco",
+    "title": "Bolo de Pote de Chocolate com Creme Suave de Coco",
+    "description": "Delicioso bolo de pote com massa fofinha de chocolate e recheio cremoso de coco. Perfeito para vender em potes ou servir em festas.",
+    "category": "Bolos",
+    "published": "2026-10-12",
+    "source_name": "Receita autoral DoceGestor",
+    "source_url": "",
+    "ingredients": [
+      "4 ovos inteiros",
+      "200g de açúcar refinado",
+      "100ml de óleo vegetal",
+      "200ml de leite integral",
+      "180g de farinha de trigo",
+      "60g de cacau em pó 50%",
+      "10g de fermento químico em pó",
+      "395g de leite condensado",
+      "200g de creme de leite",
+      "200ml de leite de coco",
+      "100g de coco ralado sem açúcar"
+    ],
+    "steps": [
+      "Preaqueça o forno a 180°C e unte uma assadeira retangular com óleo e cacau em pó.",
+      "Em uma batedeira, bata os 4 ovos com os 200g de açúcar por cerca de 5 minutos até obter um creme claro e volumoso.",
+      "Adicione os 100ml de óleo vegetal e os 200ml de leite integral, misturando delicadamente em velocidade baixa.",
+      "Peneire os 180g de farinha de trigo com os 60g de cacau em pó e junte à mistura, mexendo com um fouet até homogeneizar, adicionando os 10g de fermento por último.",
+      "Despeje a massa na assadeira e asse por 30 a 35 minutos a 180°C, ou até que um palito saia limpo ao espetar o centro.",
+      "Para o creme, misture em uma panela os 395g de leite condensado, os 200g de creme de leite, os 200ml de leite de coco e os 100g de coco ralado.",
+      "Leve a panela ao fogo médio, mexendo sempre, até levantar fervura e atingir o ponto de cremosidade firme, cerca de 10 minutos.",
+      "Espere a massa e o creme esfriarem totalmente e esfarele a massa de bolo delicadamente em um recipiente.",
+      "Monte nos potes alternando camadas de bolo de chocolate e creme de coco, finalizando a última camada com o creme e um pouco de coco ralado."
+    ],
+    "tips": [
+      "A validade é de até 5 dias quando mantido sob refrigeração entre 2°C e 6°C.",
+      "Utilize potes transparentes de 200ml ou 250ml com tampa para uma apresentação profissional nas vendas.",
+      "Se preferir uma massa ainda mais molhada, regue as camadas de bolo com uma calda leve de leite e leite condensado."
+    ]
+  },
+  {
     "slug": "bolo-de-pote-prestigio-cremoso-de-chocolate-e-coco",
     "title": "Bolo de Pote Prestígio Cremoso de Chocolate e Coco",
     "description": "Delicioso bolo de pote de chocolate bem molhadinho alternado com creme aveludado de coco. Perfeito para vender por encomenda ou saborear em casa.",
