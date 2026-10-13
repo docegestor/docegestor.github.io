@@ -1,5 +1,43 @@
 [
   {
+    "slug": "bolo-de-pote-supremo-de-chocolate-com-creme-de-coco",
+    "title": "Bolo de Pote Supremo de Chocolate com Creme de Coco",
+    "description": "Aprenda a fazer um bolo de pote irresistível de chocolate com recheio cremoso de coco. Receita perfeita para agradar clientes e aumentar suas vendas.",
+    "category": "Bolos",
+    "published": "2026-10-13",
+    "source_name": "Receita autoral DoceGestor",
+    "source_url": "",
+    "ingredients": [
+      "2 xícaras de chá de farinha de trigo",
+      "1 xícara de chá de açúcar refinado",
+      "1/2 xícara de chá de cacau em pó",
+      "1 xícara de chá de leite integral",
+      "1/2 xícara de chá de óleo de girassol",
+      "3 unidades de ovos inteiros",
+      "1 colher de sopa de fermento em químico em pó",
+      "1 lata de leite condensado",
+      "200 gramas de creme de leite",
+      "100 gramas de coco ralado fresco",
+      "1 xícara de chá de leite de coco para umedecer"
+    ],
+    "steps": [
+      "Preaqueça o forno a 180 graus Celsius e unte uma assadeira retangular com manteiga e cacau em pó.",
+      "Em uma tigela grande, bata os ovos com o açúcar com um fouet até obter um creme claro e homogêneo.",
+      "Adicione o óleo, o leite e o cacau em pó, misturando delicadamente até incorporar todos os líquidos.",
+      "Acrescente a farinha de trigo aos poucos, mexendo sem parar para evitar a formação de grumos na massa.",
+      "Incorpore o fermento químico em pó por último, misturando levemente com uma espátula de baixo para cima.",
+      "Despeje a massa na assadeira preparada e leve ao forno por trinta e cinco minutos ou até que o teste do palito saia limpo.",
+      "Retire o bolo do forno, espere esfriar completamente e esfarele a massa com as mãos para usar na montagem.",
+      "Em uma panela, misture o leite condensado, o creme de leite, o coco ralado e leve ao fogo baixo, mexendo sempre até obter ponto de brigadeiro mole.",
+      "Em potes individuais esterilizados, alterne camadas de massa de chocolate esfarelada umedecida com leite de coco e camadas generosas do creme de coco.",
+      "Finalize a última camada com o creme de coco e polvilhe um pouco de coco ralado por cima para decorar antes de tampar."
+    ],
+    "tips": [
+      "Para venda por encomenda, mantenha os bolos refrigerados por até quatro dias ou congelados por até trinta dias antes da entrega.",
+      "Garanta que a massa esteja totalmente fria antes de montar nos potes para evitar a condensação e proliferação de bactérias."
+    ]
+  },
+  {
     "slug": "bolo-de-pote-de-chocolate-com-creme-suave-de-coco",
     "title": "Bolo de Pote de Chocolate com Creme Suave de Coco",
     "description": "Delicioso bolo de pote com massa fofinha de chocolate e recheio cremoso de coco. Perfeito para vender em potes ou servir em festas.",
