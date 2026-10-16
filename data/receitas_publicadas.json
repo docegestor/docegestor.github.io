@@ -1,5 +1,42 @@
 [
   {
+    "slug": "bolo-de-pote-de-chocolate-amargo-com-creme-prestigio-de-coco",
+    "title": "Bolo de Pote de Chocolate Amargo com Creme Prestígio de Coco",
+    "description": "Aprenda a fazer um irresistível bolo de pote de chocolate fofinho montado em camadas com um cremoso recheio de coco ralado e calda de leite.",
+    "category": "Bolos",
+    "published": "2026-10-16",
+    "source_name": "Receita autoral DoceGestor",
+    "source_url": "",
+    "ingredients": [
+      "4 ovos inteiros",
+      "200g de açúcar refinado",
+      "100ml de óleo vegetal",
+      "100ml de água morna",
+      "60g de cacau em pó 50%",
+      "200g de farinha de trigo",
+      "10g de fermento químico em pó",
+      "395g de leite condensado",
+      "200g de creme de leite",
+      "100g de coco ralado sem açúcar",
+      "200ml de leite de coco"
+    ],
+    "steps": [
+      "Bata os ovos com o açúcar na batedeira por 5 minutos até obter um creme claro e volumoso.",
+      "Adicione o óleo, a água morna e o cacau em pó, misturando delicadamente com um fouet até homogeneizar.",
+      "Peneire a farinha de trigo e o fermento sobre a massa, incorporando levemente para não perder a aeração.",
+      "Despeje em uma assadeira untada e asse em forno pré-aquecido a 180°C por 30 minutos, deixando esfriar completamente depois.",
+      "Em uma panela, misture o leite condensado, o creme de leite, o coco ralado e metade do leite de coco.",
+      "Cozinhe o creme de coco em fogo médio por cerca de 10 minutos, mexendo sempre até atingir ponto de brigadeiro mole.",
+      "Misture o restante do leite de coco com 50ml de água filtrada para formar a calda de regar a massa.",
+      "Esfarele o bolo frio e monte os potes alternando camadas de massa umedecida com a calda e camadas do creme de coco."
+    ],
+    "tips": [
+      "Mantenha os potes refrigerados por até 5 dias para preservar o frescor e a textura do recheio de coco.",
+      "Para venda por encomenda, utilize potes bem selados e adicione uma etiqueta com a data de fabricação.",
+      "Aguarde o recheio de coco esfriar completamente antes da montagem para evitar a perda da validade precoce."
+    ]
+  },
+  {
     "slug": "bolo-de-pote-supremo-de-chocolate-com-creme-de-coco",
     "title": "Bolo de Pote Supremo de Chocolate com Creme de Coco",
     "description": "Aprenda a fazer um bolo de pote irresistível de chocolate com recheio cremoso de coco. Receita perfeita para agradar clientes e aumentar suas vendas.",
