@@ -1816,5 +1816,77 @@
       }
     ],
     "conclusion": "Dominar a margem de lucro na confeitaria é o caminho mais seguro para construir um negócio sólido e duradouro. Dedique tempo para calcular cada receita com atenção e valorize o seu trabalho artesanal. Com uma precificação correta, seus doces trarão não apenas elogios, mas o retorno financeiro que você merece."
+  },
+  {
+    "title": "Margem de lucro na confeitaria: como calcular e escolher uma taxa saudável",
+    "slug": "margem-de-lucro-na-confeitaria-como-escolher",
+    "description": "Descubra como definir uma margem de lucro saudável na confeitaria, diferenciando markup de lucro real para garantir a sustentabilidade do seu negócio.",
+    "category": "Precificação",
+    "intro": "Definir o preço correto dos doces é um dos maiores desafios para quem trabalha com confeitaria artesanal. Muitos profissionais confundem faturamento com lucro e acabam vendendo muito sem ver a cor do dinheiro no fim do mês. Entender como escolher uma margem de lucro saudável é essencial para garantir o crescimento sustentável do seu negócio.",
+    "sections": [
+      {
+        "heading": "A diferença entre margem de lucro e markup",
+        "paragraphs": [
+          "Na confeitaria, é comum confundir markup com margem de lucro, mas esses dois conceitos mensuram coisas diferentes. O markup é um multiplicador aplicado sobre o custo de produção para definir o preço de venda, enquanto a margem de lucro é a porcentagem do preço final que realmente sobra como lucro líquido.",
+          "Se um bolo custa R$ 50 para ser feito e você o vende por R$ 100, o seu markup foi de 100%, mas a sua margem de lucro bruta foi de 50%. Ter essa clareza impede que você calcule seus ganhos de forma equivocada e comprometa seu caixa."
+        ],
+        "bullets": [
+          "Markup: porcentagem adicionada ao custo de produção.",
+          "Margem de lucro: porcentagem de sobra no valor final de venda.",
+          "Lucro líquido: o valor real retido após pagar custos fixos e variáveis."
+        ]
+      },
+      {
+        "heading": "Custos ocultos que afetam sua margem",
+        "paragraphs": [
+          "Para calcular uma margem de lucro real, você precisa mapear todos os custos invisíveis da produção artesanal. Ingredientes são apenas uma parte da equação; gastos com energia, água, depreciação de equipamentos e embalagens precisam entrar na conta.",
+          "Ignorar as despesas indiretas faz com que sua margem teórica pareça alta, mas a margem real seja insuficiente para cobrir o funcionamento do ateliê."
+        ],
+        "bullets": [
+          "Depreciação de batedeiras, fornos e utensílios.",
+          "Consumo proporcional de água, luz e gás de cozinha.",
+          "Embalagens, fitas, etiquetas e sacolas de transporte."
+        ]
+      },
+      {
+        "heading": "Qual é a margem de lucro ideal na confeitaria artesanal?",
+        "paragraphs": [
+          "Não existe um valor único para todas as confeiteiras, mas a média saudável do mercado de confeitaria artesanal varia entre 20% e 35% de lucro líquido. Produtos de alta rotatividade podem trabalhar com margens menores, enquanto itens personalizados exigem margens maiores.",
+          "Doces finos e bolos decorados demandam mais tempo de mão de obra e habilidade técnica, justificando uma margem líquida superior para remunerar o conhecimento do profissional."
+        ],
+        "bullets": [
+          "Produtos de linha ou pronta entrega: margem líquida entre 20% e 25%.",
+          "Bolos decorados e personalizações: margem líquida entre 30% e 40%.",
+          "Doces para grandes eventos: foco no volume com margens ajustadas."
+        ]
+      },
+      {
+        "heading": "Como reajustar seus preços sem perder clientes",
+        "paragraphs": [
+          "Se você percebeu que sua margem atual está muito baixa, o reajuste de preços deve ser feito de forma estratégica. Em vez de aumentar tudo de uma vez, avalie quais produtos possuem maior aceitação e margem de contribuição.",
+          "Transmitir o valor do seu trabalho por meio de ingredientes de qualidade, apresentação impecável e bom atendimento ajuda o cliente a compreender o novo preço sem rejeição."
+        ],
+        "bullets": [
+          "Atualize sua ficha técnica a cada variação nos insumos.",
+          "Comunique melhor o diferencial artesanal dos seus produtos.",
+          "Crie combos ou kits para aumentar o ticket médio da loja."
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "question": "Prolabore é a mesma coisa que margem de lucro?",
+        "answer": "Não. O prolabore é o salário fixo da confeiteira pelo trabalho executado na produção, enquanto a margem de lucro é a sobra da empresa destinada a investimentos, reservas de emergência e expansão."
+      },
+      {
+        "question": "Posso usar a regra de multiplicar o custo dos ingredientes por três?",
+        "answer": "Essa regra antiga é arriscada porque não considera seus custos fixos reais, horas trabalhadas nem a margem líquida exata, podendo gerar prejuízo velado em produtos complexos."
+      },
+      {
+        "question": "Com que frequência devo revisar a margem de lucro dos meus doces?",
+        "answer": "O ideal é revisar a precificação a cada três ou quatro meses, ou sempre que houver um aumento significativo nos insumos principais, como leite condensado, chocolate e embalagens."
+      }
+    ],
+    "conclusion": "Escolher uma margem de lucro saudável é o passo fundamental para transformar sua paixão por doces em um negócio lucrativo e duradouro. Mantenha suas fichas técnicas atualizadas, precifique com base em dados reais e valorize a sua mão de obra em cada entrega."
   }
 ]
