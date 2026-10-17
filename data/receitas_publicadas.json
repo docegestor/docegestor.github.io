@@ -1,5 +1,42 @@
 [
   {
+    "slug": "bolo-de-pote-de-chocolate-fofinho-com-creme-gelado-de-coco",
+    "title": "Bolo de Pote de Chocolate Fofinho com Creme Gelado de Coco",
+    "description": "Delicioso bolo de pote com massa úmida de chocolate e recheio cremoso de coco. Perfeito para vender ou servir em festas individuais.",
+    "category": "Bolos",
+    "published": "2026-10-17",
+    "source_name": "Receita autoral DoceGestor",
+    "source_url": "",
+    "ingredients": [
+      "4 ovos inteiros",
+      "200g de açúcar refinado",
+      "100ml de óleo vegetal",
+      "200ml de leite integral",
+      "200g de farinha de trigo",
+      "90g de cacau em pó 50%",
+      "10g de fermento químico em pó",
+      "395g de leite condensado",
+      "200g de creme de leite",
+      "200ml de leite de coco",
+      "100g de coco ralado sem açúcar"
+    ],
+    "steps": [
+      "Em uma batedeira, bata 4 ovos e 200g de açúcar por 5 minutos até formar um creme claro e volumoso.",
+      "Adicione 100ml de óleo vegetal e 200ml de leite integral, misturando delicadamente com um fouet.",
+      "Peneire 200g de farinha de trigo com 90g de cacau em pó 50% e incorpore à massa, finalizando com 10g de fermento químico em pó.",
+      "Despeje a massa em uma assadeira untada e asse em forno pré-aquecido a 180°C por cerca de 30 minutos.",
+      "Para o recheio, misture em uma panela 395g de leite condensado, 200g de creme de leite, 200ml de leite de coco e 100g de coco ralado sem açúcar.",
+      "Leve ao fogo médio, mexendo sempre, por 10 a 12 minutos até atingir o ponto de brigadeiro mole e deixe esfriar completamente.",
+      "Esfarele a massa de chocolate assada e já fria em pedaços uniformes.",
+      "Monte os potes alternando uma camada de bolo esfarelado e uma camada do creme de coco frio, finalizando com o creme e mantendo na geladeira por 4 horas antes de servir."
+    ],
+    "tips": [
+      "Utilize potes herméticos de 200ml a 250ml para garantir a conservação por até 5 dias sob refrigeração.",
+      "Regue a massa com uma calda leve de leite de coco e leite condensado para deixar o bolo ainda mais úmido.",
+      "Para venda por encomenda, adicione uma etiqueta personalizada com a data de fabricação e validade na tampa do pote."
+    ]
+  },
+  {
     "slug": "bolo-de-pote-de-chocolate-amargo-com-creme-prestigio-de-coco",
     "title": "Bolo de Pote de Chocolate Amargo com Creme Prestígio de Coco",
     "description": "Aprenda a fazer um irresistível bolo de pote de chocolate fofinho montado em camadas com um cremoso recheio de coco ralado e calda de leite.",
