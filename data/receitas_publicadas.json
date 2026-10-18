@@ -1,5 +1,40 @@
 [
   {
+    "slug": "bolo-de-pote-prestigio-cremoso",
+    "title": "Bolo de Pote Prestígio Cremoso",
+    "description": "Delicioso bolo de pote de chocolate úmido intercalado com recheio cremoso de coco e cobertura suave. Perfeito para vender ou servir em festas.",
+    "category": "Bolos",
+    "published": "2026-10-18",
+    "source_name": "Receita autoral DoceGestor",
+    "source_url": "",
+    "ingredients": [
+      "4 ovos inteiros",
+      "200g de açúcar refinado",
+      "200g de farinha de trigo",
+      "60g de cacau em pó 50%",
+      "100ml de leite integral",
+      "10g de fermento químico em pó",
+      "395g de leite condensado",
+      "200g de creme de leite",
+      "200ml de leite de coco",
+      "100g de coco ralado sem açúcar"
+    ],
+    "steps": [
+      "Bata os 4 ovos com os 200g de açúcar refinado na batedeira por 5 minutos até obter um creme fofo e claro.",
+      "Adicione alternadamente os 200g de farinha de trigo e os 60g de cacau em pó peneirados junto com os 100ml de leite integral, misturando delicadamente.",
+      "Incorpore os 10g de fermento químico em pó por último, mexendo suavemente com um fouet até homogeneizar.",
+      "Despeje a massa em uma assadeira untada e leve ao forno pré-aquecido a 180°C por cerca de 30 minutos.",
+      "Para o recheio, junte em uma panela os 395g de leite condensado, os 200g de creme de leite, os 200ml de leite de coco e os 100g de coco ralado sem açúcar.",
+      "Leve a panela ao fogo médio, mexendo sempre, por aproximadamente 10 minutos até atingir ponto de brigadeiro mole e deixe esfriar completamente.",
+      "Esfarele o bolo assado já frio ou corte em discos proporcionais ao tamanho dos potes de montagem.",
+      "Monte nos potes alternando camadas de bolo esfarelado e camadas do recheio cremoso de coco, finalizando com o recheio e coco ralado para decorar."
+    ],
+    "tips": [
+      "Para aumentar a durabilidade para venda, mantenha os potes refrigerados entre 2°C e 6°C por até 5 dias.",
+      "Umedeça levemente as camadas de bolo com uma calda simples de leite e leite condensado para garantir maior suculência."
+    ]
+  },
+  {
     "slug": "bolo-de-pote-de-chocolate-fofinho-com-creme-gelado-de-coco",
     "title": "Bolo de Pote de Chocolate Fofinho com Creme Gelado de Coco",
     "description": "Delicioso bolo de pote com massa úmida de chocolate e recheio cremoso de coco. Perfeito para vender ou servir em festas individuais.",
