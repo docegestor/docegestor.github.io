@@ -1,5 +1,42 @@
 [
   {
+    "slug": "bolo-de-pote-de-chocolate-amargo-com-cremoso-de-coco",
+    "title": "Bolo de Pote de Chocolate Amargo com Cremoso de Coco",
+    "description": "Deliciosa combinação de bolo de chocolate fofinho intercalado com creme aveludado de coco e calda especial. Perfeito para vender em potes de 200ml.",
+    "category": "Bolos",
+    "published": "2026-11-04",
+    "source_name": "Receita autoral DoceGestor",
+    "source_url": "",
+    "ingredients": [
+      "4 ovos inteiros",
+      "200g de açúcar refinado",
+      "100ml de óleo de milho",
+      "200g de farinha de trigo",
+      "80g de cacau em pó 50%",
+      "150ml de água morna",
+      "10g de fermento químico em pó",
+      "395g de leite condensado",
+      "200g de creme de leite",
+      "200ml de leite de coco",
+      "100g de coco ralado sem açúcar"
+    ],
+    "steps": [
+      "Em uma batedeira, bata 4 ovos inteiros com 200g de açúcar refinado por 5 minutos até obter um creme claro e volumoso.",
+      "Adicione 100ml de óleo de milho e 150ml de água morna, misturando delicadamente com um fouet.",
+      "Peneire 200g de farinha de trigo com 80g de cacau em pó 50% e incorpore à massa, finalizando com 10g de fermento químico em pó.",
+      "Despeje a massa em uma assadeira untada e asse em forno pré-aquecido a 180°C por 30 minutos ou até passar no teste do palito.",
+      "Para o creme de coco, misture em uma panela 395g de leite condensado, 200g de creme de leite, 200ml de leite de coco e 100g de coco ralado sem açúcar.",
+      "Leve a panela ao fogo médio, mexendo sempre por cerca de 10 minutos após levantar fervura, até atingir ponto de brigadeiro cremoso, e deixe esfriar completamente.",
+      "Esfarele a massa de chocolate já fria em pedaços uniformes para facilitar a montagem nos potes.",
+      "Monte os potes alternando uma camada de bolo de chocolate esfarelado e uma camada do creme de coco frio, repetindo até completar o pote de 200ml."
+    ],
+    "tips": [
+      "Para garantir maior durabilidade, armazene os potes fechados sob refrigeração por até 5 dias.",
+      "Umedeça a massa do bolo com uma calda simples de leite e leite de coco para deixar o produto ainda mais molhado.",
+      "Calcule o custo de cada pote de 200ml somando embalagem e ingredientes para definir a margem de lucro ideal para venda."
+    ]
+  },
+  {
     "slug": "bolo-de-pote-prestigio-cremoso-com-coco-ralado",
     "title": "Bolo de Pote Prestígio Cremoso com Coco Ralado",
     "description": "Delicioso bolo de pote de chocolate fofinho alternado com creme aveludado de coco. Perfeito para vender por encomenda ou servir em festas.",
