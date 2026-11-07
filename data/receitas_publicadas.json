@@ -1,5 +1,41 @@
 [
   {
+    "slug": "bolo-de-pote-prestigio-artesanal-com-creme-de-coco",
+    "title": "Bolo de Pote Prestígio Artesanal com Creme de Coco",
+    "description": "Delicioso bolo de pote feito com pão de ló de cacau fofinho, recheado com creme aveludado de coco e ganache de chocolate meio amargo. Perfeito para vender.",
+    "category": "Bolos",
+    "published": "2026-11-07",
+    "source_name": "Receita autoral DoceGestor",
+    "source_url": "",
+    "ingredients": [
+      "4 ovos inteiros",
+      "150 gramas de açúcar refinado",
+      "120 gramas de farinha de trigo",
+      "40 gramas de cacau em pó 50%",
+      "1 colher de chá de fermento químico em pó",
+      "395 gramas de leite condensado",
+      "200 mililitros de leite de coco",
+      "100 gramas de coco ralado fino sem açúcar",
+      "200 gramas de chocolate meio amargo picado",
+      "200 gramas de creme de leite de caixinha"
+    ],
+    "steps": [
+      "Bata os ovos com o açúcar refinado na batedeira por 8 minutos até obter um creme fofo e claro.",
+      "Peneire a farinha de trigo com o cacau em pó e incorpore delicadamente à mistura de ovos usando um fouet.",
+      "Adicione o fermento químico em pó, misture levemente e despeje a massa em uma assadeira untada de 20x30 cm.",
+      "Asse em forno pré-aquecido a 180°C por 25 minutos até que um palito saia limpo. Deixe esfriar e esfarele a massa.",
+      "Em uma panela, junte o leite condensado, o leite de coco e o coco ralado fino, cozinhando em fogo médio por 10 minutos até engrossar. Deixe esfriar.",
+      "Derreta o chocolate meio amargo no micro-ondas de 30 em 30 segundos e misture com o creme de leite de caixinha até formar uma ganache lisa.",
+      "Monte os potes alternando camadas de bolo esfarelado, creme de coco e ganache de chocolate, finalizando com ganache.",
+      "Tampe os potes e leve à geladeira por no mínimo 4 horas antes de servir ou comercializar."
+    ],
+    "tips": [
+      "Umedeça levemente a massa com uma calda feita de 100ml de leite de coco e 50ml de água para manter a umidade ideal.",
+      "Mantenha os potes refrigerados entre 2°C e 6°C com validade de até 5 dias após o preparo.",
+      "Para vendas, utilize potes transparentes de 220ml com lacre de segurança e cole uma etiqueta com data de fabricação e validade."
+    ]
+  },
+  {
     "slug": "bolo-de-pote-de-chocolate-amargo-com-cremoso-de-coco",
     "title": "Bolo de Pote de Chocolate Amargo com Cremoso de Coco",
     "description": "Deliciosa combinação de bolo de chocolate fofinho intercalado com creme aveludado de coco e calda especial. Perfeito para vender em potes de 200ml.",
