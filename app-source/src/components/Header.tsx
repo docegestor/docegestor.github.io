@@ -1,17 +1,13 @@
 import React, { useState } from 'react';
-import { Download, Sparkles, Wifi, WifiOff, Smartphone } from 'lucide-react';
+import { Download, Wifi, WifiOff } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { usePWAInstall } from '../hooks/usePWAInstall';
 import { useOnlineStatus } from '../hooks/useOnlineStatus';
 import { PWAInstallModal } from './PWAInstallModal';
 
-interface HeaderProps {
-  onNavigate?: (tab: string, extra?: any) => void;
-}
-
-export const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
+export const Header: React.FC = () => {
   const { config, currentTheme } = useApp();
-  const { isInstallable, isIOS, isStandalone, install } = usePWAInstall();
+  const { isInstallable, isStandalone, install } = usePWAInstall();
   const isOnline = useOnlineStatus();
   const [showInstallModal, setShowInstallModal] = useState(false);
 
@@ -20,8 +16,8 @@ export const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
       try {
         const accepted = await install();
         if (accepted) return;
-      } catch (e) {
-        console.error('Install error', e);
+      } catch (error) {
+        console.error('Install error', error);
       }
     }
     setShowInstallModal(true);
@@ -36,84 +32,70 @@ export const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
           borderColor: currentTheme.border,
         }}
       >
-        <div className="max-w-4xl mx-auto px-4 py-2.5 flex items-center justify-between">
-          {/* Brand Logo & Name */}
-          <div className="flex items-center gap-2.5">
+        <div className="mx-auto flex w-full max-w-5xl items-center justify-between gap-3 px-3 py-2.5 sm:px-4">
+          <div className="flex min-w-0 items-center gap-2.5">
             <div
-              className="w-10 h-10 rounded-2xl flex items-center justify-center shadow-sm border text-xl"
-              style={{
-                backgroundColor: currentTheme.primary,
-                borderColor: currentTheme.border,
-              }}
+              className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl border text-xl shadow-sm"
+              style={{ backgroundColor: currentTheme.primary, borderColor: currentTheme.border }}
+              aria-hidden="true"
             >
               <span>{currentTheme.emoji}</span>
             </div>
-            <div>
-              <div className="flex items-center gap-1.5">
+            <div className="min-w-0">
+              <div className="flex min-w-0 flex-wrap items-center gap-x-1.5 gap-y-0.5">
                 <h1
-                  className="font-display font-bold text-lg leading-tight tracking-tight"
+                  className="font-display truncate text-base font-bold leading-tight tracking-tight sm:text-lg"
                   style={{ color: currentTheme.textMain }}
                 >
                   DoceGestor
                 </h1>
                 <span
-                  className="text-[10px] font-bold px-1.5 py-0.5 rounded-md uppercase tracking-wider"
-                  style={{
-                    backgroundColor: currentTheme.accent + '25',
-                    color: currentTheme.accent,
-                  }}
+                  className="rounded-md px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wider"
+                  style={{ backgroundColor: currentTheme.accent + '25', color: currentTheme.accent }}
                 >
-                  PWA Pro
+                  PWA PRO
                 </span>
               </div>
               <p
-                className="text-[11px] truncate max-w-[180px] sm:max-w-[260px]"
+                className="max-w-[150px] truncate text-[10px] leading-tight sm:max-w-[260px] sm:text-[11px]"
                 style={{ color: currentTheme.textMuted }}
+                title={config.nomeConfeitaria || 'Minha doceria'}
               >
-                {config.nomeConfeitaria || 'Gestão para Confeitarias'}
+                {config.nomeConfeitaria || 'Minha doceria'}
               </p>
             </div>
           </div>
 
-          {/* Right Action: Online/Offline Badge & Install App */}
-          <div className="flex items-center gap-2">
-            {/* Status indicator */}
+          <div className="flex shrink-0 items-center gap-1.5 sm:gap-2">
             <div
-              className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-medium border"
+              className="hidden items-center gap-1.5 rounded-full border px-2.5 py-1 text-[11px] font-medium sm:flex"
               style={{
                 backgroundColor: isOnline ? '#E8F5E9' : '#FEF3C7',
                 color: isOnline ? '#2E7D32' : '#B45309',
                 borderColor: isOnline ? '#C8E6C9' : '#FDE68A',
               }}
+              role="status"
+              aria-label={isOnline ? 'Conectado' : 'Sem conexão'}
             >
               {isOnline ? <Wifi size={12} /> : <WifiOff size={12} />}
               <span>{isOnline ? 'Online' : 'Offline'}</span>
             </div>
-
-            {/* Install PWA Button */}
             {!isStandalone && (
               <button
                 onClick={handleInstallClick}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold text-white shadow-sm transition-all hover:opacity-95 active:scale-95 cursor-pointer"
-                style={{
-                  backgroundColor: currentTheme.primary,
-                }}
+                className="flex min-h-9 items-center gap-1.5 rounded-xl px-2.5 py-1.5 text-[11px] font-semibold text-white shadow-sm transition hover:opacity-95 active:scale-95 sm:px-3 sm:text-xs"
+                style={{ backgroundColor: currentTheme.primary }}
                 title="Instalar aplicativo na tela inicial"
               >
-                <Download size={14} className="text-[#D4A574]" />
-                <span className="hidden xs:inline">Instalar App</span>
-                <span className="xs:hidden">App</span>
+                <Download size={14} />
+                <span>Instalar</span>
               </button>
             )}
           </div>
         </div>
       </header>
 
-      {/* Install Modal */}
-      <PWAInstallModal
-        isOpen={showInstallModal}
-        onClose={() => setShowInstallModal(false)}
-      />
+      <PWAInstallModal isOpen={showInstallModal} onClose={() => setShowInstallModal(false)} />
     </>
   );
 };

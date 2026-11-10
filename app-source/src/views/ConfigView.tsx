@@ -37,6 +37,18 @@ import { usePWAInstall } from '../hooks/usePWAInstall';
 import { PWAInstallModal } from '../components/PWAInstallModal';
 import { GOOGLE_APPS_SCRIPT_CODE } from '../services/googleSheetsSync';
 
+type SettingsSection = 'nuvem' | 'apoio' | 'negocio' | 'precificacao' | 'custos' | 'temas' | 'instalacao';
+
+const SETTINGS_SECTIONS = [
+  { id: 'negocio', label: 'Sua confeitaria', icon: Sparkles },
+  { id: 'precificacao', label: 'Precificação', icon: Clock },
+  { id: 'custos', label: 'Custos fixos', icon: DollarSign },
+  { id: 'temas', label: 'Temas e cores', icon: Palette },
+  { id: 'instalacao', label: 'App instalável', icon: Smartphone },
+  { id: 'nuvem', label: 'Nuvem e backup', icon: Cloud },
+  { id: 'apoio', label: 'Apoio', icon: Heart },
+] as const;
+
 interface ConfigViewProps {
   scrollToApoio?: boolean;
 }
@@ -58,6 +70,7 @@ export const ConfigView: React.FC<ConfigViewProps> = ({ scrollToApoio = false })
 
   const { isInstallable, isStandalone, isIOS, install } = usePWAInstall();
   const [showInstallModal, setShowInstallModal] = useState(false);
+  const [activeSection, setActiveSection] = useState<SettingsSection>('negocio');
 
   // Apoio ao Projeto & PIX
   const apoioRef = React.useRef<HTMLDivElement>(null);
@@ -79,6 +92,7 @@ export const ConfigView: React.FC<ConfigViewProps> = ({ scrollToApoio = false })
   // Scroll automático para a área de apoio quando requisitado
   React.useEffect(() => {
     if (scrollToApoio || window.location.hash === '#apoio' || window.location.hash === '#config-apoio') {
+      setActiveSection('apoio');
       setTimeout(() => {
         apoioRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
         setHighlightApoio(true);
@@ -270,17 +284,39 @@ export const ConfigView: React.FC<ConfigViewProps> = ({ scrollToApoio = false })
           </p>
         </div>
 
-        <button
-          onClick={handleInstallClick}
-          className="flex items-center gap-1.5 px-3.5 py-2 rounded-2xl text-xs font-bold text-white shadow-sm transition hover:opacity-90 active:scale-95 cursor-pointer"
-          style={{ backgroundColor: currentTheme.primary }}
-          title="Instalar App no celular"
-        >
-          <Smartphone size={15} className="text-[#D4A574]" />
-          <span>Instalar App</span>
-        </button>
+        <div className="flex items-center gap-1.5 rounded-full border px-2.5 py-1.5 text-[10px] font-semibold" style={{ borderColor: currentTheme.border, color: currentTheme.textMuted }}>
+          <ShieldCheck size={13} className="text-emerald-700" />
+          <span>Seus dados ficam com você</span>
+        </div>
       </div>
 
+
+      <nav className="no-scrollbar -mx-1 flex gap-2 overflow-x-auto pb-1" role="tablist" aria-label="Seções de configuração">
+        {SETTINGS_SECTIONS.map((section) => {
+          const Icon = section.icon;
+          const selected = activeSection === section.id;
+          return (
+            <button
+              key={section.id}
+              type="button"
+              role="tab"
+              aria-selected={selected}
+              onClick={() => setActiveSection(section.id)}
+              className="flex min-h-10 shrink-0 items-center gap-1.5 rounded-full border px-3 text-[11px] font-bold transition-colors"
+              style={{
+                backgroundColor: selected ? currentTheme.primary : currentTheme.cardBg,
+                borderColor: selected ? currentTheme.primary : currentTheme.border,
+                color: selected ? '#FFFFFF' : currentTheme.textMuted,
+              }}
+            >
+              <Icon size={13} />
+              <span>{section.label}</span>
+            </button>
+          );
+        })}
+      </nav>
+
+      {activeSection === 'nuvem' && <>
       {/* 1. Sincronização & Backup na Nuvem (Google Sheets + Apps Script) */}
       <div
         className="rounded-3xl p-5 border shadow-sm space-y-4"
@@ -300,8 +336,8 @@ export const ConfigView: React.FC<ConfigViewProps> = ({ scrollToApoio = false })
               </h3>
             </div>
             <p className="text-xs text-muted-foreground mt-1 leading-relaxed">
-              Sincronize seus dados em tempo real com uma planilha do Google Sheets usando o Google Apps Script.
-              Acesse a mesma planilha em outro celular ou tablet para sincronizar!
+              Salve uma cópia na sua planilha do Google Sheets e restaure em outros aparelhos usando a mesma URL.
+              O envio e a restauração são iniciados por você, quando quiser.
             </p>
           </div>
         </div>
@@ -491,6 +527,9 @@ export const ConfigView: React.FC<ConfigViewProps> = ({ scrollToApoio = false })
         </div>
       </div>
 
+      </>}
+
+      {activeSection === 'apoio' && <>
       {/* 2. Apoie a Evolução do Projeto & Criação de Apps Gratuitos (Área Especial de Doação PIX) */}
       <div
         ref={apoioRef}
@@ -528,13 +567,13 @@ export const ConfigView: React.FC<ConfigViewProps> = ({ scrollToApoio = false })
         {/* Mensagem de Apelo Confeiteira / Empreendedor */}
         <div className="space-y-2 text-xs sm:text-sm leading-relaxed" style={{ color: currentTheme.textMain }}>
           <div className="p-3 rounded-2xl bg-rose-50/70 border border-rose-100 text-rose-950 font-medium">
-            🧁 <strong>Quando fizer uma boa venda ou fechar o mês com saldo positivo, faça uma doação!</strong>
+            🧁 <strong>Se o DoceGestor fez diferença na sua rotina, considere apoiar o projeto quando puder.</strong>
           </div>
           <p className="text-muted-foreground text-xs leading-relaxed">
-            Este projeto vai <strong>muito além de um simples aplicativo</strong>: é sobre empoderar confeiteiros, doceiras artesanais e autônomos com tecnologia profissional, simples e 100% gratuita — sem mensalidades e sem pegadinhas.
+            O DoceGestor é um projeto independente e de código aberto, feito para oferecer ferramentas úteis a confeiteiros, doceiras artesanais e pequenos negócios — sem mensalidade para usar os recursos gratuitos.
           </p>
           <p className="text-muted-foreground text-xs leading-relaxed">
-            Apoiando e acompanhando nas redes sociais, você financia diretamente o tempo de desenvolvimento, melhorias contínuas no DoceGestor e me ajuda a <strong>construir e liberar ainda mais aplicativos úteis e gratuitos</strong> para fortalecer pequenos empreendedores!
+            Apoios voluntários ajudam a dedicar tempo ao desenvolvimento, corrigir problemas e <strong>criar novos aplicativos gratuitos</strong>. Você também pode contribuir enviando feedback ou compartilhando o projeto.
           </p>
         </div>
 
@@ -621,6 +660,9 @@ export const ConfigView: React.FC<ConfigViewProps> = ({ scrollToApoio = false })
         </div>
       </div>
 
+      </>}
+
+      {activeSection === 'negocio' && <>
       {/* 3. Identidade da Confeitaria */}
       <div
         className="rounded-3xl p-5 border shadow-sm space-y-3"
@@ -685,6 +727,9 @@ export const ConfigView: React.FC<ConfigViewProps> = ({ scrollToApoio = false })
         </div>
       </div>
 
+      </>}
+
+      {activeSection === 'precificacao' && <>
       {/* 3. Parâmetros da Calculadora de Preços */}
       <div
         className="rounded-3xl p-5 border shadow-sm space-y-4"
@@ -794,6 +839,9 @@ export const ConfigView: React.FC<ConfigViewProps> = ({ scrollToApoio = false })
         </div>
       </div>
 
+      </>}
+
+      {activeSection === 'custos' && <>
       {/* 4. Custos Fixos em R$ por Produção */}
       <div
         className="rounded-3xl p-5 border shadow-sm space-y-3"
@@ -836,7 +884,7 @@ export const ConfigView: React.FC<ConfigViewProps> = ({ scrollToApoio = false })
         </div>
 
         {/* Adicionar novo custo fixo */}
-        <div className="flex gap-2 pt-2 border-t border-border">
+        <div className="flex flex-col gap-2 pt-2 border-t border-border sm:flex-row">
           <input
             type="text"
             value={novoFixoNome}
@@ -866,6 +914,9 @@ export const ConfigView: React.FC<ConfigViewProps> = ({ scrollToApoio = false })
         </div>
       </div>
 
+      </>}
+
+      {activeSection === 'temas' && <>
       {/* 5. Temas Visuais */}
       <div
         className="rounded-3xl p-5 border shadow-sm space-y-3"
@@ -916,6 +967,9 @@ export const ConfigView: React.FC<ConfigViewProps> = ({ scrollToApoio = false })
         </div>
       </div>
 
+      </>}
+
+      {activeSection === 'instalacao' && <>
       {/* 6. Instalação & Status PWA */}
       <div
         className="rounded-3xl p-5 border shadow-sm space-y-3"
@@ -953,6 +1007,9 @@ export const ConfigView: React.FC<ConfigViewProps> = ({ scrollToApoio = false })
         </button>
       </div>
 
+      </>}
+
+      {activeSection === 'nuvem' && <>
       {/* 7. Gestão de Dados & Backup em Arquivo JSON Local */}
       <div
         className="rounded-3xl p-5 border shadow-sm space-y-3"
@@ -1013,6 +1070,8 @@ export const ConfigView: React.FC<ConfigViewProps> = ({ scrollToApoio = false })
           </button>
         </div>
       </div>
+
+      </>}
 
       {/* Modal PWA */}
       <PWAInstallModal

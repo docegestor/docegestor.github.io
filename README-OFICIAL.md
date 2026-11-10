@@ -23,10 +23,10 @@ O app já foi compilado com `base: '/app/'`, portanto seus scripts, ícones, man
 cd app-source
 npm install
 npm run lint
-npm run build -- --outDir ../app
+npm run build
 ```
 
-Em seguida, faça commit da pasta `app/` compilada e do código-fonte alterado.
+O build limpa e recria a pasta `app/` compilada, evitando que arquivos antigos permaneçam no deploy. Em seguida, faça commit dela e do código-fonte alterado.
 
 ## Feedback público
 
@@ -38,4 +38,4 @@ O app mantém os dados principais no armazenamento local do aparelho. A sincroni
 
 ## Redes sociais
 
-O site usa o Instagram público `@saulomgg`. Se o perfil mudar, atualize os links em `index.html` e nas páginas de apoio/feedback.
+O site usa o Instagram público `@saulo_mgg`. Se o perfil mudar, atualize os links em `index.html` e nas páginas de apoio/feedback.

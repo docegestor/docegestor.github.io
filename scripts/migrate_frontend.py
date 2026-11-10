@@ -9,7 +9,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE_URL = "https://docegestor.github.io"
-MARKET_URL = "https://www.mercadolivre.com.br/docegestor-sistema-para-confeitaria--precificacao-e-vendas/up/MLBU4686356819?pdp_filters=item_id:MLB7401439782"
+APP_URL = "/app/"
 TELEGRAM_URL = "https://t.me/docelucro"
 WHATSAPP_URL = "https://wa.me/5511999999999"
 
@@ -26,12 +26,12 @@ def nav(active: str = "") -> str:
     )
     return f'''<header class="site-header"><div class="site-header-inner">
       <a class="site-brand" href="/"><span class="brand-mark">DG</span><span>DoceGestor</span></a>
-      <nav class="site-nav" aria-label="Navegação principal">{items}<a class="nav-cta" href="{MARKET_URL}" target="_blank" rel="sponsored noopener">Conhecer o app</a></nav>
+      <nav class="site-nav" aria-label="Navegação principal">{items}<a class="nav-cta" href="{APP_URL}">Abrir o app</a></nav>
     </div></header>'''
 
 
 def footer() -> str:
-    return f'''<footer class="site-footer"><div class="footer-grid"><div><a class="footer-brand" href="/"><span class="brand-mark">DG</span><span>DoceGestor</span></a><p>Gestão, receitas e recursos para confeiteiras.</p></div><div><h3>Explorar</h3><a href="/">O app</a><a href="/blog/">Blog</a><a href="/receitas/">Receitas</a><a href="/ebooks/">E-books</a></div><div><h3>Comunidade</h3><a href="{WHATSAPP_URL}" target="_blank" rel="noopener">Grupo no WhatsApp</a></div><div><h3>Comprar</h3><a href="{MARKET_URL}" target="_blank" rel="sponsored noopener">Comprar no Mercado Livre</a></div></div><div class="footer-bottom"><span>© 2026 DoceGestor · Dados locais no seu aparelho</span><span>Desenvolvido por <a href="https://saulomgg.github.io" target="_blank" rel="noopener">Saulo</a></span></div></footer>'''
+    return f'''<footer class="site-footer"><div class="footer-grid"><div><a class="footer-brand" href="/"><span class="brand-mark">DG</span><span>DoceGestor</span></a><p>Gestão, receitas e recursos para confeiteiras.</p></div><div><h3>Explorar</h3><a href="{APP_URL}">Abrir o app</a><a href="/blog/">Blog</a><a href="/receitas/">Receitas</a><a href="/ebooks/">E-books</a></div><div><h3>Comunidade</h3><a href="{WHATSAPP_URL}" target="_blank" rel="noopener">Grupo no WhatsApp</a></div><div><h3>Projeto</h3><a href="/apoio/">Apoiar o projeto</a><a href="https://github.com/docegestor/docegestor.github.io" target="_blank" rel="noopener noreferrer">Código aberto no GitHub</a></div></div><div class="footer-bottom"><span>© 2026 DoceGestor · Dados locais no seu aparelho</span><span>Desenvolvido por <a href="https://saulomgg.github.io" target="_blank" rel="noopener">Saulo</a></span></div></footer>'''
 
 def community_strip() -> str:
     return f'''<aside class="community-strip" aria-label="Comunidade DoceGestor"><span><strong>Doce &amp; Lucro</strong> · ideias práticas para sua confeitaria.</span><a href="{TELEGRAM_URL}" target="_blank" rel="noopener">Entrar no canal <span aria-hidden="true">→</span></a></aside>'''

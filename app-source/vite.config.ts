@@ -32,6 +32,7 @@ export default defineConfig(() => {
           orientation: 'portrait',
           start_url: '/app/',
           scope: '/app/',
+          lang: 'pt-BR',
           categories: ['business', 'finance', 'food'],
           icons: [
             {
@@ -105,6 +106,10 @@ export default defineConfig(() => {
         },
       }),
     ],
+    build: {
+      outDir: '../app',
+      emptyOutDir: true,
+    },
     resolve: {
       alias: {
         '@': path.resolve(__dirname, '.'),

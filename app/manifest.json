@@ -1,42 +1,46 @@
 {
-  "id": "/",
+  "id": "/app/",
   "name": "DoceGestor — Gestão de Confeitaria",
   "short_name": "DoceGestor",
   "description": "Calcule preços justos, registre vendas, gerencie estoque e acompanhe o lucro real da sua confeitaria.",
-  "start_url": "/",
-  "scope": "/",
+  "start_url": "/app/",
+  "scope": "/app/",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#FFF8F0",
   "theme_color": "#3D2314",
-  "categories": ["business", "finance", "food"],
+  "categories": [
+    "business",
+    "finance",
+    "food"
+  ],
   "icons": [
     {
-      "src": "/icon-192.png",
+      "src": "/app/icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/icon-512.png",
+      "src": "/app/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/icon-maskable-512.png",
+      "src": "/app/icon-maskable-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
     },
     {
-      "src": "/icon-192.svg",
+      "src": "/app/icon-192.svg",
       "sizes": "192x192",
       "type": "image/svg+xml",
       "purpose": "any"
     },
     {
-      "src": "/icon-512.svg",
+      "src": "/app/icon-512.svg",
       "sizes": "512x512",
       "type": "image/svg+xml",
       "purpose": "any"
@@ -47,29 +51,50 @@
       "name": "Calcular Preço",
       "short_name": "Calcular",
       "description": "Calcular preço de custo e venda",
-      "url": "/calcular",
-      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+      "url": "/app/#calcular",
+      "icons": [
+        {
+          "src": "/app/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
     },
     {
       "name": "Nova Venda",
       "short_name": "Vendas",
       "description": "Registrar nova venda ou encomenda",
-      "url": "/vendas",
-      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+      "url": "/app/#vendas",
+      "icons": [
+        {
+          "src": "/app/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
     },
     {
       "name": "Minhas Receitas",
       "short_name": "Receitas",
       "description": "Livro de receitas e fichas técnicas",
-      "url": "/receitas",
-      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+      "url": "/app/#receitas",
+      "icons": [
+        {
+          "src": "/app/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
     },
     {
       "name": "Estoque de Insumos",
       "short_name": "Insumos",
       "description": "Preços e compras de insumos",
-      "url": "/insumos",
-      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+      "url": "/app/#insumos",
+      "icons": [
+        {
+          "src": "/app/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
     }
-  ]
+  ],
+  "lang": "pt-BR"
 }
