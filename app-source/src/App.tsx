@@ -64,7 +64,7 @@ function AppContent() {
 
   return (
     <div
-      className="min-h-screen transition-colors duration-200"
+      className="min-h-screen w-full max-w-full overflow-x-clip transition-colors duration-200"
       style={{
         backgroundColor: currentTheme.bgPrimary,
         color: currentTheme.textMain,
@@ -73,7 +73,7 @@ function AppContent() {
       <Header />
       <OfflineIndicator />
 
-      <main className="max-w-md sm:max-w-2xl lg:max-w-4xl mx-auto px-4 pt-4 pb-28">
+      <main className="w-full min-w-0 max-w-md sm:max-w-2xl lg:max-w-4xl mx-auto px-4 pt-4 pb-28">
         {currentTab === 'inicio' && <HomeView onNavigate={handleSelectTab} />}
         {currentTab === 'calcular' && (
           <CalculadoraView

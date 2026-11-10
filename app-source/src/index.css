@@ -23,16 +23,25 @@
   }
 
   html {
-    min-width: 320px;
-    overflow-x: clip;
+    width: 100%;
+    max-width: 100%;
+    /* `hidden` no html (propaga para o viewport) funciona em todos os navegadores móveis;
+       `clip` sozinho não é suportado no iOS < 16 e não impede o arrasto lateral em alguns Androids. */
+    overflow-x: hidden;
+    /* Bloqueia o arrasto horizontal da página, mantendo rolagem vertical e pinça-zoom. */
+    touch-action: pan-y pinch-zoom;
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
   }
 
   body {
-    min-width: 320px;
+    width: 100%;
+    max-width: 100%;
     min-height: 100vh;
+    min-height: 100dvh;
     margin: 0;
+    /* `clip` não cria contêiner de rolagem, então o header `sticky` continua funcionando. */
     overflow-x: clip;
     background-color: var(--bg-primary);
     color: var(--text-main);
@@ -63,6 +72,40 @@
   button {
     touch-action: manipulation;
   }
+
+  #root {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: clip;
+  }
+
+  img,
+  svg,
+  video,
+  canvas {
+    max-width: 100%;
+  }
+
+  select {
+    text-overflow: ellipsis;
+  }
+}
+
+/* iOS dá zoom automático ao focar campos com fonte < 16px e a página fica "solta"
+   para os lados. Em telas pequenas, forçamos 16px nos campos de formulário. */
+@media (max-width: 767px) {
+  input:not([type='checkbox']):not([type='radio']):not([type='range']):not([type='color']),
+  select,
+  textarea {
+    font-size: 16px;
+  }
+}
+
+/* Textos longos (e-mail, chave PIX, nomes de insumos) quebram em vez de alargar a página. */
+main {
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 /* Safe-area utilities for devices with a home indicator or notch. */
