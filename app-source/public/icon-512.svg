@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4A2818"/>
+      <stop offset="50%" stop-color="#3D2314"/>
+      <stop offset="100%" stop-color="#28140B"/>
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFE8B3"/>
+      <stop offset="50%" stop-color="#E5B25D"/>
+      <stop offset="100%" stop-color="#C58D37"/>
+    </linearGradient>
+    <linearGradient id="frostingGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF8F0"/>
+      <stop offset="60%" stop-color="#F5D8C3"/>
+      <stop offset="100%" stop-color="#E8BFA3"/>
+    </linearGradient>
+    <linearGradient id="cupGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#E5B25D"/>
+      <stop offset="100%" stop-color="#8C531B"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#000000" flood-opacity="0.45"/>
+    </filter>
+  </defs>
+
+  <!-- Background rounded squircle with safe padding -->
+  <rect width="512" height="512" rx="112" fill="url(#bgGrad)"/>
+  <rect x="16" y="16" width="480" height="480" rx="96" fill="none" stroke="url(#goldGrad)" stroke-width="4" stroke-opacity="0.3"/>
+
+  <!-- Main Luxury Cupcake / Confectionery Symbol -->
+  <g filter="url(#shadow)">
+    <!-- Plate / Stand Glow -->
+    <ellipse cx="256" cy="390" rx="150" ry="18" fill="#000000" opacity="0.35"/>
+    <ellipse cx="256" cy="386" rx="120" ry="12" fill="url(#goldGrad)" opacity="0.25"/>
+
+    <!-- Cupcake Liner / Base -->
+    <path d="M 160 270 L 186 380 Q 256 395 326 380 L 352 270 Z" fill="url(#cupGrad)"/>
+    <!-- Liner pleats -->
+    <path d="M 195 270 L 210 384 M 235 270 L 240 388 M 277 270 L 272 388 M 317 270 L 302 384" stroke="#5C3410" stroke-width="3" stroke-linecap="round" opacity="0.6"/>
+
+    <!-- Frosting Layers (Swirled luxury bakery icing) -->
+    <!-- Bottom swirl -->
+    <path d="M 130 270 C 130 230, 200 230, 220 240 C 240 220, 280 220, 300 240 C 330 230, 382 235, 382 270 C 382 290, 350 295, 320 292 C 280 296, 230 296, 190 292 C 160 295, 130 290, 130 270 Z" fill="url(#frostingGrad)"/>
+    
+    <!-- Middle swirl -->
+    <path d="M 162 232 C 162 195, 220 190, 250 205 C 280 190, 350 195, 350 232 C 345 250, 310 252, 280 248 C 250 252, 220 252, 190 248 C 170 250, 162 245, 162 232 Z" fill="url(#frostingGrad)"/>
+
+    <!-- Top swirl -->
+    <path d="M 200 195 C 200 160, 240 150, 256 160 C 272 150, 312 160, 312 195 C 300 210, 280 212, 256 210 C 232 212, 212 210, 200 195 Z" fill="url(#frostingGrad)"/>
+
+    <!-- Top tip swirl with cherry/golden star -->
+    <path d="M 242 165 C 242 140, 256 128, 256 125 C 258 132, 270 145, 268 165 Z" fill="#FFF8F0"/>
+
+    <!-- Golden Crown / Star on top -->
+    <circle cx="256" cy="115" r="16" fill="url(#goldGrad)"/>
+    <path d="M 256 90 L 260 106 L 276 110 L 262 120 L 266 136 L 256 126 L 246 136 L 250 120 L 236 110 L 252 106 Z" fill="url(#goldGrad)" filter="url(#shadow)"/>
+
+    <!-- Golden sprinkles / sparkles -->
+    <circle cx="205" cy="225" r="4" fill="url(#goldGrad)"/>
+    <circle cx="295" cy="215" r="4.5" fill="url(#goldGrad)"/>
+    <circle cx="230" cy="180" r="3.5" fill="url(#goldGrad)"/>
+    <circle cx="280" cy="175" r="3.5" fill="url(#goldGrad)"/>
+    <circle cx="175" cy="265" r="5" fill="url(#goldGrad)"/>
+    <circle cx="335" cy="260" r="4.5" fill="url(#goldGrad)"/>
+    <circle cx="256" cy="245" r="4" fill="url(#goldGrad)"/>
+  </g>
+</svg>

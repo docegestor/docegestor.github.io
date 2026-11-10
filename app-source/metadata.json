@@ -1,0 +1,6 @@
+{
+  "name": "DoceGestor — Gestão de Confeitaria PWA",
+  "description": "App PWA completo para confeitarias: calculadora de preços de venda, fichas técnicas, estoque de insumos, gestão de encomendas e controle financeiro offline.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
