@@ -450,7 +450,7 @@ export const ReceitasView: React.FC<ReceitasViewProps> = ({ onNavigate }) => {
               return acc + item.custo;
             }, 0);
 
-            const custoMaoObraRec = rec.tempoPreparoHoras * (config.horaTrabalho || 18);
+            const custoMaoObraRec = rec.tempoPreparoHoras * (config.horaTrabalho ?? 18);
             const custoTotalRec = custoInsumosAtualizado + custoMaoObraRec;
             const custoUnitarioRec = rec.rendimentoQtd > 0 ? custoTotalRec / rec.rendimentoQtd : custoTotalRec;
 

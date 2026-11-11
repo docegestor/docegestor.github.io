@@ -34,8 +34,8 @@ export const CalculadoraView: React.FC<CalculadoraViewProps> = ({
   const [rendimentoUnidade, setRendimentoUnidade] = useState('unidades');
   const [tempoHoras, setTempoHoras] = useState<number>(1.5);
   const [margemLucroPct, setMargemLucroPct] = useState<number>(80); // 80% lucro
-  const [multiplicador, setMultiplicador] = useState<number>(config.multiplicadorPadrao || 3.0);
-  const [margemDesperdicioPct, setMargemDesperdicioPct] = useState<number>(config.margemSegurancaPct || 5.0);
+  const [multiplicador, setMultiplicador] = useState<number>(config.multiplicadorPadrao ?? 3.0);
+  const [margemDesperdicioPct, setMargemDesperdicioPct] = useState<number>(config.margemSegurancaPct ?? 5.0);
   const [insumosSelecionados, setInsumosSelecionados] = useState<InsumoCalculo[]>([]);
 
   // Input states para adicionar insumo da despensa
@@ -83,13 +83,13 @@ export const CalculadoraView: React.FC<CalculadoraViewProps> = ({
   const custoInsumosComPerda = custoInsumosBruto + custoDesperdicio;
 
   // Custos fixos % (ex: 10% para gás, água, energia)
-  const custoFixosPctValor = custoInsumosComPerda * ((config.custosFixosPct || 10) / 100);
+  const custoFixosPctValor = custoInsumosComPerda * ((config.custosFixosPct ?? 10) / 100);
 
   // Custos fixos em R$ (itens configurados na aba config)
   const custoFixosValor = config.custosFixosPersonais.reduce((acc, c) => acc + c.valor, 0);
 
   // Mão de obra (Horas de trabalho x valor da hora configurada)
-  const custoMaoObra = tempoHoras * (config.horaTrabalho || 18);
+  const custoMaoObra = tempoHoras * (config.horaTrabalho ?? 18);
 
   // Custo Total e Unitário
   const custoTotal = custoInsumosComPerda + custoFixosPctValor + custoFixosValor + custoMaoObra;
@@ -617,7 +617,7 @@ ${config.chavePix ? `💳 Chave PIX: ${config.chavePix}` : ''}`;
             </div>
             <input
               type="range"
-              min="2.0"
+              min="0"
               max="5.0"
               step="0.1"
               value={multiplicador}

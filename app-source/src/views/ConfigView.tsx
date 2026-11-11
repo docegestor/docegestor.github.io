@@ -751,11 +751,11 @@ export const ConfigView: React.FC<ConfigViewProps> = ({ scrollToApoio = false })
             <div className="flex items-center gap-2">
               <input
                 type="number"
-                min="5"
+                min="0"
                 step="1"
                 value={config.horaTrabalho}
                 onChange={(e) =>
-                  updateConfig({ horaTrabalho: Math.max(1, parseFloat(e.target.value) || 15) })
+                  updateConfig({ horaTrabalho: Math.max(0, parseFloat(e.target.value) || 0) })
                 }
                 className="w-32 px-3.5 py-2.5 rounded-xl border text-sm font-bold focus:outline-none"
                 style={{ backgroundColor: currentTheme.bgPrimary, borderColor: currentTheme.border }}
@@ -776,13 +776,13 @@ export const ConfigView: React.FC<ConfigViewProps> = ({ scrollToApoio = false })
             <div className="flex items-center gap-2">
               <input
                 type="number"
-                min="1.5"
+                min="0"
                 max="6"
                 step="0.1"
                 value={config.multiplicadorPadrao}
                 onChange={(e) =>
                   updateConfig({
-                    multiplicadorPadrao: Math.max(1.5, parseFloat(e.target.value) || 3.0),
+                    multiplicadorPadrao: Math.max(0, parseFloat(e.target.value) || 0),
                   })
                 }
                 className="w-32 px-3.5 py-2.5 rounded-xl border text-sm font-bold focus:outline-none"
@@ -823,11 +823,11 @@ export const ConfigView: React.FC<ConfigViewProps> = ({ scrollToApoio = false })
             </label>
             <input
               type="number"
-              min="500"
+              min="0"
               step="100"
               value={config.metaVendasMensal}
               onChange={(e) =>
-                updateConfig({ metaVendasMensal: Math.max(100, parseFloat(e.target.value) || 3000) })
+                updateConfig({ metaVendasMensal: Math.max(0, parseFloat(e.target.value) || 0) })
               }
               className="w-full px-3.5 py-2.5 rounded-xl border text-sm font-bold focus:outline-none"
               style={{ backgroundColor: currentTheme.bgPrimary, borderColor: currentTheme.border }}

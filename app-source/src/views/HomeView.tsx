@@ -43,8 +43,8 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate }) => {
   const margemReal = faturamentoMes > 0 ? (lucroMes / faturamentoMes) * 100 : 0;
 
   // Meta mensal
-  const meta = config.metaVendasMensal || 3000;
-  const percentMeta = Math.min(100, Math.round((faturamentoMes / meta) * 100));
+  const meta = config.metaVendasMensal ?? 3000;
+  const percentMeta = meta > 0 ? Math.min(100, Math.round((faturamentoMes / meta) * 100)) : 0;
 
   // Encomendas pendentes
   const encomendasPendentes = vendas.filter(

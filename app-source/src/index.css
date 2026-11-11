@@ -105,7 +105,7 @@
 /* Textos longos (e-mail, chave PIX, nomes de insumos) quebram em vez de alargar a página. */
 main {
   min-width: 0;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 /* Safe-area utilities for devices with a home indicator or notch. */
