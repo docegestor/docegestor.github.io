@@ -1,5 +1,42 @@
 [
   {
+    "slug": "bolo-de-pote-de-chocolate-com-creme-cremoso-de-coco",
+    "title": "Bolo de Pote de Chocolate com Creme Cremoso de Coco",
+    "description": "Delicioso bolo de pote de chocolate macio intercalado com um aveludado creme de coco. Perfeito para vender por encomenda ou servir em festas.",
+    "category": "Bolos",
+    "published": "2026-11-11",
+    "source_name": "Receita autoral DoceGestor",
+    "source_url": "",
+    "ingredients": [
+      "3 ovos médios",
+      "200g de açúcar refinado",
+      "120ml de óleo de girassol",
+      "240ml de leite integral",
+      "60g de cacau em pó 50%",
+      "180g de farinha de trigo",
+      "10g de fermento em pó",
+      "395g de leite condensado",
+      "200ml de leite de coco",
+      "100g de coco ralado úmido e adoçado",
+      "15g de manteiga sem sal"
+    ],
+    "steps": [
+      "Em uma batedeira, bata os 3 ovos médios com os 200g de açúcar refinado por 5 minutos até obter um creme claro e fofo.",
+      "Adicione os 120ml de óleo de girassol e os 240ml de leite integral, misturando delicadamente com um fouet.",
+      "Peneire os 60g de cacau em pó 50% e os 180g de farinha de trigo sobre a mistura, incorporando suavemente. Por último, adicione os 10g de fermento em pó.",
+      "Despeje a massa em uma assadeira untada e asse em forno pré-aquecido a 180°C por 30 minutos ou até passar no teste do palito. Deixe esfriar e esfarele a massa.",
+      "Para o creme de coco, junte em uma panela os 395g de leite condensado, os 200ml de leite de coco, os 100g de coco ralado e os 15g de manteiga sem sal.",
+      "Leve ao fogo médio, mexendo sempre, por cerca de 10 minutos até atingir o ponto de brigadeiro mole de colher. Deixe esfriar completamente.",
+      "Nos potes individuais de 200ml, monte camadas alternando o bolo esfarelado e o creme de coco, finalizando com o creme no topo.",
+      "Tampe os potes e leve à geladeira por no mínimo 4 horas antes de servir ou comercializar."
+    ],
+    "tips": [
+      "Mantenha os potes refrigerados por até 5 dias para preservar o frescor e a textura do creme.",
+      "Para um acabamento profissional na venda, utilize sacos de confeitar na montagem das camadas e decore a tampa com fita e etiqueta de validade.",
+      "Regue levemente as camadas de bolo com uma calda de leite com leite condensado para deixar o bolo ainda mais molhadinho."
+    ]
+  },
+  {
     "slug": "bolo-de-pote-prestigio-artesanal-com-creme-de-coco",
     "title": "Bolo de Pote Prestígio Artesanal com Creme de Coco",
     "description": "Delicioso bolo de pote feito com pão de ló de cacau fofinho, recheado com creme aveludado de coco e ganache de chocolate meio amargo. Perfeito para vender.",
