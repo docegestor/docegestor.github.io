@@ -27,37 +27,13 @@
     <section class="page-hero"><div class="wrap support-page-intro"><div><p class="eyebrow"><span class="eyebrow-dot"></span> Apoio voluntário, sem obrigação</p><h1>Ajude boas ideias a continuarem gratuitas.</h1><p>O DoceGestor é um projeto independente e de código aberto. Se a ferramenta já ajudou sua rotina, uma contribuição voluntária pode apoiar o tempo de desenvolvimento e abrir caminho para novos apps gratuitos.</p></div><div class="support-stamp" aria-hidden="true">feito<br>em<br>comunidade</div></div></section>
     <section class="section support-content"><div class="wrap">
       <article class="support-card"><p class="eyebrow">O que o seu apoio torna possível</p><h2>Mais cuidado com o app. Mais ferramentas para quem empreende.</h2><p>As contribuições ajudam a sustentar o desenvolvimento independente: corrigir problemas, melhorar acessibilidade e experiência no celular, documentar o projeto, testar ideias e criar outros aplicativos úteis para pequenos negócios. O apoio não compra acesso, não cria mensalidade e não altera a privacidade dos dados da sua confeitaria.</p>
-        <div class="pix-box"><div><small>Chave Pix · e-mail</small><strong id="pix-key">saulomg2@hotmail.com</strong><p>Abra o app do seu banco, escolha Pix por e-mail e contribua com o valor que fizer sentido para você.</p></div><button class="copy-button" id="copy-pix" type="button" aria-describedby="copy-feedback">Copiar chave Pix</button></div><p class="copy-feedback" id="copy-feedback" role="status" aria-live="polite"></p>
+        <div class="pix-box"><div><small>Link de apoio · Mercado Pago</small><strong>link.mercadopago.com.br/saulomgg</strong><p>Contribua com o valor que fizer sentido para você. O apoio é voluntário e o DoceGestor continua gratuito.</p></div><a class="copy-button" href="https://link.mercadopago.com.br/saulomgg" target="_blank" rel="noopener noreferrer">Abrir Link de apoio ↗</a></div><p class="copy-feedback" role="status" aria-live="polite">O apoio ajuda a manter o app gratuito e a criar novas ferramentas.</p>
         <div class="support-note"><article><b>Se puder, contribua</b><p>Qualquer valor é bem-vindo. Não há valor mínimo, recorrência ou obrigação.</p></article><article><b>Sem doação? Tudo bem.</b><p>Compartilhar o app, enviar feedback ou acompanhar o projeto também ajuda muito.</p></article><article><b>Transparência primeiro</b><p>O código é público no GitHub e as melhorias acompanham o retorno de quem usa.</p></article></div>
         <div class="support-links"><a href="/app/">Abrir o DoceGestor <span aria-hidden="true">→</span></a><a href="https://github.com/docegestor/docegestor.github.io" target="_blank" rel="noopener noreferrer">Ver o código no GitHub <span aria-hidden="true">↗</span></a><a href="/feedback/">Enviar uma sugestão <span aria-hidden="true">→</span></a><a href="https://www.instagram.com/saulo_mgg/" target="_blank" rel="noopener noreferrer">Instagram @saulo_mgg <span aria-hidden="true">↗</span></a></div>
       </article>
     </div></section>
   </main>
   <footer class="footer"><div class="wrap footer-bottom"><span>© 2026 DoceGestor · Apoio voluntário e código aberto</span><span>Desenvolvido por <a href="https://saulomgg.github.io" target="_blank" rel="noopener noreferrer">Saulomgg</a> · <a href="/app/">Abrir o app</a></span></div></footer>
-  <script>
-    const button = document.getElementById('copy-pix');
-    const key = document.getElementById('pix-key').textContent.trim();
-    const status = document.getElementById('copy-feedback');
-    button.addEventListener('click', async () => {
-      try {
-        await navigator.clipboard.writeText(key);
-        status.textContent = 'Chave Pix copiada. Obrigado por apoiar o projeto!';
-        button.textContent = 'Chave copiada ✓';
-      } catch {
-        const input = document.createElement('textarea');
-        input.value = key;
-        input.setAttribute('readonly', '');
-        input.style.position = 'fixed';
-        input.style.opacity = '0';
-        document.body.appendChild(input);
-        input.select();
-        const copied = document.execCommand('copy');
-        input.remove();
-        status.textContent = copied ? 'Chave Pix copiada. Obrigado por apoiar o projeto!' : 'Não foi possível copiar automaticamente. Selecione e copie a chave acima.';
-        button.textContent = copied ? 'Chave copiada ✓' : 'Tente copiar novamente';
-      }
-      window.setTimeout(() => { button.textContent = 'Copiar chave Pix'; }, 3000);
-    });
-  </script>
+
 </body>
 </html>

@@ -72,7 +72,7 @@ export const ConfigView: React.FC<ConfigViewProps> = ({ scrollToApoio = false })
   const [showInstallModal, setShowInstallModal] = useState(false);
   const [activeSection, setActiveSection] = useState<SettingsSection>('negocio');
 
-  // Apoio ao Projeto & PIX
+  // Apoio ao Projeto
   const apoioRef = React.useRef<HTMLDivElement>(null);
   const [highlightApoio, setHighlightApoio] = useState(false);
   const [copiouPix, setCopiouPix] = useState(false);
@@ -103,9 +103,9 @@ export const ConfigView: React.FC<ConfigViewProps> = ({ scrollToApoio = false })
 
   // Copiar Chave PIX
   const handleCopiarPix = async () => {
-    const chave = 'saulomg2@hotmail.com';
+    const linkApoio = 'https://link.mercadopago.com.br/saulomgg';
     try {
-      await navigator.clipboard.writeText(chave);
+      window.open(linkApoio, '_blank', 'noopener,noreferrer');
       setCopiouPix(true);
       confetti({
         particleCount: 80,
@@ -114,12 +114,7 @@ export const ConfigView: React.FC<ConfigViewProps> = ({ scrollToApoio = false })
       });
       setTimeout(() => setCopiouPix(false), 3500);
     } catch {
-      const textarea = document.createElement('textarea');
-      textarea.value = chave;
-      document.body.appendChild(textarea);
-      textarea.select();
-      document.execCommand('copy');
-      document.body.removeChild(textarea);
+      window.location.href = linkApoio;
       setCopiouPix(true);
       confetti({
         particleCount: 80,
@@ -586,13 +581,13 @@ export const ConfigView: React.FC<ConfigViewProps> = ({ scrollToApoio = false })
             <div>
               <div className="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-muted-foreground">
                 <Coffee size={13} className="text-[#D4A574]" />
-                <span>Chave PIX Oficial (Tipo: E-mail)</span>
+                <span>Link de apoio oficial · Mercado Pago</span>
               </div>
               <div className="font-mono text-sm sm:text-base font-bold text-gray-900 select-all tracking-wide mt-0.5">
-                saulomg2@hotmail.com
+                link.mercadopago.com.br/saulomgg
               </div>
               <p className="text-[11px] text-muted-foreground">
-                Copie a chave e cole no aplicativo do seu banco na opção <strong>PIX Chave E-mail</strong>.
+                O apoio é voluntário e acontece pelo Mercado Pago. O app continua gratuito para todos.
               </p>
             </div>
 
@@ -602,7 +597,7 @@ export const ConfigView: React.FC<ConfigViewProps> = ({ scrollToApoio = false })
               style={{ backgroundColor: copiouPix ? '#2E7D32' : '#C85A6E' }}
             >
               {copiouPix ? <Check size={16} /> : <Copy size={16} />}
-              <span>{copiouPix ? '✓ Chave Copiada com Sucesso!' : 'Copiar Chave PIX (E-mail)'}</span>
+              <span>{copiouPix ? '✓ Link aberto' : 'Abrir Link de apoio'}</span>
             </button>
           </div>
 
