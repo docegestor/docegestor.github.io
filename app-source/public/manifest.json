@@ -1,8 +1,8 @@
 {
   "id": "/app/",
-  "name": "DoceGestor — Gestão de Confeitaria",
+  "name": "DoceGestor — Bakery management",
   "short_name": "DoceGestor",
-  "description": "Calcule preços justos, registre vendas, gerencie estoque e acompanhe o lucro real da sua confeitaria.",
+  "description": "Price products, organize recipes and orders, and follow your bakery results privately, even offline.",
   "start_url": "/app/",
   "scope": "/app/",
   "display": "standalone",
@@ -48,9 +48,9 @@
   ],
   "shortcuts": [
     {
-      "name": "Calcular Preço",
+      "name": "Calculate price",
       "short_name": "Calcular",
-      "description": "Calcular preço de custo e venda",
+      "description": "Calculate cost and sale price",
       "url": "/app/#calcular",
       "icons": [
         {
@@ -60,9 +60,9 @@
       ]
     },
     {
-      "name": "Nova Venda",
+      "name": "New sale",
       "short_name": "Vendas",
-      "description": "Registrar nova venda ou encomenda",
+      "description": "Register a new sale or order",
       "url": "/app/#vendas",
       "icons": [
         {
@@ -72,9 +72,9 @@
       ]
     },
     {
-      "name": "Minhas Receitas",
+      "name": "My recipes",
       "short_name": "Receitas",
-      "description": "Livro de receitas e fichas técnicas",
+      "description": "Recipe book and technical sheets",
       "url": "/app/#receitas",
       "icons": [
         {
@@ -84,9 +84,9 @@
       ]
     },
     {
-      "name": "Estoque de Insumos",
+      "name": "Supplies inventory",
       "short_name": "Insumos",
-      "description": "Preços e compras de insumos",
+      "description": "Supply prices and purchases",
       "url": "/app/#insumos",
       "icons": [
         {
@@ -96,5 +96,5 @@
       ]
     }
   ],
-  "lang": "pt-BR"
+  "lang": "en-US"
 }

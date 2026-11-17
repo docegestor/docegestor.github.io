@@ -22,17 +22,17 @@ export default defineConfig(() => {
         ],
         manifest: {
           id: '/app/',
-          name: 'DoceGestor — Gestão de Confeitaria',
+          name: 'DoceGestor — Bakery management',
           short_name: 'DoceGestor',
           description:
-            'Calcule preços justos, registre vendas, gerencie estoque e acompanhe o lucro real da sua confeitaria.',
+            'Price products, organize recipes and orders, and follow your bakery results privately, even offline.',
           theme_color: '#3D2314',
           background_color: '#FFF8F0',
           display: 'standalone',
           orientation: 'portrait',
           start_url: '/app/',
           scope: '/app/',
-          lang: 'pt-BR',
+          lang: 'en-US',
           categories: ['business', 'finance', 'food'],
           icons: [
             {

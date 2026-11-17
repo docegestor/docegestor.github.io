@@ -11,9 +11,11 @@ import { ReceitasView } from './views/ReceitasView';
 import { InsumosView } from './views/InsumosView';
 import { BalancoView } from './views/BalancoView';
 import { ConfigView } from './views/ConfigView';
+import { I18nProvider, useI18n } from './i18n';
 
 function AppContent() {
   const { currentTheme } = useApp();
+  const { t } = useI18n();
 
   // Parse initial tab from URL hash if available
   const getInitialTab = () => {
@@ -96,7 +98,7 @@ function AppContent() {
         {/* Footer solicitado */}
         <footer className="mt-8 pt-4 pb-4 text-center border-t space-y-2.5" style={{ borderColor: currentTheme.border }}>
           <p className="text-xs font-medium" style={{ color: currentTheme.textMuted }}>
-            DoceGestor App v2.5 · Privado por padrão · Desenvolvido por{' '}
+            {t('appVersion')} · {t('privateByDefault')} · {t('developedBy')}{' '}
             <a
               href="https://saulomgg.github.io"
               target="_blank"
@@ -110,10 +112,10 @@ function AppContent() {
 
           <div className="flex flex-wrap items-center justify-center gap-2">
             <a href="https://docegestor.github.io/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold transition hover:scale-105 active:scale-95 shadow-xs border" style={{ backgroundColor: currentTheme.cardBg, borderColor: currentTheme.border, color: currentTheme.textMain }}>
-              Site oficial
+              {t('officialSite')}
             </a>
             <a href="https://github.com/docegestor/docegestor.github.io/issues/new" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold transition hover:scale-105 active:scale-95 shadow-xs border" style={{ backgroundColor: currentTheme.cardBg, borderColor: currentTheme.border, color: currentTheme.textMain }}>
-              Feedback e melhorias
+              {t('feedback')}
             </a>
             <button
               onClick={() => handleSelectTab('config', { scrollToApoio: true })}
@@ -126,7 +128,7 @@ function AppContent() {
               title="Apoie a evolução do projeto e criação de apps gratuitos"
             >
               <span className="text-rose-500">💖</span>
-              <span>Apoie a evolução do projeto (Chave PIX & Redes)</span>
+              <span>{t('support')}</span>
             </button>
           </div>
         </footer>
@@ -140,7 +142,9 @@ function AppContent() {
 export default function App() {
   return (
     <AppProvider>
-      <AppContent />
+      <I18nProvider>
+        <AppContent />
+      </I18nProvider>
     </AppProvider>
   );
 }
