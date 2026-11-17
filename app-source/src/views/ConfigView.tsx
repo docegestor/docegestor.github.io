@@ -36,7 +36,6 @@ import { useApp, THEMES } from '../context/AppContext';
 import { usePWAInstall } from '../hooks/usePWAInstall';
 import { PWAInstallModal } from '../components/PWAInstallModal';
 import { GOOGLE_APPS_SCRIPT_CODE } from '../services/googleSheetsSync';
-import { LanguageSelect, useI18n } from '../i18n';
 
 type SettingsSection = 'nuvem' | 'apoio' | 'negocio' | 'precificacao' | 'custos' | 'temas' | 'instalacao';
 
@@ -55,7 +54,6 @@ interface ConfigViewProps {
 }
 
 export const ConfigView: React.FC<ConfigViewProps> = ({ scrollToApoio = false }) => {
-  const { t } = useI18n();
   const {
     config,
     updateConfig,
@@ -274,18 +272,17 @@ export const ConfigView: React.FC<ConfigViewProps> = ({ scrollToApoio = false })
             className="font-display text-2xl font-bold tracking-tight"
             style={{ color: currentTheme.textMain }}
           >
-            {t('settings')}
+            Configurações
           </h2>
           <p className="text-xs" style={{ color: currentTheme.textMuted }}>
-            {t('settingsSubtitle')}
+            Personalize sua confeitaria, valores e sincronização
           </p>
         </div>
 
         <div className="flex items-center gap-1.5 rounded-full border px-2.5 py-1.5 text-[10px] font-semibold" style={{ borderColor: currentTheme.border, color: currentTheme.textMuted }}>
           <ShieldCheck size={13} className="text-emerald-700" />
-          <span>{t('yourData')}</span>
+          <span>Seus dados ficam com você</span>
         </div>
-        <LanguageSelect style={{ color: currentTheme.textMain, borderColor: currentTheme.border, backgroundColor: currentTheme.cardBg }} />
       </div>
 
 

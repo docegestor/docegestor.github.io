@@ -9,7 +9,6 @@ import {
   Settings,
 } from 'lucide-react';
 import { useApp } from '../context/AppContext';
-import { useI18n } from '../i18n';
 
 interface BottomNavProps {
   currentTab: string;
@@ -18,20 +17,19 @@ interface BottomNavProps {
 
 export const BottomNav: React.FC<BottomNavProps> = ({ currentTab, onSelectTab }) => {
   const { currentTheme, vendas } = useApp();
-  const { t } = useI18n();
 
   const pedidosPendentes = vendas.filter(
     (v) => v.tipo === 'encomenda' && (v.status === 'pendente' || v.status === 'em_producao')
   ).length;
 
   const navItems = [
-    { id: 'inicio', label: t('home'), icon: Home },
-    { id: 'calcular', label: t('calculate'), icon: Calculator },
-    { id: 'vendas', label: t('sales'), icon: ShoppingBag, badge: pedidosPendentes > 0 ? pedidosPendentes : undefined },
-    { id: 'receitas', label: t('recipes'), icon: BookOpen },
-    { id: 'insumos', label: t('supplies'), icon: Package },
-    { id: 'balanco', label: t('balance'), icon: PieChart },
-    { id: 'config', label: t('settings'), icon: Settings },
+    { id: 'inicio', label: 'Início', icon: Home },
+    { id: 'calcular', label: 'Calcular', icon: Calculator },
+    { id: 'vendas', label: 'Vendas', icon: ShoppingBag, badge: pedidosPendentes > 0 ? pedidosPendentes : undefined },
+    { id: 'receitas', label: 'Receitas', icon: BookOpen },
+    { id: 'insumos', label: 'Insumos', icon: Package },
+    { id: 'balanco', label: 'Balanço', icon: PieChart },
+    { id: 'config', label: 'Config', icon: Settings },
   ];
 
   return (

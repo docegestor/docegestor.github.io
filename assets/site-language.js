@@ -1,15 +1,11 @@
 (() => {
-  const storageKey = 'docegestor-language';
-  const language = document.documentElement.lang?.startsWith('pt') ? 'pt' : document.documentElement.lang?.startsWith('es') ? 'es' : 'en';
   const select = document.querySelector('[data-language-select]');
   if (!select) return;
-  const saved = localStorage.getItem(storageKey);
-  if (saved === 'en' || saved === 'pt' || saved === 'es') select.value = saved;
+  const saved = localStorage.getItem('docegestor-language');
+  const pathLanguage = window.location.pathname.startsWith('/en/') ? 'en' : window.location.pathname.startsWith('/es/') ? 'es' : 'pt';
+  select.value = saved === 'en' || saved === 'pt' || saved === 'es' ? saved : pathLanguage;
   select.addEventListener('change', () => {
-    const next = select.value;
-    localStorage.setItem(storageKey, next);
-    const path = next === 'en' ? '/en/' : next === 'es' ? '/es/' : '/pt/';
-    window.location.href = path;
+    localStorage.setItem('docegestor-language', select.value);
+    window.location.href = select.value === 'en' ? '/en/' : select.value === 'es' ? '/es/' : '/pt/';
   });
-  select.setAttribute('aria-label', language === 'pt' ? 'Selecionar idioma' : language === 'es' ? 'Seleccionar idioma' : 'Select language');
 })();

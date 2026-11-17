@@ -4,11 +4,9 @@ import { useApp } from '../context/AppContext';
 import { usePWAInstall } from '../hooks/usePWAInstall';
 import { useOnlineStatus } from '../hooks/useOnlineStatus';
 import { PWAInstallModal } from './PWAInstallModal';
-import { LanguageSelect, useI18n } from '../i18n';
 
 export const Header: React.FC = () => {
   const { config, currentTheme } = useApp();
-  const { t } = useI18n();
   const { isInstallable, isStandalone, install } = usePWAInstall();
   const isOnline = useOnlineStatus();
   const [showInstallModal, setShowInstallModal] = useState(false);
@@ -77,21 +75,20 @@ export const Header: React.FC = () => {
                 borderColor: isOnline ? '#C8E6C9' : '#FDE68A',
               }}
               role="status"
-              aria-label={isOnline ? t('online') : t('offline')}
+              aria-label={isOnline ? 'Conectado' : 'Sem conexão'}
             >
               {isOnline ? <Wifi size={12} /> : <WifiOff size={12} />}
-              <span>{isOnline ? t('online') : t('offline')}</span>
+              <span>{isOnline ? 'Online' : 'Offline'}</span>
             </div>
-            <LanguageSelect style={{ color: currentTheme.textMain, borderColor: currentTheme.border, backgroundColor: currentTheme.cardBg }} />
             {!isStandalone && (
               <button
                 onClick={handleInstallClick}
                 className="flex min-h-9 items-center gap-1.5 rounded-xl px-2.5 py-1.5 text-[11px] font-semibold text-white shadow-sm transition hover:opacity-95 active:scale-95 sm:px-3 sm:text-xs"
                 style={{ backgroundColor: currentTheme.primary }}
-                title={t('install')}
+                title="Instalar aplicativo na tela inicial"
               >
                 <Download size={14} />
-                <span>{t('install')}</span>
+                <span>Instalar</span>
               </button>
             )}
           </div>
