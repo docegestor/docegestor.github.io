@@ -1,5 +1,42 @@
 [
   {
+    "slug": "bolo-de-pote-de-chocolate-com-creme-de-coco-supremo",
+    "title": "Bolo de Pote de Chocolate com Creme de Coco Supremo",
+    "description": "Delicioso bolo de pote de chocolate fofinho alternado com creme aveludado de coco. Perfeito para vender, encantar clientes ou servir em festas.",
+    "category": "Bolos",
+    "published": "2026-11-24",
+    "source_name": "Receita autoral DoceGestor",
+    "source_url": "",
+    "ingredients": [
+      "3 ovos inteiros",
+      "200 gramas de açúcar refinado",
+      "100 mililitros de óleo vegetal",
+      "200 mililitros de leite integral",
+      "90 gramas de cacau em pó 50%",
+      "240 gramas de farinha de trigo",
+      "10 gramas de fermento químico em pó",
+      "395 gramas de leite condensado",
+      "200 gramas de creme de leite",
+      "100 mililitros de leite de coco",
+      "100 gramas de coco ralado sem açúcar"
+    ],
+    "steps": [
+      "Bata os 3 ovos inteiros com 200 gramas de açúcar refinado e 100 mililitros de óleo vegetal na batedeira por 4 minutos até obter um creme claro.",
+      "Adicione 200 mililitros de leite integral e 90 gramas de cacau em pó 50%, misturando delicadamente até homogeneizar.",
+      "Peneire 240 gramas de farinha de trigo e 10 gramas de fermento químico em pó sobre a massa, incorporando com um fouet sem bater demais.",
+      "Despeje a massa em uma assadeira untada e asse em forno pré-aquecido a 180°C por 30 minutos ou até passar no teste do palito.",
+      "Para o recheio, junte em uma panela 395 gramas de leite condensado, 200 gramas de creme de leite, 100 mililitros de leite de coco e 100 gramas de coco ralado sem açúcar.",
+      "Cozinhe o recheio de coco em fogo médio, mexendo sempre, por cerca de 10 minutos até atingir o ponto de brigadeiro mole, depois deixe esfriar totalmente.",
+      "Esfarele o bolo assado já frio em pedaços uniformes para facilitar a montagem nos recipientes.",
+      "Monte os potes alternando camadas de massa de chocolate e camadas do creme de coco frio, finalizando com recheio e coco ralado para decorar."
+    ],
+    "tips": [
+      "Mantenha os potes refrigerados a 4°C por até 5 dias para garantir a frescura e a textura perfeita.",
+      "Utilize potes transparentes de 220ml com tampa para valorizar o visual das camadas na hora da venda.",
+      "Para um bolo ainda mais molhadinho, regue as camadas de massa com uma calda leve de leite condensado diluído em água."
+    ]
+  },
+  {
     "slug": "bolo-de-pote-de-chocolate-com-creme-cremoso-de-coco",
     "title": "Bolo de Pote de Chocolate com Creme Cremoso de Coco",
     "description": "Delicioso bolo de pote de chocolate macio intercalado com um aveludado creme de coco. Perfeito para vender por encomenda ou servir em festas.",
