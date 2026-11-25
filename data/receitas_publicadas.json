@@ -1,5 +1,42 @@
 [
   {
+    "slug": "bolo-de-pote-de-chocolate-intenso-com-cremoso-de-coco",
+    "title": "Bolo de Pote de Chocolate Intenso com Cremoso de Coco",
+    "description": "Delicioso bolo de pote com massa fofinha de chocolate e recheio cremoso de coco. Perfeito para vender por encomenda ou servir em festas.",
+    "category": "Bolos",
+    "published": "2026-11-25",
+    "source_name": "Receita autoral DoceGestor",
+    "source_url": "",
+    "ingredients": [
+      "4 unidades de ovos inteiros",
+      "200 g de açúcar refinado",
+      "120 ml de óleo vegetal",
+      "200 ml de leite integral morno",
+      "90 g de cacau em pó 50%",
+      "240 g de farinha de trigo",
+      "10 g de fermento químico em pó",
+      "395 g de leite condensado",
+      "200 g de creme de leite",
+      "200 ml de leite de coco",
+      "100 g de coco ralado sem açúcar"
+    ],
+    "steps": [
+      "Em uma batedeira, bata 4 unidades de ovos inteiros com 200 g de açúcar refinado por 5 minutos até formar um creme claro.",
+      "Adicione 120 ml de óleo vegetal e 200 ml de leite integral morno, batendo em velocidade baixa para homogeneizar.",
+      "Peneire 240 g de farinha de trigo com 90 g de cacau em pó 50% e incorpore delicadamente à mistura com um fouet.",
+      "Adicione 10 g de fermento químico em pó e misture suavemente de baixo para cima.",
+      "Despeje a massa em uma assadeira untada e asse em forno pré-aquecido a 180 °C por 30 minutos.",
+      "Em uma panela, misture 395 g de leite condensado, 200 g de creme de leite, 200 ml de leite de coco e 100 g de coco ralado sem açúcar.",
+      "Cozinhe em fogo médio por 10 minutos mexendo sempre até atingir ponto de brigadeiro cremoso e deixe esfriar.",
+      "Monte nos potes alternando camadas de bolo de chocolate esfarelado e camadas do creme de coco frio."
+    ],
+    "tips": [
+      "Armazene os potes fechados na geladeira por até 5 dias para manter a textura cremosa.",
+      "Use potes transparentes de 200 ml para destacar a beleza das camadas e atrair clientes.",
+      "Umedeça a massa durante a montagem com uma calda leve de leite de coco diluído em água."
+    ]
+  },
+  {
     "slug": "bolo-de-pote-de-chocolate-com-creme-de-coco-supremo",
     "title": "Bolo de Pote de Chocolate com Creme de Coco Supremo",
     "description": "Delicioso bolo de pote de chocolate fofinho alternado com creme aveludado de coco. Perfeito para vender, encantar clientes ou servir em festas.",
